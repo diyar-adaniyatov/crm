@@ -4579,7 +4579,7 @@ def get_working_hours_reply(clinic_id: int = 1) -> str:
         if day_map.get(item.strip())
     ]
     days_text = ", ".join(working_days) if working_days else "по рабочим дням"
-    return f"Мы работаем с {work_start} до {work_end} ({days_text}). Могу помочь подобрать удобное время для записи."
+    return f"⏰ Мы работаем с {work_start} до {work_end} ({days_text}). Могу помочь подобрать удобное время для записи."
 
 
 def get_clinic_location_reply(clinic_id: int = 1) -> str:
@@ -4588,9 +4588,9 @@ def get_clinic_location_reply(clinic_id: int = 1) -> str:
     address = (settings.get("address") or "").strip()
 
     if address:
-        return f"Клиника «{clinic_name}» находится по адресу: {address}."
+        return f"📍 Клиника «{clinic_name}» находится по адресу: {address}."
 
-    return "Адрес пока не добавлен в настройках клиники. Я могу передать вопрос администратору."
+    return "📍 Адрес пока не добавлен в настройках клиники. Я могу передать вопрос администратору."
 
 
 def get_clinic_greeting_reply(clinic_id: int = 1, user_name: str = "") -> str:
@@ -4599,7 +4599,7 @@ def get_clinic_greeting_reply(clinic_id: int = 1, user_name: str = "") -> str:
     first_name = (user_name or "").strip().split()[0] if user_name else ""
     name_part = f", {first_name}" if first_name else ""
     return (
-        f"Здравствуйте{name_part}! Рады видеть вас в клинике «{clinic_name}».\n\n"
+        f"Здравствуйте{name_part}! 👋 Рады видеть вас в клинике «{clinic_name}».\n\n"
         "Помогу записаться, перенести визит, отменить запись или ответить на вопрос."
     )
 
@@ -4700,7 +4700,7 @@ def get_doctors_reply(clinic_id: int = 1) -> str:
     if not doctors:
         return "Сейчас список врачей пуст. Администратор скоро добавит специалистов."
 
-    text = "У нас работают:\n\n"
+    text = "👩‍⚕️ У нас работают:\n\n"
 
     for d in doctors:
         text += f"• {d['full_name']} — {d['profession']}\n"

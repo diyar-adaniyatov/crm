@@ -624,79 +624,87 @@ def get_reschedule_confirmation(time: str) -> str:
 
 
 def get_thanks_response() -> str:
-    return human_responses.get_random_response('thanks_responses')
+    return add_reply_icon(human_responses.get_random_response('thanks_responses'), "🙏")
 
 
 def get_booking_already_exists_response(time: str, service: str) -> str:
-    return human_responses.get_random_response('booking_already_exists', time=time, service=service)
+    return add_reply_icon(human_responses.get_random_response('booking_already_exists', time=time, service=service), "ℹ️")
 
 # Global instance for easy access
 human_responses = HumanResponses()
 
 
+def add_reply_icon(text: str, icon: str) -> str:
+    """Prefix a bot reply with one small visual cue when it is useful."""
+    value = (text or "").strip()
+    if not value or value.startswith(icon):
+        return value
+    return f"{icon} {value}"
+
+
 def get_greeting() -> str:
     """Get a random greeting response."""
-    return human_responses.get_random_response('greetings')
+    return add_reply_icon(human_responses.get_random_response('greetings'), "👋")
 
 
 def get_service_question() -> str:
     """Get a random service question."""
-    return human_responses.get_random_response('service_questions')
+    return add_reply_icon(human_responses.get_random_response('service_questions'), "🦷")
 
 
 def get_name_question() -> str:
     """Get a random name question."""
-    return human_responses.get_random_response('name_questions')
+    return add_reply_icon(human_responses.get_random_response('name_questions'), "👤")
 
 
 def get_phone_question() -> str:
     """Get a random phone question."""
-    return human_responses.get_random_response('phone_questions')
+    return add_reply_icon(human_responses.get_random_response('phone_questions'), "📞")
 
 
 def get_datetime_question() -> str:
     """Get a random datetime question."""
-    return human_responses.get_random_response('datetime_questions')
+    return add_reply_icon(human_responses.get_random_response('datetime_questions'), "🗓️")
 
 
 def get_booking_confirmation(time: str, service: str = "") -> str:
     """Get a random booking confirmation."""
-    return human_responses.get_random_response('booking_confirmations', time=time, service=service)
+    return add_reply_icon(human_responses.get_random_response('booking_confirmations', time=time, service=service), "✅")
 
 
 def get_cancellation_confirmation(time: str, service: str = "") -> str:
     """Get a random cancellation confirmation."""
-    return human_responses.get_random_response('cancellation_confirmations', time=time, service=service)
+    return add_reply_icon(human_responses.get_random_response('cancellation_confirmations', time=time, service=service), "✅")
 
 
 def get_no_active_booking_response() -> str:
     """Get a friendly response when there is no active booking to cancel."""
-    return human_responses.get_random_response('no_active_booking')
+    return add_reply_icon(human_responses.get_random_response('no_active_booking'), "ℹ️")
 
 
 def get_cancellation_error_response() -> str:
     """Get a friendly response when automatic cancellation fails."""
-    return human_responses.get_random_response('cancellation_errors')
+    return add_reply_icon(human_responses.get_random_response('cancellation_errors'), "⚠️")
 
 
 def get_reschedule_offer(current_time: str, new_time: str) -> str:
     """Get a random reschedule offer."""
-    return human_responses.get_random_response('reschedule_offers', current_time=current_time, new_time=new_time)
+    return add_reply_icon(human_responses.get_random_response('reschedule_offers', current_time=current_time, new_time=new_time), "🗓️")
 
 
 def get_slot_unavailable_message(alternatives: str) -> str:
     """Get a random slot unavailable message."""
-    return human_responses.get_random_response('slot_unavailable', alternatives=alternatives)
+    return add_reply_icon(human_responses.get_random_response('slot_unavailable', alternatives=alternatives), "⏰")
 
 
 def get_no_alternatives_message() -> str:
     """Get a random no alternatives message."""
-    return human_responses.get_random_response('no_alternatives')
+    return add_reply_icon(human_responses.get_random_response('no_alternatives'), "⏰")
 
 
 def get_missing_info_message(fields: str) -> str:
     """Get a random missing info message."""
-    return human_responses.get_random_response('missing_info', fields=fields)
+    return add_reply_icon(human_responses.get_random_response('missing_info', fields=fields), "ℹ️")
 
 
 def get_price_response(service: str, price: str, duration: str) -> str:
@@ -704,94 +712,94 @@ def get_price_response(service: str, price: str, duration: str) -> str:
     pretty_price = str(price)
     if isinstance(price, (int, float)):
         pretty_price = f"{int(price):,}".replace(",", " ")
-    return human_responses.get_random_response('price_responses', service=service, price=pretty_price, duration=duration)
+    return add_reply_icon(human_responses.get_random_response('price_responses', service=service, price=pretty_price, duration=duration), "💳")
 
 
 def get_price_not_available_response(service: str) -> str:
     """Get a random price not available response."""
-    return human_responses.get_random_response('price_not_available', service=service)
+    return add_reply_icon(human_responses.get_random_response('price_not_available', service=service), "ℹ️")
 
 
 def get_services_list_response(services: str) -> str:
     """Get a random services list response."""
-    return human_responses.get_random_response('services_list', services=services)
+    return add_reply_icon(human_responses.get_random_response('services_list', services=services), "🦷")
 
 
 def get_price_overview_response(items: str) -> str:
     """Get a short overview response for general price questions."""
-    return human_responses.get_random_response('price_overview', items=items)
+    return add_reply_icon(human_responses.get_random_response('price_overview', items=items), "💳")
 
 
 def get_info_missing_response(topic: str) -> str:
     """Get a graceful response when clinic info is missing."""
-    return human_responses.get_random_response('info_missing', topic=topic)
+    return add_reply_icon(human_responses.get_random_response('info_missing', topic=topic), "ℹ️")
 
 
 def get_faq_response(answer: str) -> str:
     """Get a random FAQ response."""
-    return human_responses.get_random_response('faq_responses', answer=answer)
+    return add_reply_icon(human_responses.get_random_response('faq_responses', answer=answer), "ℹ️")
 
 
 def get_forward_to_admin_response() -> str:
     """Get a random forward to admin response."""
-    return human_responses.get_random_response('forward_to_admin')
+    return add_reply_icon(human_responses.get_random_response('forward_to_admin'), "👩‍💼")
 
 
 def get_operator_request_response() -> str:
     """Get a random operator request response."""
-    return human_responses.get_random_response('operator_requests')
+    return add_reply_icon(human_responses.get_random_response('operator_requests'), "👩‍💼")
 
 
 def get_error_response() -> str:
     """Get a random error response."""
-    return human_responses.get_random_response('error_responses')
+    return add_reply_icon(human_responses.get_random_response('error_responses'), "⚠️")
 
 
 def get_clarifying_question() -> str:
     """Get a short clarifying question for unclear free-form messages."""
-    return human_responses.get_random_response('clarifying_questions')
+    return add_reply_icon(human_responses.get_random_response('clarifying_questions'), "✨")
 
 
 def get_booking_error_response() -> str:
     """Get a random booking lifecycle error response."""
-    return human_responses.get_random_response('booking_errors')
+    return add_reply_icon(human_responses.get_random_response('booking_errors'), "⚠️")
 
 
 def get_invalid_datetime_response() -> str:
     """Get a friendly invalid date/time response."""
-    return human_responses.get_random_response('invalid_datetime')
+    return add_reply_icon(human_responses.get_random_response('invalid_datetime'), "🗓️")
 
 
 def get_past_datetime_response() -> str:
     """Get a friendly response for past times."""
-    return human_responses.get_random_response('past_datetime')
+    return add_reply_icon(human_responses.get_random_response('past_datetime'), "⏰")
 
 
 def get_outside_working_hours_response(start: str = "10:00", end: str = "19:00") -> str:
     """Get a working-hours guidance response."""
-    return human_responses.get_random_response('outside_working_hours', start=start, end=end)
+    return add_reply_icon(human_responses.get_random_response('outside_working_hours', start=start, end=end), "⏰")
 
 
 def get_reset_success_response() -> str:
     """Get a random reset success response."""
-    return human_responses.get_random_response('reset_success')
+    return add_reply_icon(human_responses.get_random_response('reset_success'), "✅")
 
 
 def get_reset_error_response() -> str:
     """Get a random reset error response."""
-    return human_responses.get_random_response('reset_error')
+    return add_reply_icon(human_responses.get_random_response('reset_error'), "⚠️")
 
 
 def get_no_services_response() -> str:
     """Get a random no services response."""
-    return human_responses.get_random_response('no_services')
+    return add_reply_icon(human_responses.get_random_response('no_services'), "ℹ️")
 
 
 def get_no_bookings_response() -> str:
     """Get a random no bookings response."""
-    return human_responses.get_random_response('no_bookings')
+    return add_reply_icon(human_responses.get_random_response('no_bookings'), "ℹ️")
 
 
 def get_reschedule_confirmation(time: str) -> str:
     """Get a random reschedule confirmation."""
-    return human_responses.get_random_response('reschedule_confirmations', time=time)
+    return add_reply_icon(human_responses.get_random_response('reschedule_confirmations', time=time), "✅")

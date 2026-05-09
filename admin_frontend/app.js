@@ -655,16 +655,29 @@ function ChannelManager({ data, onAddChannel, onDeleteChannel }) {
   ]);
 }
 
-function SettingsView({ data, onSave, onAddChannel, onDeleteChannel }) {
+function SettingsView({ data, onSave, onAddChannel, onDeleteChannel, onDirtyChange }) {
   const [form, setForm] = useState(data.settings);
+  const [dirty, setDirty] = useState(false);
 
-  useEffect(() => setForm(data.settings), [data.settings]);
+  useEffect(() => {
+    if (!dirty) setForm(data.settings);
+  }, [data.settings, dirty]);
+
+  useEffect(() => {
+    if (onDirtyChange) onDirtyChange(dirty);
+  }, [dirty, onDirtyChange]);
+
+  useEffect(() => () => {
+    if (onDirtyChange) onDirtyChange(false);
+  }, [onDirtyChange]);
 
   function update(key, value) {
+    setDirty(true);
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
   function toggleDay(day) {
+    setDirty(true);
     setForm((prev) => {
       const set = new Set(prev.working_days || []);
       if (set.has(day)) set.delete(day);
@@ -673,12 +686,17 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel }) {
     });
   }
 
-  function submit(event) {
+  async function submit(event) {
     event.preventDefault();
-    onSave(form);
+    const ok = await onSave(form);
+    if (ok) setDirty(false);
   }
 
   return h("div", { className: "settings-stack" }, [
+    dirty && h("div", { className: "unsaved-banner", key: "dirty" }, [
+      h("strong", { key: "title" }, "Есть несохранённые изменения"),
+      h("span", { key: "text" }, "Автообновление не перезапишет эту форму. Нажмите «Сохранить настройки», когда закончите."),
+    ]),
     h("section", { className: "panel", key: "schedule" }, [
       h("div", { className: "panel-header", key: "head" }, [
         h("h2", { className: "panel-title", key: "title" }, "Профиль, график и ручной режим"),
@@ -746,7 +764,7 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel }) {
             ]),
           ]),
           h("div", { className: "toolbar", style: { marginTop: 18 }, key: "save" }, [
-            h("button", { className: "btn primary", type: "submit" }, "Сохранить настройки"),
+            h("button", { className: "btn primary", type: "submit" }, dirty ? "Сохранить изменения" : "Сохранить настройки"),
             h("span", { className: "cell-sub" }, "Эти параметры применяются только к текущей клинике."),
           ]),
         ])
@@ -930,6 +948,7 @@ function App() {
   const [selectedId, setSelectedId] = useState(null);
   const [thread, setThread] = useState(null);
   const [loadingThread, setLoadingThread] = useState(false);
+  const [settingsDirty, setSettingsDirty] = useState(false);
 
   const [pageTitle, pageKicker] = titleForView(view);
 
@@ -976,11 +995,11 @@ function App() {
     const timer = window.setInterval(() => {
       const active = document.activeElement;
       const busy = active && ["INPUT", "TEXTAREA", "SELECT"].includes(active.tagName);
-      if (!busy) loadData(true);
-      if (!busy && selectedId) loadThread(selectedId);
+      if (!busy && !settingsDirty) loadData(true);
+      if (!busy && selectedId && view === "conversations") loadThread(selectedId);
     }, 6000);
     return () => window.clearInterval(timer);
-  }, [selectedId]);
+  }, [selectedId, settingsDirty, view]);
 
   const navItems = useMemo(() => {
     if (!data?.platform_admin?.can_manage_all_clinics) return NAV;
@@ -1069,9 +1088,13 @@ function App() {
       if (payload?.ok) {
         setData(payload.data);
         showToast("Настройки сохранены");
-      } else {
-        showToast(payload?.error || "Не удалось сохранить настройки", "error");
+        return true;
       }
+      showToast(payload?.error || "Не удалось сохранить настройки", "error");
+      return false;
+    } catch (error) {
+      showToast(error.message || "Не удалось сохранить настройки", "error");
+      return false;
     } finally {
       setSaving(false);
     }
@@ -1355,7 +1378,12 @@ function App() {
         ]),
         h("div", { className: "top-actions", key: "actions" }, [
           h(StatusBadge, { status: "active", key: "hours" }, `${data.settings.work_start}–${data.settings.work_end}`),
-          h("button", { className: "btn", disabled: saving, onClick: () => loadData(), key: "refresh" }, saving ? "Работаем..." : "Обновить"),
+          h("button", {
+            className: "btn",
+            disabled: saving,
+            onClick: () => settingsDirty ? showToast("Сначала сохраните изменения в настройках", "error") : loadData(),
+            key: "refresh",
+          }, saving ? "Работаем..." : "Обновить"),
           h("a", { className: "btn", href: "/logout", key: "logout" }, "Выйти"),
         ]),
       ]),
@@ -1374,7 +1402,7 @@ function App() {
         }),
         view === "services" && h(ServicesView, { data, onAddService, onUpdateService, onDeleteService }),
         view === "doctors" && h(DoctorsView, { data, onAddDoctor, onUpdateDoctor, onDeleteDoctor }),
-        view === "settings" && h(SettingsView, { data, onSave: onSaveSettings, onAddChannel, onDeleteChannel }),
+        view === "settings" && h(SettingsView, { data, onSave: onSaveSettings, onAddChannel, onDeleteChannel, onDirtyChange: setSettingsDirty }),
         view === "platform" && data.platform_admin?.can_manage_all_clinics && h(PlatformView, {
           data,
           onSwitchClinic,
