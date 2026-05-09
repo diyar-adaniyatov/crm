@@ -1,0 +1,1945 @@
+2026-05-07 10:02:04,161 [WARNING] Could not create admin user from .env: name 'get_db_connection' is not defined
+2026-05-07 10:03:32,323 [WARNING] Could not create admin user from .env: name 'get_db_connection' is not defined
+2026-05-07 10:03:34,501 [WARNING] Could not create admin user from .env: name 'get_db_connection' is not defined
+2026-05-07 10:03:36,178 [WARNING] Could not create admin user from .env: name 'get_db_connection' is not defined
+2026-05-07 10:03:47,862 [WARNING] Could not create admin user from .env: name 'get_db_connection' is not defined
+2026-05-07 10:05:48,784 [INFO] Created admin user from ADMIN_USERNAME in .env
+2026-05-07 11:01:44,481 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:44,491 [INFO] MSG chat_id=77475053338 text='Стучи папа во дворе'
+2026-05-07 11:01:45,388 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:46,499 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:46,507 [INFO] MSG chat_id=77475053338 text='Только не сильно'
+2026-05-07 11:01:47,456 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:48,512 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:48,524 [INFO] MSG chat_id=77475053338 text='Он злой'
+2026-05-07 11:01:49,424 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:50,857 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:50,869 [INFO] MSG chat_id=77475053338 text='Можешь скачать валдберис'
+2026-05-07 11:01:51,722 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:52,704 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:52,712 [INFO] MSG chat_id=77475053338 text='Свои данные и выбери на магните филиал'
+2026-05-07 11:01:53,554 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:54,540 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:54,548 [INFO] MSG chat_id=77475053338 text='Я тебе скажу что заказать'
+2026-05-07 11:01:55,230 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:56,348 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:56,360 [INFO] MSG chat_id=77475053338 text='Ты можешь заказывать да?'
+2026-05-07 11:01:57,448 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:58,974 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:01:58,985 [INFO] MSG chat_id=77475053338 text='K2 Чернитель для пластика и шин автомобиля\nhttps://www.wildberries.kz/catalog/29'
+2026-05-07 11:01:59,565 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:02:00,420 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:02:00,430 [INFO] MSG chat_id=77475053338 text='Этот закажи ка щас'
+2026-05-07 11:02:00,999 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:02:01,700 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:02:01,707 [INFO] MSG chat_id=77475053338 text='Выбери оплата при получении'
+2026-05-07 11:02:02,347 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:02:05,629 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:02:05,632 [INFO] MSG chat_id=120363407116667869@g.us text='👍'
+2026-05-07 11:02:06,305 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:02:07,111 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:02:07,121 [INFO] MSG chat_id=120363407116667869@g.us text='👏'
+2026-05-07 11:02:07,681 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:02:08,408 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:02:08,417 [INFO] MSG chat_id=120363407116667869@g.us text='👍'
+2026-05-07 11:02:08,972 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:02:11,806 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:02:11,812 [INFO] MSG chat_id=120363407116667869@g.us text='👍'
+2026-05-07 11:02:12,395 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:02:13,313 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:02:13,322 [INFO] MSG chat_id=120363407116667869@g.us text='❤️'
+2026-05-07 11:02:13,909 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:04:30,850 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:04:30,860 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 11:04:31,459 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:12:00,585 [INFO] MSG chat_id=77475053338 text=''
+2026-05-07 11:12:01,212 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:12:01,374 [INFO] MSG chat_id=77475053338 text=''
+2026-05-07 11:12:01,984 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:12:02,367 [INFO] MSG chat_id=77475053338 text=''
+2026-05-07 11:12:02,988 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:12:03,176 [INFO] MSG chat_id=77475053338 text=''
+2026-05-07 11:12:03,743 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:12:03,917 [INFO] MSG chat_id=77475053338 text=''
+2026-05-07 11:12:04,537 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:12:16,142 [INFO] MSG chat_id=77475053338 text=''
+2026-05-07 11:12:16,721 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:12:22,443 [INFO] MSG chat_id=77475053338 text=''
+2026-05-07 11:12:23,020 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:12:41,079 [INFO] MSG chat_id=77475053338 text=''
+2026-05-07 11:12:41,998 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:16:36,793 [INFO] MSG chat_id=77475053338 text=''
+2026-05-07 11:16:37,486 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:16:59,083 [INFO] MSG chat_id=77475053338 text=''
+2026-05-07 11:16:59,905 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:20:24,096 [INFO] MSG chat_id=120363407116667869@g.us text='👍'
+2026-05-07 11:20:25,084 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 11:20:59,082 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 11:20:59,736 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:21:10,699 [INFO] MSG chat_id=77475053338 text='Хочу записаться к вам'
+2026-05-07 11:21:11,606 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:21:23,808 [INFO] MSG chat_id=77475053338 text='Завтра в 13:00'
+2026-05-07 11:21:24,579 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:21:39,473 [INFO] MSG chat_id=77475053338 text='Изменить телефон'
+2026-05-07 11:21:40,187 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:22:35,535 [INFO] MSG chat_id=77475053338 text='+7 747 505 33 38'
+2026-05-07 11:22:36,596 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:22:45,647 [INFO] MSG chat_id=77475053338 text='Завтра в 17:00'
+2026-05-07 11:22:46,643 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:22:54,450 [INFO] MSG chat_id=77475053338 text='Изменить услугу'
+2026-05-07 11:22:55,261 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:23:02,725 [INFO] MSG chat_id=77475053338 text='Подкрутить пластины'
+2026-05-07 11:23:03,835 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:23:10,817 [INFO] MSG chat_id=77475053338 text='Завтра в 16:00'
+2026-05-07 11:23:11,728 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:23:19,647 [INFO] MSG chat_id=77475053338 text='Да'
+2026-05-07 11:23:20,731 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:23:21,777 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:23:21,795 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-07 11:23:55,512 [INFO] MSG chat_id=77475053338 text='Удалить запись'
+2026-05-07 11:23:56,378 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:24:01,522 [INFO] MSG chat_id=77475053338 text='Да'
+2026-05-07 11:24:02,390 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:24:02,409 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-07 11:24:12,399 [INFO] MSG chat_id=77475053338 text='Запишите на чистку зубов'
+2026-05-07 11:24:13,258 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:24:23,211 [INFO] MSG chat_id=77475053338 text='Послезавтра в 18:00'
+2026-05-07 11:24:24,320 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:24:32,019 [INFO] MSG chat_id=77475053338 text='Изменить услугу'
+2026-05-07 11:24:33,126 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:24:38,475 [INFO] MSG chat_id=77475053338 text='Удалить кариес'
+2026-05-07 11:24:39,294 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:34:46,050 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 11:34:46,788 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:34:56,211 [INFO] MSG chat_id=77475053338 text='Хотел бы записаться к вам'
+2026-05-07 11:34:56,810 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:35:08,524 [INFO] MSG chat_id=77475053338 text='Удалить зуб'
+2026-05-07 11:35:10,194 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:35:17,673 [INFO] MSG chat_id=77475053338 text='Завтра в 13:00'
+2026-05-07 11:35:18,258 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:35:24,335 [INFO] MSG chat_id=77475053338 text='Изменить имя'
+2026-05-07 11:35:24,988 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:35:27,593 [INFO] MSG chat_id=77475053338 text='Камилла'
+2026-05-07 11:35:28,182 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:36:04,200 [INFO] MSG chat_id=77475053338 text='Завтра в 13:00'
+2026-05-07 11:36:04,809 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:36:09,599 [INFO] MSG chat_id=77475053338 text='Да'
+2026-05-07 11:36:10,197 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:36:10,832 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 11:36:10,852 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-07 12:00:44,968 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 12:00:45,637 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:00:52,605 [INFO] MSG chat_id=77475053338 text='Моя запись'
+2026-05-07 12:00:53,195 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:01:03,572 [INFO] MSG chat_id=77475053338 text='Отменить запись'
+2026-05-07 12:01:04,144 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:01:08,844 [INFO] MSG chat_id=77475053338 text='Да'
+2026-05-07 12:01:09,475 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:01:09,494 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-07 12:01:20,155 [INFO] MSG chat_id=77475053338 text='Запишите на установку брекетов'
+2026-05-07 12:01:20,755 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:01:32,784 [INFO] MSG chat_id=77475053338 text='Послезавтра в 13:00'
+2026-05-07 12:01:33,380 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:01:41,629 [INFO] MSG chat_id=77475053338 text='Изменить имя'
+2026-05-07 12:01:42,216 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:01:48,187 [INFO] MSG chat_id=77475053338 text='Камилла'
+2026-05-07 12:01:48,940 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:02:15,847 [INFO] MSG chat_id=77475053338 text='Также'
+2026-05-07 12:02:16,734 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:04:09,786 [INFO] MSG chat_id=77475053338 text='Завтра в 16:00'
+2026-05-07 12:04:10,458 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:04:16,263 [INFO] MSG chat_id=77475053338 text='Завтра в 16:09'
+2026-05-07 12:04:17,164 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:04:24,228 [INFO] MSG chat_id=77475053338 text='Моя запись'
+2026-05-07 12:04:25,024 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:04:34,259 [INFO] MSG chat_id=77475053338 text='Запишите на чистку зубов'
+2026-05-07 12:04:34,835 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:04:40,138 [INFO] MSG chat_id=77475053338 text='Завтра в 16:00'
+2026-05-07 12:04:40,735 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:09:09,121 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 12:09:09,743 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:09:24,161 [INFO] MSG chat_id=77475053338 text='Запишите на чистку зубов'
+2026-05-07 12:09:25,131 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:09:45,413 [INFO] MSG chat_id=77475053338 text='Изменить имя'
+2026-05-07 12:09:49,905 [WARNING] WhatsApp send failed: 500 Internal server error
+2026-05-07 12:09:58,692 [INFO] MSG chat_id=77475053338 text='Изменить услугу'
+2026-05-07 12:09:59,332 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:14:53,850 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 12:14:54,454 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:15:12,571 [INFO] MSG chat_id=77475053338 text='Хочу удалить зуб'
+2026-05-07 12:15:13,589 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:15:31,243 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 12:15:31,916 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:15:54,860 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 12:15:55,467 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:16:02,611 [INFO] MSG chat_id=77475053338 text='Завтра в 16:00'
+2026-05-07 12:16:03,355 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:16:07,996 [INFO] MSG chat_id=77475053338 text='Да'
+2026-05-07 12:16:08,883 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:16:09,772 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:16:09,790 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-07 12:16:12,742 [INFO] MSG chat_id=77475053338 text='Удалить запись'
+2026-05-07 12:16:13,386 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:16:16,337 [INFO] MSG chat_id=77475053338 text='Да'
+2026-05-07 12:16:16,996 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:16:17,015 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-07 12:16:34,622 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 12:16:35,608 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:17:04,158 [INFO] MSG chat_id=77475053338 text='Хотела бы записаться к врачу'
+2026-05-07 12:17:04,980 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:17:51,257 [INFO] MSG chat_id=77475053338 text='16:00,9 мая'
+2026-05-07 12:17:51,870 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 12:18:15,498 [INFO] MSG chat_id=77475053338 text='Измените имя'
+2026-05-07 12:18:16,162 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 20:10:49,256 [INFO] AUTOMATION: Initializing background automation
+2026-05-07 20:10:49,256 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-07 20:10:49,472 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:10:49,472 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:11:49,875 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:11:49,875 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:12:50,321 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:12:50,321 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:13:50,808 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:13:50,809 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:14:38,874 [INFO] MSG chat_id=120363407116667869@g.us text='🔥'
+2026-05-07 20:14:40,162 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 20:14:40,353 [INFO] MSG chat_id=120363407116667869@g.us text='❤️'
+2026-05-07 20:14:41,289 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 20:14:41,492 [INFO] MSG chat_id=120363407116667869@g.us text='❤️'
+2026-05-07 20:14:42,518 [INFO] WhatsApp message sent to 120363407116667869@g.us
+2026-05-07 20:14:47,801 [INFO] MSG chat_id=77475053338 text='здравствуйте'
+2026-05-07 20:14:48,867 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 20:14:49,225 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 20:14:50,198 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 20:14:50,585 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 20:14:51,181 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:14:51,181 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:14:51,408 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 20:15:51,741 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:15:51,741 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:16:52,257 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:16:52,258 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:17:52,774 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:17:52,775 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:18:53,394 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:18:53,395 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:19:53,911 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:19:53,911 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:20:54,327 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:20:54,327 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:21:54,646 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:21:54,646 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:22:55,053 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:22:55,054 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:23:55,570 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:23:55,570 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:24:56,089 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:24:56,089 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:25:56,605 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:25:56,605 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:26:57,222 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:26:57,222 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:27:57,695 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:27:57,696 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:28:58,157 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:28:58,158 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:29:58,867 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:29:58,867 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:30:59,499 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:30:59,500 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:32:00,110 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:32:00,110 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:33:00,638 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:33:00,639 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:34:01,256 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:34:01,256 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:35:01,773 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:35:01,773 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:36:02,267 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:36:02,267 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:37:03,176 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:37:03,176 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:38:03,632 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:38:03,632 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:39:04,150 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:39:04,150 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:40:04,667 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:40:04,667 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:41:05,065 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:41:05,066 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:42:05,572 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:42:05,572 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:43:06,036 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:43:06,036 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:44:06,633 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:44:06,634 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:45:07,146 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:45:07,146 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:46:07,589 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:46:07,590 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:47:08,084 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:47:08,085 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:48:08,514 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:48:08,514 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:49:09,016 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:49:09,016 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:50:09,353 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:50:09,354 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:51:10,869 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:51:10,870 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:52:11,263 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:52:11,264 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:53:11,800 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:53:11,800 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:54:12,120 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:54:12,120 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:55:12,734 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:55:12,734 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:56:13,063 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:56:13,063 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:57:13,408 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:57:13,408 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:58:13,733 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:58:13,733 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 20:59:14,048 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 20:59:14,048 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:00:14,640 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:00:14,640 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:01:14,958 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:01:14,958 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:02:15,345 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:02:15,345 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:03:15,745 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:03:15,746 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:04:16,160 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:04:16,160 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:05:16,567 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:05:16,567 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:06:16,991 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:06:16,991 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:07:17,327 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:07:17,327 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:08:17,745 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:08:17,745 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:09:18,147 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:09:18,147 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:10:18,482 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:10:18,482 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:11:19,271 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:11:19,271 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:12:19,631 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:12:19,631 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:13:19,982 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:13:19,982 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:14:20,412 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:14:20,413 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:15:20,829 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:15:20,829 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:16:21,161 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:16:21,161 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:17:21,506 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:17:21,507 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:18:21,838 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:18:21,839 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:19:22,204 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:19:22,205 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:20:22,520 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:20:22,521 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:21:23,023 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:21:23,023 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:22:23,474 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:22:23,474 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:23:23,794 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:23:23,795 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:24:24,115 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:24:24,115 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:25:24,509 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:25:24,510 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:26:24,915 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:26:24,915 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:27:25,276 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:27:25,276 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:28:25,713 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:28:25,713 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:29:26,127 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:29:26,127 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:30:26,544 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:30:26,544 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:31:26,911 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:31:26,911 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:32:27,439 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:32:27,439 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:33:09,372 [INFO] MSG chat_id=77475053338 text='Здравствуйте'
+2026-05-07 21:33:10,336 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:33:27,998 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:33:27,999 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:33:42,285 [INFO] MSG chat_id=77475053338 text='Можно записаться к врачу?'
+2026-05-07 21:33:43,453 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:34:11,121 [INFO] MSG chat_id=77475053338 text='К игнату сабитову'
+2026-05-07 21:34:12,123 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:34:28,555 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:34:28,555 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:34:32,314 [INFO] MSG chat_id=77475053338 text='На завтра в 15:30 свободно?'
+2026-05-07 21:34:33,319 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:34:50,533 [INFO] MSG chat_id=77475053338 text='Завтра в 14:30'
+2026-05-07 21:34:51,649 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:35:29,128 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:35:29,128 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:35:29,552 [INFO] MSG chat_id=77475053338 text='Да'
+2026-05-07 21:35:30,649 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:35:31,611 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:36:29,544 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:36:29,544 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:37:29,866 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:37:29,866 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:38:30,480 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:38:30,480 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:39:30,806 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:39:30,807 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:40:31,305 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:40:31,306 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:41:31,862 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:41:31,862 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:42:32,350 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:42:32,350 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:43:32,669 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:43:32,669 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:44:33,169 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:44:33,169 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:45:33,789 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:45:33,789 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:46:34,307 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:46:34,307 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:47:34,825 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:47:34,825 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:48:18,790 [INFO] MSG chat_id=77475053338 text='Добрый день'
+2026-05-07 21:48:19,606 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:48:35,546 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:48:35,546 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:48:38,931 [INFO] MSG chat_id=77475053338 text='Можно записаться к врачу?'
+2026-05-07 21:48:39,846 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:48:48,763 [INFO] MSG chat_id=77475053338 text='К дияру аданиятову'
+2026-05-07 21:48:49,606 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:48:54,197 [INFO] MSG chat_id=77475053338 text='записаться'
+2026-05-07 21:48:54,899 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:48:58,188 [INFO] MSG chat_id=77475053338 text='Запись'
+2026-05-07 21:48:58,905 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:49:35,962 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:49:35,962 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:50:36,480 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:50:36,480 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:51:36,854 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:51:36,854 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:52:37,309 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:52:37,309 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:53:01,448 [INFO] MSG chat_id=77475053338 text='Добрый вечер, можно записаться к врачу?'
+2026-05-07 21:53:02,026 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:53:10,810 [INFO] MSG chat_id=77475053338 text='К аданиятову дияру'
+2026-05-07 21:53:11,515 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:53:21,149 [INFO] MSG chat_id=77475053338 text='к Аданиятову дияру'
+2026-05-07 21:53:21,954 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:53:36,607 [INFO] MSG chat_id=77475053338 text='А какие свободны?'
+2026-05-07 21:53:37,329 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:53:37,724 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:53:37,725 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:53:45,437 [INFO] MSG chat_id=77475053338 text='Какие врачи свободны?'
+2026-05-07 21:53:46,325 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:54:38,288 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:54:38,288 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:55:38,617 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:55:38,617 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:56:39,072 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:56:39,072 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:57:39,421 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:57:39,421 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:58:34,801 [INFO] MSG chat_id=77475053338 text='Добрый вечер, хотела бы записаться к врачу'
+2026-05-07 21:58:35,601 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:58:39,859 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:58:39,859 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 21:58:46,572 [INFO] MSG chat_id=77475053338 text='К аданиятову дияру можно?'
+2026-05-07 21:58:47,379 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:58:54,453 [INFO] MSG chat_id=77475053338 text='К аданиятову дияру'
+2026-05-07 21:58:54,470 [ERROR] process_client_message error chat_id=77475053338: NameError("name 'doctors' is not defined")
+2026-05-07 21:58:55,222 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 21:59:40,290 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 21:59:40,290 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:00:40,607 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:00:40,608 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:00:57,236 [INFO] MSG chat_id=77475053338 text='Добрый день!'
+2026-05-07 22:00:58,013 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:01:04,495 [INFO] MSG chat_id=77475053338 text='хотел бы записаться к врачу'
+2026-05-07 22:01:05,309 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:01:11,054 [INFO] MSG chat_id=77475053338 text='К аданиятову дияру'
+2026-05-07 22:01:11,078 [ERROR] process_client_message error chat_id=77475053338: UnboundLocalError("cannot access local variable 'doctors' where it is not associated with a value")
+2026-05-07 22:01:11,757 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:01:41,044 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:01:41,044 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:02:41,376 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:02:41,376 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:03:17,458 [INFO] MSG chat_id=77475053338 text='Запишите меня к врачу'
+2026-05-07 22:03:18,117 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:03:23,702 [INFO] MSG chat_id=77475053338 text='Аданиятов дияр'
+2026-05-07 22:03:23,720 [ERROR] process_client_message error chat_id=77475053338: UnboundLocalError("cannot access local variable 'doctors' where it is not associated with a value")
+2026-05-07 22:03:24,681 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:03:41,683 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:03:41,683 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:04:38,108 [INFO] MSG chat_id=77475053338 text='Запишите к врачу'
+2026-05-07 22:04:38,826 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:04:42,339 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:04:42,339 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:04:44,484 [INFO] MSG chat_id=77475053338 text='К аданиятову дияру'
+2026-05-07 22:04:44,506 [ERROR] process_client_message error chat_id=77475053338: UnboundLocalError("cannot access local variable 'doctors' where it is not associated with a value")
+2026-05-07 22:04:45,116 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:05:30,450 [INFO] MSG chat_id=77475053338 text='Запишите к врачу'
+2026-05-07 22:05:31,134 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:05:38,297 [INFO] MSG chat_id=77475053338 text='к аданиятову дияру'
+2026-05-07 22:05:38,312 [ERROR] process_client_message error chat_id=77475053338: UnboundLocalError("cannot access local variable 'doctors' where it is not associated with a value")
+2026-05-07 22:05:38,934 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:05:42,909 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:05:42,909 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:06:43,631 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:06:43,631 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:07:43,953 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:07:43,954 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:08:44,346 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:08:44,346 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:09:25,953 [INFO] MSG chat_id=77475053338 text='Добрый день'
+2026-05-07 22:09:26,854 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:09:29,628 [INFO] MSG chat_id=77475053338 text='Запишите меня к врачу'
+2026-05-07 22:09:30,437 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:09:41,616 [INFO] MSG chat_id=77475053338 text='К аданиятову дияру'
+2026-05-07 22:09:41,635 [ERROR] process_client_message error chat_id=77475053338: UnboundLocalError("cannot access local variable 'doctors' where it is not associated with a value")
+2026-05-07 22:09:42,418 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:09:44,902 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:09:44,902 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:10:45,311 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:10:45,311 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:11:45,632 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:11:45,633 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:12:46,225 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:12:46,226 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:13:46,741 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:13:46,741 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:14:47,277 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:14:47,277 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:15:47,776 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:15:47,776 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:16:16,355 [INFO] MSG chat_id=77475053338 text='Добрый вечер'
+2026-05-07 22:16:18,474 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:16:25,230 [INFO] MSG chat_id=77475053338 text='Запишите меня к врачу'
+2026-05-07 22:16:26,127 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:16:33,787 [INFO] MSG chat_id=77475053338 text='К аданиятову дияру'
+2026-05-07 22:16:33,839 [ERROR] process_client_message error chat_id=77475053338: UnboundLocalError("cannot access local variable 'doctors' where it is not associated with a value")
+2026-05-07 22:16:35,123 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:16:41,311 [INFO] MSG chat_id=77475053338 text='Аданиятов дияр'
+2026-05-07 22:16:41,339 [ERROR] process_client_message error chat_id=77475053338: UnboundLocalError("cannot access local variable 'doctors' where it is not associated with a value")
+2026-05-07 22:16:42,324 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:16:44,791 [INFO] MSG chat_id=77475053338 text='Какие врачи есть?'
+2026-05-07 22:16:45,692 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:16:48,101 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:16:48,102 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:17:48,547 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:17:48,547 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:18:49,328 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:18:49,328 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:19:49,883 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:19:49,884 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:20:50,208 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:20:50,208 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:21:50,524 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:21:50,524 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:22:19,944 [INFO] MSG chat_id=77475053338 text='Добрый день'
+2026-05-07 22:22:20,621 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:22:29,296 [INFO] MSG chat_id=77475053338 text='Хотел бы записаться на прием'
+2026-05-07 22:22:29,315 [ERROR] process_client_message error chat_id=77475053338: UnboundLocalError("cannot access local variable 'matched_doctor' where it is not associated with a value")
+2026-05-07 22:22:30,060 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:22:37,450 [INFO] MSG chat_id=77475053338 text='Хочу записаться к врачу'
+2026-05-07 22:22:38,201 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:22:49,669 [INFO] MSG chat_id=77475053338 text='К аданиятову дияру'
+2026-05-07 22:22:49,687 [ERROR] process_client_message error chat_id=77475053338: UnboundLocalError("cannot access local variable 'matched_doctor' where it is not associated with a value")
+2026-05-07 22:22:50,406 [INFO] WhatsApp message sent to 77475053338@c.us
+2026-05-07 22:22:50,988 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:22:50,988 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:23:51,711 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:23:51,711 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:24:52,018 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:24:52,018 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:25:52,416 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:25:52,417 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-07 22:26:52,728 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-07 22:26:52,728 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:48:24,036 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 09:48:24,037 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 09:48:24,173 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:48:24,174 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:49:24,676 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:49:24,676 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:50:25,293 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:50:25,294 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:51:25,741 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:51:25,742 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:52:26,435 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:52:26,436 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:53:27,050 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:53:27,050 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:54:27,490 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:54:27,490 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:55:28,087 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:55:28,087 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:56:28,705 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:56:28,706 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:57:29,326 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:57:29,326 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:58:29,945 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:58:29,945 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 09:59:30,477 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 09:59:30,477 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:00:30,980 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:00:30,980 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:01:31,505 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:01:31,506 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:02:32,014 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:02:32,015 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:03:32,535 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:03:32,535 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:04:33,066 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:04:33,066 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:05:33,669 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:05:33,670 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:06:34,291 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:06:34,291 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:07:34,704 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:07:34,704 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:08:35,120 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:08:35,121 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:09:35,637 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:09:35,637 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:10:36,359 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:10:36,359 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:11:36,672 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:11:36,672 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:12:37,291 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:12:37,291 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:13:37,611 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:13:37,611 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:14:38,036 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:14:38,036 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:15:38,409 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:15:38,409 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:16:39,029 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:16:39,029 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:17:39,352 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:17:39,352 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:18:39,884 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:18:39,884 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:19:40,401 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:19:40,401 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:20:40,900 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:20:40,900 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:21:41,342 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:21:41,342 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:22:41,851 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:22:41,852 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:23:42,171 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:23:42,171 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:24:42,513 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:24:42,514 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:25:43,095 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:25:43,095 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:26:43,716 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:26:43,716 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:27:44,130 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:27:44,130 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:28:44,546 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:28:44,546 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:29:44,964 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:29:44,964 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:30:45,412 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:30:45,412 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:31:45,790 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:31:45,790 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:32:46,207 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:32:46,207 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:33:46,825 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:33:46,825 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:34:47,345 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:34:47,345 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:35:47,860 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:35:47,861 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:36:48,378 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:36:48,379 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:37:48,694 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:37:48,694 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:38:49,208 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:38:49,208 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:39:49,725 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:39:49,726 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:40:50,242 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:40:50,242 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:41:50,862 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:41:50,862 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:42:51,176 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:42:51,176 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:43:51,693 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:43:51,693 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:44:52,025 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:44:52,025 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:45:52,416 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:45:52,416 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:46:52,938 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:46:52,938 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:47:53,486 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:47:53,487 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:48:53,974 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:48:53,974 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:49:54,497 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:49:54,497 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:50:55,008 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:50:55,008 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:51:55,425 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:51:55,426 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:52:55,747 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:52:55,747 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:53:56,253 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:53:56,253 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:54:56,769 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:54:56,769 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:55:57,390 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:55:57,390 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:56:57,906 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:56:57,907 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:57:58,424 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:57:58,425 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:58:58,941 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:58:58,941 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 10:59:59,263 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 10:59:59,263 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 11:00:59,772 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 11:00:59,772 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 11:02:00,598 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 11:02:00,598 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 11:03:01,319 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 11:03:01,319 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 11:04:01,675 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 11:04:01,675 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 11:05:02,560 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 11:05:02,560 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 11:06:03,076 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 11:06:03,077 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:12:01,678 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 15:12:01,707 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 15:12:01,989 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:12:01,990 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:12:17,478 [INFO] MSG chat_id=8405286126 text='Здравствуйте'
+2026-05-08 15:12:26,288 [INFO] MSG chat_id=8405286126 text='Запишите к врачу'
+2026-05-08 15:12:32,440 [INFO] MSG chat_id=8405286126 text='К аданиятову дияру'
+2026-05-08 15:12:41,531 [INFO] MSG chat_id=8405286126 text='к Аданиятов Дияр'
+2026-05-08 15:12:50,393 [INFO] MSG chat_id=8405286126 text='завтра в 13:00'
+2026-05-08 15:13:02,722 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:13:02,722 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:14:03,228 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:14:03,229 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:15:03,837 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:15:03,838 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:16:04,777 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:16:04,777 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:16:05,519 [INFO] MSG chat_id=8405286126 text='Отменить запись'
+2026-05-08 15:16:08,766 [INFO] MSG chat_id=8405286126 text='История'
+2026-05-08 15:17:05,547 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:17:05,547 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:18:06,411 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:18:06,411 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:19:07,224 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:19:07,225 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:20:07,970 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:20:07,970 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:21:08,583 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:21:08,583 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:22:09,405 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:22:09,405 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:22:21,938 [INFO] MSG chat_id=8405286126 text='Здравствуйте'
+2026-05-08 15:22:29,107 [INFO] MSG chat_id=8405286126 text='хочу записаться к врачу'
+2026-05-08 15:23:10,238 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:23:10,238 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:23:47,004 [INFO] MSG chat_id=8405286126 text='к аданиятову дияру'
+2026-05-08 15:23:49,148 [INFO] MSG chat_id=8405286126 text='к аданиятов дияр'
+2026-05-08 15:23:59,839 [INFO] MSG chat_id=8405286126 text='на завтра в 17:00'
+2026-05-08 15:24:10,763 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:24:10,763 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:24:47,349 [INFO] MSG chat_id=8405286126 text='аданиятов дияр'
+2026-05-08 15:24:56,225 [INFO] MSG chat_id=8405286126 text='завтра в 13:00'
+2026-05-08 15:25:11,671 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:25:11,671 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:26:12,494 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:26:12,494 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:27:14,307 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:27:14,307 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:28:15,169 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:28:15,170 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:29:16,096 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:29:16,096 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:29:21,971 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 15:29:29,857 [INFO] MSG chat_id=8405286126 text='здравствуйте'
+2026-05-08 15:29:44,701 [INFO] MSG chat_id=8405286126 text='здравствуйте'
+2026-05-08 15:30:17,613 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:30:17,613 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:31:18,773 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:31:18,773 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:32:19,453 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:32:19,453 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:33:20,216 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:33:20,216 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:33:30,083 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 15:33:51,481 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 15:34:02,069 [INFO] MSG chat_id=8405286126 text='Хотел бы попасть к вам на прием'
+2026-05-08 15:34:21,044 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:34:21,045 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:35:21,975 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:35:21,976 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:36:22,692 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:36:22,693 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:37:23,511 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:37:23,511 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:38:24,225 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:38:24,226 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:39:26,039 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:39:26,039 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:40:26,812 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:40:26,813 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:41:27,738 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:41:27,739 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:42:28,618 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:42:28,618 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:43:29,463 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:43:29,463 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:44:30,419 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:44:30,419 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:45:31,053 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:45:31,053 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:46:31,510 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:46:31,510 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:47:32,272 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:47:32,272 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:48:32,884 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:48:32,884 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:49:33,611 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:49:33,612 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:49:41,871 [INFO] MSG chat_id=8405286126 text='Добрый день'
+2026-05-08 15:49:56,140 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 15:50:04,365 [INFO] MSG chat_id=8405286126 text='Хотел бы попасть на прием'
+2026-05-08 15:50:34,139 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:50:34,139 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:51:34,948 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:51:34,949 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:52:36,089 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:52:36,089 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:52:52,604 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 15:52:57,939 [INFO] MSG chat_id=8405286126 text='хотел бы записаться на прием'
+2026-05-08 15:53:36,597 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:53:36,598 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:54:37,282 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:54:37,283 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:55:37,983 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:55:37,984 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:56:24,158 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 15:56:30,435 [INFO] MSG chat_id=8405286126 text='хотел бы попасть на прием'
+2026-05-08 15:56:38,451 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:56:38,451 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:57:08,051 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 15:57:08,052 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 15:57:08,254 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:57:08,255 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:57:23,665 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 15:57:30,765 [INFO] MSG chat_id=8405286126 text='хотел бы попасть на прием'
+2026-05-08 15:57:36,360 [INFO] MSG chat_id=8405286126 text='к аданиятову дияру'
+2026-05-08 15:57:41,493 [INFO] MSG chat_id=8405286126 text='к аданиятов дияр'
+2026-05-08 15:57:52,125 [INFO] MSG chat_id=8405286126 text='На завтра в 15:00'
+2026-05-08 15:58:08,399 [INFO] MSG chat_id=8405286126 text='Запишите на завтра  15:24'
+2026-05-08 15:58:08,788 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:58:08,789 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 15:58:15,775 [INFO] MSG chat_id=8405286126 text='к аданиятов дияр'
+2026-05-08 15:59:09,595 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 15:59:09,595 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:00:10,420 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:00:10,421 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:01:10,938 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 16:01:10,938 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 16:01:11,144 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:01:11,145 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:01:28,487 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 16:01:30,862 [INFO] MSG chat_id=8405286126 text='хотел бы попасть на прием'
+2026-05-08 16:01:40,468 [INFO] MSG chat_id=8405286126 text='К аданиятову дияру'
+2026-05-08 16:01:44,400 [INFO] MSG chat_id=8405286126 text='к аданиятов дияр'
+2026-05-08 16:01:55,117 [INFO] MSG chat_id=8405286126 text='на завтра в 15:00'
+2026-05-08 16:02:11,793 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:02:11,793 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:03:12,792 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:03:12,792 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:04:13,616 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:04:13,616 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:05:14,338 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:05:14,338 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:06:15,264 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:06:15,264 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:07:16,191 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:07:16,191 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:08:17,379 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:08:17,379 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:08:35,757 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 16:08:35,758 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 16:08:35,960 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:08:35,960 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:08:50,789 [INFO] MSG chat_id=8440022852 text='добрый день'
+2026-05-08 16:08:57,807 [INFO] MSG chat_id=8440022852 text='хотел бы попасть на прием'
+2026-05-08 16:09:02,619 [INFO] MSG chat_id=8440022852 text='к аданиятов дияр'
+2026-05-08 16:09:08,329 [INFO] MSG chat_id=8440022852 text='на завтра в 15:00'
+2026-05-08 16:09:28,799 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 16:09:28,800 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 16:09:29,008 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:09:29,009 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:09:37,797 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 16:09:45,460 [INFO] MSG chat_id=8405286126 text='хотел бы записаться на прием к аданиятов дияр'
+2026-05-08 16:09:52,674 [INFO] MSG chat_id=8405286126 text='к аданиятов дияр'
+2026-05-08 16:10:13,828 [INFO] MSG chat_id=8405286126 text='завтра в 14:00'
+2026-05-08 16:10:29,527 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:10:29,527 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:11:30,308 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:11:30,308 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:12:30,867 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:12:30,868 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:13:31,789 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:13:31,789 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:13:52,165 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 16:13:52,165 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 16:13:52,369 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:13:52,369 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:13:59,165 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 16:14:03,777 [INFO] MSG chat_id=8405286126 text='хотел бы записаться к врачу'
+2026-05-08 16:14:07,390 [INFO] MSG chat_id=8405286126 text='к аданиятов дияр'
+2026-05-08 16:14:16,168 [INFO] MSG chat_id=8405286126 text='на завтра в 15:00'
+2026-05-08 16:14:53,397 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:14:53,397 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:15:54,017 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:15:54,017 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:16:54,843 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:16:54,843 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:17:55,483 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:17:55,483 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:18:56,244 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:18:56,244 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:19:56,803 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:19:56,804 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:20:57,421 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:20:57,421 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:21:58,246 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:21:58,246 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:22:59,079 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:22:59,080 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:23:59,701 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:23:59,701 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:25:00,618 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:25:00,618 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:26:01,341 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:26:01,341 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:27:02,165 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:27:02,166 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:28:04,118 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 16:28:04,118 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 16:28:04,321 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:28:04,321 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:28:18,388 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 16:28:23,160 [INFO] MSG chat_id=8405286126 text='хотел бы записаться к врачу'
+2026-05-08 16:28:28,839 [INFO] MSG chat_id=8405286126 text='к аданиятов дияр'
+2026-05-08 16:28:35,184 [INFO] MSG chat_id=8405286126 text='на завтра в 15:00'
+2026-05-08 16:29:04,941 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:29:04,941 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:30:05,866 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:30:05,866 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:31:06,588 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:31:06,589 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:32:07,367 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:32:07,367 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:33:07,899 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:33:07,899 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:33:48,494 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 16:33:48,495 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 16:33:48,999 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:33:48,999 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:33:54,406 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 16:33:58,563 [INFO] MSG chat_id=8405286126 text='хотел бы записаться к врачу'
+2026-05-08 16:34:00,718 [INFO] MSG chat_id=8405286126 text='к аданиятов дияр'
+2026-05-08 16:34:08,355 [INFO] MSG chat_id=8405286126 text='на завтра в 15:50'
+2026-05-08 16:34:49,979 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:34:49,979 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:35:51,210 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:35:51,210 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:37:01,911 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 16:37:01,911 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 16:37:02,323 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:37:02,323 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:37:08,538 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 16:37:13,715 [INFO] MSG chat_id=8405286126 text='хотел бы записаться на прием'
+2026-05-08 16:37:18,749 [INFO] MSG chat_id=8405286126 text='к аданиятов дияр'
+2026-05-08 16:37:25,866 [INFO] MSG chat_id=8405286126 text='на 14:00'
+2026-05-08 16:38:02,779 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:38:02,779 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:39:03,532 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:39:03,532 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:40:04,095 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:40:04,096 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:41:06,641 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:41:06,642 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:42:07,873 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:42:07,873 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:43:08,905 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:43:08,905 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:44:09,428 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:44:09,428 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:45:10,145 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:45:10,145 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:46:10,772 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:46:10,772 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:47:11,588 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:47:11,588 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:48:12,311 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:48:12,312 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:49:13,239 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:49:13,239 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:49:37,816 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 16:49:37,816 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 16:49:38,087 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:49:38,088 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:50:03,348 [INFO] MSG chat_id=8405286126 text='хотел бы записаться к врачу'
+2026-05-08 16:50:07,560 [INFO] MSG chat_id=8405286126 text='какие есть?'
+2026-05-08 16:50:19,949 [INFO] MSG chat_id=8405286126 text='запишите к аданиятов дияр'
+2026-05-08 16:50:29,183 [INFO] MSG chat_id=8405286126 text='к стоматологу'
+2026-05-08 16:50:34,172 [INFO] MSG chat_id=8405286126 text='к стоматолог'
+2026-05-08 16:50:38,332 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:50:38,332 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:50:39,496 [INFO] MSG chat_id=8405286126 text='к аданиятов дияр'
+2026-05-08 16:50:48,118 [INFO] MSG chat_id=8405286126 text='на завтра в 15:00'
+2026-05-08 16:51:00,179 [INFO] MSG chat_id=8405286126 text='Поменять услу'
+2026-05-08 16:51:05,199 [INFO] MSG chat_id=8405286126 text='поменять услугу'
+2026-05-08 16:51:10,524 [INFO] MSG chat_id=8405286126 text='Удаление зуба'
+2026-05-08 16:51:17,361 [INFO] MSG chat_id=8405286126 text='завтра в 15:00'
+2026-05-08 16:51:22,685 [INFO] MSG chat_id=8405286126 text='да'
+2026-05-08 16:51:23,238 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-08 16:51:38,949 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:51:38,949 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:52:39,877 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:52:39,877 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:53:40,496 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:53:40,496 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:54:41,320 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:54:41,320 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:55:12,249 [INFO] [ADMIN->TG] Sending message to 8405286126: Напоминаю вам о записи
+2026-05-08 16:55:13,267 [INFO] [TG] Delivered message to chat_id=8405286126
+2026-05-08 16:55:13,268 [INFO] [ADMIN->TG] Delivered conv=27 chat_id=8405286126
+2026-05-08 16:55:30,110 [INFO] MSG chat_id=8405286126 text='спасибо'
+2026-05-08 16:55:41,925 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:55:41,926 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:56:42,715 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:56:42,715 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:57:43,300 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:57:43,300 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:58:44,106 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:58:44,106 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 16:59:44,943 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 16:59:44,943 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:00:46,063 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:00:46,064 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:01:46,580 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:01:46,580 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:02:47,503 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:02:47,504 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:03:48,158 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:03:48,158 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:04:49,141 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:04:49,141 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:05:49,986 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:05:49,987 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:06:50,911 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:06:50,911 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:07:51,559 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:07:51,559 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:08:52,152 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:08:52,152 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:09:53,176 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:09:53,176 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:10:53,693 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:10:53,693 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:11:54,265 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:11:54,265 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:12:54,945 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:12:54,945 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:13:55,679 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:13:55,679 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:14:56,585 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:14:56,586 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:15:57,304 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:15:57,304 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:16:57,923 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:16:57,924 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:17:58,958 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:17:58,958 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:18:59,774 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:18:59,775 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:20:00,703 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:20:00,704 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:21:01,324 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:21:01,324 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:22:02,059 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:22:02,059 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:22:24,473 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 17:22:24,473 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 17:22:24,677 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:22:24,677 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:22:42,893 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 17:22:48,893 [INFO] MSG chat_id=8405286126 text='моя запись'
+2026-05-08 17:22:54,206 [INFO] MSG chat_id=8405286126 text='отмените пожалуйста'
+2026-05-08 17:22:56,783 [INFO] MSG chat_id=8405286126 text='да'
+2026-05-08 17:22:57,064 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-08 17:23:03,216 [INFO] MSG chat_id=8405286126 text='здравствуйте'
+2026-05-08 17:23:09,993 [INFO] MSG chat_id=8405286126 text='хотел бы записаться на прием к врачу'
+2026-05-08 17:23:15,915 [INFO] MSG chat_id=8405286126 text='какие есть?'
+2026-05-08 17:23:25,604 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:23:25,605 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:23:26,226 [INFO] MSG chat_id=8405286126 text='к аданиятову дияру пожалуйста'
+2026-05-08 17:23:41,720 [INFO] MSG chat_id=8405286126 text='на завтра в 15:00 можно?'
+2026-05-08 17:24:26,437 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:24:26,437 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:25:27,061 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:25:27,062 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:26:28,081 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:26:28,081 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:27:28,797 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:27:28,797 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:28:29,520 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:28:29,520 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:29:30,451 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:29:30,451 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:30:31,240 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:30:31,240 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:31:31,993 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:31:31,993 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:32:32,613 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:32:32,613 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:33:33,435 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:33:33,435 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:34:34,159 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:34:34,159 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:35:34,983 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:35:34,983 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:36:35,655 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:36:35,655 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:37:36,427 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:37:36,427 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:38:37,153 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:38:37,153 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:39:37,973 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:39:37,974 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:40:38,599 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:40:38,600 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:41:39,317 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:41:39,318 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:42:40,140 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:42:40,140 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:42:50,491 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 17:42:50,491 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 17:42:50,689 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:42:50,689 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:42:58,610 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 17:43:05,548 [INFO] MSG chat_id=8405286126 text='хотела бы записаться на прием к врачу'
+2026-05-08 17:43:13,073 [INFO] MSG chat_id=8405286126 text='аданиятов дияр свободен?'
+2026-05-08 17:43:21,251 [INFO] MSG chat_id=8405286126 text='запишите к аданиятову дияру'
+2026-05-08 17:43:26,989 [INFO] MSG chat_id=8405286126 text='К аданиятову дияру'
+2026-05-08 17:43:37,182 [INFO] MSG chat_id=8405286126 text='14 мая в 15:00'
+2026-05-08 17:43:51,310 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:43:51,310 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:44:52,232 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:44:52,232 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:45:52,754 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:45:52,755 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:46:53,882 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:46:53,882 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:47:54,782 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:47:54,782 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:48:56,043 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:48:56,043 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:49:56,662 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:49:56,662 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:50:57,693 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:50:57,694 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:51:58,617 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:51:58,618 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:52:59,443 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:52:59,443 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:53:38,253 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 17:53:38,253 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 17:53:38,468 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:53:38,468 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:53:44,639 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 17:53:51,301 [INFO] MSG chat_id=8405286126 text='хотел бы попасть на прием'
+2026-05-08 17:54:02,059 [INFO] MSG chat_id=8405286126 text='Запишите пожалуйста к аданиятову дияру'
+2026-05-08 17:54:07,167 [INFO] MSG chat_id=8405286126 text='К аданиятову дияру'
+2026-05-08 17:54:26,129 [INFO] MSG chat_id=8405286126 text='на 15 мая в 14:00'
+2026-05-08 17:54:26,162 [ERROR] process_client_message error chat_id=8405286126: UnboundLocalError("cannot access local variable 'month_name_match' where it is not associated with a value")
+2026-05-08 17:54:39,208 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:54:39,208 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:55:39,903 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:55:39,903 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:56:40,727 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:56:40,727 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:57:28,202 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 17:57:28,202 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 17:57:28,357 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:57:28,357 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:57:34,030 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 17:57:38,930 [INFO] MSG chat_id=8405286126 text='хотел бы записаться на прием'
+2026-05-08 17:57:42,617 [INFO] MSG chat_id=8405286126 text='к аданиятову дияру'
+2026-05-08 17:57:51,459 [INFO] MSG chat_id=8405286126 text='на 15 мая в 14:00'
+2026-05-08 17:57:51,488 [ERROR] process_client_message error chat_id=8405286126: UnboundLocalError("cannot access local variable 'month_name_match' where it is not associated with a value")
+2026-05-08 17:58:29,371 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:58:29,371 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 17:59:30,091 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 17:59:30,091 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:00:30,790 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:00:30,790 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:01:31,433 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:01:31,433 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:01:53,159 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 18:01:53,160 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 18:01:53,345 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:01:53,346 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:02:04,546 [INFO] MSG chat_id=8405286126 text='добрый день'
+2026-05-08 18:02:10,492 [INFO] MSG chat_id=8405286126 text='хотел бы попасть на прием'
+2026-05-08 18:02:14,482 [INFO] MSG chat_id=8405286126 text='к аданиятову дияру'
+2026-05-08 18:02:25,568 [INFO] MSG chat_id=8405286126 text='на 9 мая в 14:00'
+2026-05-08 18:02:34,565 [INFO] MSG chat_id=8405286126 text='Да'
+2026-05-08 18:02:35,483 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-08 18:02:53,843 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:02:53,843 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:02:56,881 [INFO] MSG chat_id=8440022852 text='добрый день'
+2026-05-08 18:03:03,631 [INFO] MSG chat_id=8440022852 text='хотел бы записаться на прием'
+2026-05-08 18:03:10,392 [INFO] MSG chat_id=8440022852 text='К аданиятову дияру'
+2026-05-08 18:03:16,636 [INFO] MSG chat_id=8440022852 text='На 9 мая в 14:00'
+2026-05-08 18:03:24,469 [INFO] MSG chat_id=8440022852 text='измени телефон'
+2026-05-08 18:03:31,496 [INFO] MSG chat_id=8440022852 text='+77475053338'
+2026-05-08 18:03:36,614 [INFO] MSG chat_id=8440022852 text='завтра в 14:00'
+2026-05-08 18:03:44,593 [INFO] MSG chat_id=8440022852 text='измени имя'
+2026-05-08 18:03:46,946 [INFO] MSG chat_id=8440022852 text='владимир'
+2026-05-08 18:03:54,521 [INFO] MSG chat_id=8440022852 text='завтра в 14:00'
+2026-05-08 18:03:54,574 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:03:54,574 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:03:58,414 [INFO] MSG chat_id=8440022852 text='Да, подтверждаю'
+2026-05-08 18:04:09,070 [INFO] MSG chat_id=8440022852 text='да давайте 9 мая в 15:00'
+2026-05-08 18:04:12,752 [INFO] MSG chat_id=8440022852 text='Да, подтверждаю'
+2026-05-08 18:04:13,581 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-08 18:04:55,579 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:04:55,579 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:06:04,729 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-08 18:06:04,729 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:07:09,737 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-08 18:07:09,738 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:08:10,455 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:08:10,455 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:09:11,281 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:09:11,281 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:10:39,324 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 18:10:39,324 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 18:10:39,509 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:10:39,510 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:11:40,493 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:11:40,494 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:12:41,358 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:12:41,358 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:13:42,467 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:13:42,468 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:14:43,685 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:14:43,686 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:15:44,408 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:15:44,408 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:16:45,643 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:16:45,643 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:17:46,534 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:17:46,534 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:18:47,513 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:18:47,513 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:19:48,192 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:19:48,192 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:20:49,372 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:20:49,372 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:21:50,082 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:21:50,083 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:22:51,145 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:22:51,146 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:23:52,003 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:23:52,003 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:24:52,833 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:24:52,833 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:25:53,558 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:25:53,559 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:26:54,395 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:26:54,395 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:27:55,122 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:27:55,122 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:28:56,048 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:28:56,048 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:29:56,664 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:29:56,664 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:30:57,323 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:30:57,323 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:31:58,409 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:31:58,409 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:32:59,153 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:32:59,153 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:34:00,138 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:34:00,138 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:35:00,904 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:35:00,904 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:36:01,373 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:36:01,374 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:37:02,356 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:37:02,356 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:38:03,061 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:38:03,061 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:39:03,946 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:39:03,946 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:40:04,914 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:40:04,914 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:41:05,740 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:41:05,740 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:42:06,357 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:42:06,357 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:43:07,369 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:43:07,369 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:43:51,840 [INFO] MSG chat_id=8405286126 text='во сколько открываетесь?'
+2026-05-08 18:44:00,553 [INFO] MSG chat_id=8405286126 text='со скольки работаетеи'
+2026-05-08 18:44:08,886 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:44:08,887 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:45:09,856 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:45:09,857 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:45:24,110 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 18:45:24,111 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 18:45:24,401 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:45:24,401 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:45:31,081 [INFO] MSG chat_id=8405286126 text='со скольки работаете?'
+2026-05-08 18:45:40,691 [INFO] MSG chat_id=8405286126 text='во сколько открываетесь?'
+2026-05-08 18:46:25,288 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:46:25,288 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:47:26,044 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:47:26,045 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:47:54,470 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 18:47:54,470 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 18:47:54,717 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:47:54,717 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:48:07,229 [INFO] MSG chat_id=8405286126 text='во сколько открываетесь?'
+2026-05-08 18:48:11,109 [INFO] MSG chat_id=8405286126 text='сколько стоит чистка?'
+2026-05-08 18:48:19,417 [INFO] MSG chat_id=8405286126 text='Моя запись'
+2026-05-08 18:48:29,029 [INFO] MSG chat_id=8405286126 text='перенесите время пожалуйста'
+2026-05-08 18:48:36,223 [INFO] MSG chat_id=8405286126 text='9 мая в 15:00'
+2026-05-08 18:48:39,067 [INFO] MSG chat_id=8405286126 text='да'
+2026-05-08 18:48:46,204 [INFO] MSG chat_id=8405286126 text='ну ладно давайте в 1'
+2026-05-08 18:48:51,560 [INFO] MSG chat_id=8405286126 text='Да, подтверждаю'
+2026-05-08 18:48:52,201 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-08 18:48:54,926 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:48:54,926 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:49:55,957 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:49:55,957 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:50:56,393 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:50:56,393 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:51:57,093 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:51:57,093 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:52:58,021 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:52:58,021 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:53:58,947 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:53:58,948 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:54:15,130 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 18:54:15,130 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 18:54:15,286 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:54:15,286 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:55:16,068 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:55:16,069 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:56:11,575 [INFO] MSG chat_id=8440022852 text='свяжите с человеком'
+2026-05-08 18:56:16,671 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:56:16,672 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:56:32,234 [INFO] [ADMIN->TG] Sending message to 8440022852: Здравствуйте, какой вопрос?
+2026-05-08 18:56:33,364 [INFO] [TG] Delivered message to chat_id=8440022852
+2026-05-08 18:56:33,365 [INFO] [ADMIN->TG] Delivered conv=30 chat_id=8440022852
+2026-05-08 18:56:44,842 [INFO] MSG chat_id=8440022852 text='Здравствуйте, не могли бы вы отменить запись?'
+2026-05-08 18:56:44,869 [INFO] BOT_PAUSED chat_id=8440022852 clinic_id=1; message stored for operator
+2026-05-08 18:56:56,158 [INFO] [ADMIN->TG] Sending message to 8440022852: конечно секунду
+2026-05-08 18:56:57,120 [INFO] [TG] Delivered message to chat_id=8440022852
+2026-05-08 18:56:57,120 [INFO] [ADMIN->TG] Delivered conv=30 chat_id=8440022852
+2026-05-08 18:57:17,906 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:57:17,906 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:57:35,775 [INFO] [ADMIN->TG] Sending message to 8440022852: отменил запись какие еще вопросы?
+2026-05-08 18:57:37,401 [INFO] [TG] Delivered message to chat_id=8440022852
+2026-05-08 18:57:37,401 [INFO] [ADMIN->TG] Delivered conv=30 chat_id=8440022852
+2026-05-08 18:58:18,629 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:58:18,629 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 18:59:19,493 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 18:59:19,493 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:00:20,176 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:00:20,176 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:01:20,989 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:01:20,989 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:02:21,621 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:02:21,621 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:03:22,649 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:03:22,649 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:04:23,282 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:04:23,283 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:05:24,197 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:05:24,197 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:06:25,431 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:06:25,431 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:07:25,984 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:07:25,984 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:08:26,788 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:08:26,788 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:09:29,031 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:09:29,032 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:10:29,714 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:10:29,715 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:11:30,756 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:11:30,756 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:12:31,351 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:12:31,351 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:13:32,326 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:13:32,326 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:14:10,633 [INFO] MSG chat_id=8405286126 text='в какие дни работаете?'
+2026-05-08 19:14:32,949 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:14:32,949 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:15:33,569 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:15:33,569 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:16:34,307 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:16:34,308 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:17:17,064 [INFO] MSG chat_id=8405286126 text='в какие дни работаете?'
+2026-05-08 19:17:41,161 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 19:17:41,162 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 19:17:41,568 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:17:41,569 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:18:04,313 [INFO] MSG chat_id=8405286126 text='в какие дни работаете?'
+2026-05-08 19:18:16,393 [INFO] MSG chat_id=8440022852 text='добрый вечер'
+2026-05-08 19:18:22,884 [INFO] MSG chat_id=8440022852 text='хотел бы попасть на прием'
+2026-05-08 19:18:27,040 [INFO] MSG chat_id=8440022852 text='Какие есть?'
+2026-05-08 19:18:32,192 [INFO] MSG chat_id=8440022852 text='Можно к дантисту?'
+2026-05-08 19:18:37,176 [INFO] MSG chat_id=8440022852 text='Давайте к дантисту'
+2026-05-08 19:18:41,985 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:18:41,985 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:18:44,350 [INFO] MSG chat_id=8440022852 text='Давайте к бейбит алибекову'
+2026-05-08 19:18:52,971 [INFO] MSG chat_id=8440022852 text='к Бейбит алибекову'
+2026-05-08 19:19:14,607 [INFO] MSG chat_id=8405286126 text='добрый вечер'
+2026-05-08 19:19:18,957 [INFO] MSG chat_id=8405286126 text='хотел бы записаться'
+2026-05-08 19:19:24,289 [INFO] MSG chat_id=8405286126 text='Давай отменим'
+2026-05-08 19:19:27,370 [INFO] MSG chat_id=8405286126 text='Да'
+2026-05-08 19:19:27,687 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-08 19:19:33,001 [INFO] MSG chat_id=8405286126 text='Хочу записаться к вас'
+2026-05-08 19:19:41,487 [INFO] MSG chat_id=8405286126 text='Давайте к Аданиятову дияру'
+2026-05-08 19:19:42,601 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:19:42,602 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:19:46,699 [INFO] MSG chat_id=8405286126 text='Удаление зуба'
+2026-05-08 19:19:54,189 [INFO] MSG chat_id=8405286126 text='Завтра в 15:00'
+2026-05-08 19:19:58,595 [INFO] MSG chat_id=8405286126 text='да'
+2026-05-08 19:20:06,171 [INFO] MSG chat_id=8405286126 text='15:00'
+2026-05-08 19:20:09,235 [INFO] MSG chat_id=8405286126 text='Да, подтверждаю'
+2026-05-08 19:20:43,259 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:20:43,259 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:21:43,943 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:21:43,943 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:22:47,746 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 19:22:47,747 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 19:22:48,044 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:22:48,044 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:22:52,207 [INFO] MSG chat_id=8405286126 text='Добрый день'
+2026-05-08 19:22:56,464 [INFO] MSG chat_id=8405286126 text='хотел бы записаться к врачу'
+2026-05-08 19:23:02,520 [INFO] MSG chat_id=8405286126 text='Какие есть?'
+2026-05-08 19:23:08,137 [INFO] MSG chat_id=8405286126 text='К аданиятову дияру'
+2026-05-08 19:23:15,400 [INFO] MSG chat_id=8405286126 text='К бейбиту алибекову'
+2026-05-08 19:23:48,871 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:23:48,871 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:24:49,796 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:24:49,796 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:25:50,423 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 19:25:50,424 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 19:25:50,689 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:25:50,689 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:26:02,412 [INFO] MSG chat_id=8405286126 text='Добрый вечер'
+2026-05-08 19:26:05,697 [INFO] MSG chat_id=8405286126 text='хотел бы записаться к врачу'
+2026-05-08 19:26:11,010 [INFO] MSG chat_id=8405286126 text='К аданиятову дияру'
+2026-05-08 19:26:17,461 [INFO] MSG chat_id=8405286126 text='На завтра в 16:00'
+2026-05-08 19:26:51,666 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:26:51,667 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:27:04,877 [INFO] MSG chat_id=8405286126 text='Ну давайте в понедельник в 16:00'
+2026-05-08 19:27:10,430 [INFO] MSG chat_id=8405286126 text='да'
+2026-05-08 19:27:11,137 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-08 19:27:52,638 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:27:52,638 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:28:53,178 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:28:53,178 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:29:53,909 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:29:53,909 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:30:54,731 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:30:54,731 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 19:31:55,568 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 19:31:55,568 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:28:39,299 [INFO] AUTOMATION: Initializing background automation
+2026-05-08 22:28:39,329 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-08 22:28:39,503 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:28:39,503 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:29:39,968 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:29:39,969 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:30:40,436 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:30:40,436 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:31:41,051 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:31:41,051 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:32:41,980 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:32:41,980 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:33:42,605 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:33:42,605 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:34:43,121 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:34:43,122 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:35:43,839 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:35:43,840 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:36:44,176 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:36:44,177 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:37:44,589 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:37:44,589 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:38:44,910 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:38:44,911 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:39:45,403 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:39:45,403 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:40:45,918 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:40:45,918 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:41:46,333 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:41:46,334 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:42:46,951 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:42:46,951 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:43:47,365 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:43:47,366 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:44:47,786 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:44:47,786 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:45:48,497 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:45:48,497 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:46:48,916 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:46:48,916 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:47:50,048 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:47:50,048 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:48:50,383 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:48:50,384 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:49:50,842 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:49:50,842 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:50:51,397 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:50:51,398 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:51:52,017 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:51:52,017 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:52:52,448 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:52:52,448 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:53:53,055 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:53:53,055 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:54:53,570 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:54:53,570 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:55:53,986 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:55:53,986 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:56:54,717 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:56:54,717 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:57:55,226 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:57:55,226 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:58:55,743 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:58:55,743 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 22:59:56,211 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 22:59:56,211 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:00:57,654 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:00:57,655 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:01:58,115 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:01:58,115 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:02:58,632 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:02:58,632 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:03:59,254 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:03:59,255 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:05:00,075 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:05:00,075 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:05:45,577 [INFO] MSG chat_id=8405286126 text='Здравствуйте'
+2026-05-08 23:05:46,604 [INFO] MSG chat_id=8405286126 text='Записаться'
+2026-05-08 23:05:56,430 [INFO] MSG chat_id=8405286126 text='здравствуйте'
+2026-05-08 23:06:00,017 [INFO] MSG chat_id=8405286126 text='хотел бы записаться наприем'
+2026-05-08 23:06:00,445 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:06:00,445 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:06:14,964 [INFO] MSG chat_id=8405286126 text='а когда работаете?'
+2026-05-08 23:06:25,397 [INFO] MSG chat_id=8405286126 text='завтра в 8:40'
+2026-05-08 23:06:32,270 [INFO] MSG chat_id=8405286126 text='давайте первый вариант'
+2026-05-08 23:06:38,314 [INFO] MSG chat_id=8405286126 text='да'
+2026-05-08 23:06:39,250 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-08 23:07:01,008 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:07:01,008 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:08:01,525 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:08:01,525 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:09:02,042 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:09:02,042 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:10:02,662 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:10:02,662 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:11:03,385 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:11:03,385 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:12:03,744 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:12:03,744 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:13:04,317 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:13:04,317 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:14:04,663 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:14:04,664 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:15:05,146 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:15:05,147 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:16:05,666 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:16:05,666 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:17:06,181 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:17:06,181 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:18:06,698 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:18:06,698 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:19:07,231 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:19:07,231 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:20:07,733 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:20:07,733 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:21:08,250 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:21:08,251 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:22:08,665 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:22:08,666 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:23:09,194 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:23:09,194 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:24:09,598 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:24:09,598 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:25:10,014 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:25:10,015 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:26:10,355 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:26:10,355 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:27:10,842 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:27:10,842 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:28:11,213 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:28:11,214 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:29:11,622 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:29:11,623 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:30:12,254 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:30:12,254 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:31:12,691 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:31:12,692 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:32:13,141 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:32:13,141 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:33:13,671 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:33:13,672 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:34:14,118 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:34:14,118 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:35:14,644 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:35:14,644 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:36:15,095 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:36:15,095 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:37:15,464 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:37:15,464 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:38:15,879 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:38:15,879 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:39:16,397 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:39:16,397 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:40:16,814 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:40:16,814 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:41:17,639 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:41:17,639 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:42:18,361 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:42:18,361 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:43:18,876 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:43:18,876 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:44:19,512 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:44:19,512 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:45:19,840 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:45:19,840 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:46:20,468 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:46:20,468 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:47:21,189 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:47:21,189 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:48:21,809 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:48:21,809 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:49:22,388 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:49:22,388 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:50:22,802 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:50:22,802 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:51:23,739 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:51:23,740 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:52:24,268 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:52:24,268 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:53:24,886 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:53:24,887 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:54:25,281 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:54:25,281 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:55:25,657 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:55:25,658 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:56:26,152 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:56:26,153 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:57:26,569 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:57:26,569 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:58:26,581 [ERROR] AUTOMATION: Failed follow-up conv 28: httpx.ConnectError: [Errno 11002] getaddrinfo failed
+2026-05-08 23:58:26,582 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-08 23:59:27,193 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-08 23:59:27,193 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 00:00:27,713 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 00:00:27,713 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 00:01:28,329 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 00:01:28,329 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 00:02:28,744 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 00:02:28,744 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 00:03:29,264 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 00:03:29,265 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 00:04:29,694 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 00:04:29,695 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 00:05:30,106 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 00:05:30,107 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 00:06:30,480 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 00:06:30,480 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 00:07:30,896 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 00:07:30,897 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 00:08:31,466 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 00:08:31,466 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:40:14,503 [INFO] AUTOMATION: Initializing background automation
+2026-05-09 13:40:14,524 [INFO] AUTOMATION: Starting safe automation checker
+2026-05-09 13:40:14,763 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:40:14,764 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:40:17,891 [INFO] MSG chat_id=8405286126 text='Добрый вечер'
+2026-05-09 13:40:18,212 [INFO] MSG chat_id=8405286126 text='добрый'
+2026-05-09 13:40:18,469 [INFO] MSG chat_id=8405286126 text='здравствуйте'
+2026-05-09 13:40:18,773 [INFO] MSG chat_id=8405286126 text='здравствуйте'
+2026-05-09 13:40:19,137 [INFO] MSG chat_id=8405286126 text='добрый вечер'
+2026-05-09 13:40:24,772 [INFO] MSG chat_id=8405286126 text='моя запись'
+2026-05-09 13:40:31,126 [INFO] MSG chat_id=8405286126 text='отменить'
+2026-05-09 13:40:46,387 [INFO] MSG chat_id=8405286126 text='да'
+2026-05-09 13:40:47,319 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-09 13:41:15,731 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:41:15,731 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:42:10,151 [INFO] MSG chat_id=8405286126 text='здравствуйте'
+2026-05-09 13:42:15,791 [INFO] MSG chat_id=8405286126 text='хочу записаться на прием'
+2026-05-09 13:42:16,094 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:42:16,094 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:42:23,357 [INFO] MSG chat_id=8405286126 text='какие свободны ?'
+2026-05-09 13:42:31,240 [INFO] MSG chat_id=8405286126 text='К аданиятову дияру'
+2026-05-09 13:42:43,630 [INFO] MSG chat_id=8405286126 text='На среду в 14:00'
+2026-05-09 13:42:48,664 [INFO] MSG chat_id=8405286126 text='Да'
+2026-05-09 13:42:49,381 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-09 13:43:02,849 [INFO] MSG chat_id=8405286126 text='моя запись'
+2026-05-09 13:43:06,416 [INFO] MSG chat_id=8405286126 text='изменить время'
+2026-05-09 13:43:15,914 [INFO] MSG chat_id=8405286126 text='послезавтра в 18:00'
+2026-05-09 13:43:17,195 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:43:17,195 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:43:20,106 [INFO] MSG chat_id=8405286126 text='Да, подтверждаю'
+2026-05-09 13:43:21,123 [INFO] Admin notification skipped: ADMIN_TELEGRAM_CHAT_ID is not configured.
+2026-05-09 13:44:17,983 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:44:17,984 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:45:24,044 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 13:45:24,045 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:46:29,051 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 13:46:29,052 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:47:30,209 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:47:30,209 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:48:32,467 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:48:32,468 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:49:33,078 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:49:33,078 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:50:34,116 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:50:34,117 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:51:35,248 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:51:35,249 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:52:39,035 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:52:39,036 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:53:40,074 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:53:40,074 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:54:41,104 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:54:41,105 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:55:42,183 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:55:42,183 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:56:44,276 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:56:44,276 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:57:44,936 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:57:44,936 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:58:46,467 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:58:46,467 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 13:59:50,553 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 13:59:50,553 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:00:51,176 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:00:51,177 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:01:52,806 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:01:52,806 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:02:05,139 [INFO] RESET LINK: http://127.0.0.1:8000/reset-password/iU9U6HfV64H8nJ2IXHjJhMIGwjYS-fsT02l_9tEbIjU
+2026-05-09 14:02:53,842 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:02:53,842 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:03:55,130 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:03:55,131 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:04:55,788 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:04:55,788 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:05:56,949 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:05:56,950 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:06:58,260 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:06:58,260 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:07:59,132 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:07:59,132 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:09:00,111 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:09:00,111 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:10:00,797 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:10:00,797 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:11:07,479 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:11:07,480 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:12:09,161 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:12:09,161 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:13:15,268 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 14:13:15,268 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:14:17,392 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:14:17,392 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:15:18,388 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:15:18,388 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:16:23,397 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 14:16:23,397 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:16:34,037 [ERROR] FORGOT PASSWORD ERROR
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ai_booking_bot\ai_booking_bot\main.py", line 5051, in forgot_password
+    send_email(email, f"Перейдите по ссылке для сброса пароля:\n{link}")
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ai_booking_bot\ai_booking_bot\main.py", line 5089, in send_email
+    with smtplib.SMTP(smtp_host, smtp_port, timeout=20) as server:
+         ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\smtplib.py", line 262, in __init__
+    (code, msg) = self.connect(host, port)
+                  ~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\smtplib.py", line 348, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\smtplib.py", line 319, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+                                    self.source_address)
+                                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 846, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-05-09 14:17:05,988 [INFO] EMAIL sent to adaniyatov.diyar@gmail.com via smtp.gmail.com
+2026-05-09 14:17:05,989 [INFO] RESET LINK: http://127.0.0.1:8000/reset-password/T03dpqje-vR9HXps06niH8sSqmbwjLEmn4C5_-PwWZU
+2026-05-09 14:17:24,423 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:17:24,424 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:18:26,186 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:18:26,186 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:19:28,227 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:19:28,227 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:20:29,875 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:20:29,876 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:21:35,278 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 14:21:35,278 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:22:41,397 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 14:22:41,398 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:23:48,214 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:23:48,215 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:24:49,955 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:24:49,955 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:25:50,889 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:25:50,889 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:26:52,320 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:26:52,320 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:27:53,656 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:27:53,656 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:28:55,505 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:28:55,505 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:29:56,433 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:29:56,433 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:30:57,667 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:30:57,668 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:32:03,282 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 14:32:03,283 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:33:07,503 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:33:07,504 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:34:08,737 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:34:08,737 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:35:14,154 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 14:35:14,154 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:36:19,160 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 14:36:19,161 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:37:20,223 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:37:20,223 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:38:21,968 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:38:21,968 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:39:23,062 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:39:23,063 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:40:24,027 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:40:24,027 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:41:24,865 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:41:24,866 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:42:25,777 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:42:25,778 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:43:27,113 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:43:27,114 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:44:33,481 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:44:33,481 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:45:34,460 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:45:34,460 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:46:39,466 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 14:46:39,466 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:47:39,491 [ERROR] AUTOMATION: Failed follow-up conv 28: httpx.ConnectError: [Errno 11001] getaddrinfo failed
+2026-05-09 14:47:39,493 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:48:39,920 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:48:39,920 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:49:40,536 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:49:40,537 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:50:41,054 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:50:41,054 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:51:41,776 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:51:41,776 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:52:42,191 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:52:42,191 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:53:42,524 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:53:42,524 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:54:43,032 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:54:43,032 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:55:43,647 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:55:43,647 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:56:49,828 [ERROR] AUTOMATION: Failed follow-up conv 28: Timed out
+2026-05-09 14:56:49,828 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:57:50,294 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:57:50,294 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:58:50,722 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:58:50,722 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 14:59:51,523 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 14:59:51,523 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:00:51,883 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:00:51,883 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:01:52,479 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:01:52,479 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:02:53,100 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:02:53,100 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:03:53,719 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:03:53,719 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:04:56,490 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:04:56,491 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:05:56,894 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:05:56,895 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:06:58,553 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:06:58,553 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:07:59,066 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:07:59,066 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:08:59,583 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:08:59,583 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:10:00,012 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:10:00,013 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:11:00,619 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:11:00,619 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:12:01,048 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:12:01,049 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:13:02,325 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:13:02,326 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:14:03,119 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:14:03,120 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:15:03,610 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:15:03,610 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:16:04,127 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:16:04,127 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:17:04,744 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:17:04,745 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:18:05,115 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:18:05,115 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:19:05,901 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:19:05,901 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
+2026-05-09 15:20:07,423 [ERROR] AUTOMATION: Failed follow-up conv 28: Chat not found
+2026-05-09 15:20:07,423 [INFO] AUTOMATION: Cycle done. Reminders: 0, Follow-ups: 0
