@@ -78,6 +78,7 @@ function titleForView(view) {
     services: ["Услуги и цены", "Прайс"],
     doctors: ["Врачи клиники", "Команда"],
     settings: ["Настройки клиники", "График"],
+    platform: ["Платформа", "Все клиники"],
   };
   return titles[view] || titles.dashboard;
 }
@@ -730,6 +731,166 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel }) {
   ]);
 }
 
+function PlatformView({ data, onPlatformAddChannel, onPlatformDeleteChannel, onPlatformUserAction }) {
+  const clinics = data.platform_clinics || [];
+  const users = data.platform_users || [];
+  const canManageUsers = Boolean(data.platform_admin?.can_manage_platform_admins);
+  const [form, setForm] = useState({
+    clinic_id: clinics[0]?.id || "",
+    channel_name: "",
+    channel_key: "",
+    channel_token: "",
+  });
+
+  useEffect(() => {
+    setForm((prev) => ({
+      ...prev,
+      clinic_id: prev.clinic_id || clinics[0]?.id || "",
+    }));
+  }, [clinics.length]);
+
+  function update(key, value) {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  async function submit(event) {
+    event.preventDefault();
+    const ok = await onPlatformAddChannel(form);
+    if (ok) {
+      setForm((prev) => ({
+        ...prev,
+        channel_name: "",
+        channel_key: "",
+        channel_token: "",
+      }));
+    }
+  }
+
+  return h("div", { className: "settings-stack" }, [
+    h("section", { className: "panel", key: "connect" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("div", { key: "title" }, [
+          h("h2", { className: "panel-title", key: "main" }, "Подключить WhatsApp клинике"),
+          h("div", { className: "cell-sub", key: "sub" }, "Эта панель доступна только владельцу платформы и пользователям, которым он выдал доступ."),
+        ]),
+        h(StatusBadge, { key: "count", tone: "completed" }, `${clinics.length} клиник`),
+      ]),
+      h("div", { className: "panel-body", key: "body" }, [
+        h("div", { className: "webhook-box", key: "webhook" }, [
+          h("div", { key: "label" }, [
+            h("div", { className: "cell-main", key: "main" }, "Webhook URL для всех Green API instance"),
+            h("div", { className: "cell-sub", key: "sub" }, "Один адрес вставляется в Green API, а нужная клиника определяется по idInstance."),
+          ]),
+          h("code", { key: "code" }, data.webhooks?.whatsapp || "/webhook/whatsapp"),
+        ]),
+        h("form", { className: "channel-form", onSubmit: submit, key: "form" }, [
+          h("div", { className: "form-grid", key: "grid" }, [
+            h("div", { className: "form-field wide", key: "clinic" }, [
+              h("label", null, "Клиника"),
+              h("select", { value: form.clinic_id, onChange: (event) => update("clinic_id", event.target.value) },
+                clinics.map((clinic) => h("option", { value: clinic.id, key: clinic.id }, `#${clinic.id} ${clinic.name}`))
+              ),
+            ]),
+            h("div", { className: "form-field", key: "name" }, [
+              h("label", null, "Название канала"),
+              h("input", { value: form.channel_name, placeholder: "WhatsApp ресепшена", onChange: (event) => update("channel_name", event.target.value) }),
+            ]),
+            h("div", { className: "form-field", key: "key" }, [
+              h("label", null, "idInstance"),
+              h("input", { value: form.channel_key, placeholder: "7100000000", inputMode: "numeric", onChange: (event) => update("channel_key", event.target.value) }),
+            ]),
+            h("div", { className: "form-field wide", key: "token" }, [
+              h("label", null, "apiTokenInstance"),
+              h("input", { type: "password", value: form.channel_token, placeholder: "токен из Green API", onChange: (event) => update("channel_token", event.target.value) }),
+            ]),
+          ]),
+          h("div", { className: "toolbar", key: "actions" }, [
+            h("button", { className: "btn primary", type: "submit", disabled: !clinics.length }, "Привязать instance"),
+            h("span", { className: "cell-sub" }, "Клиника получит сообщения только со своего idInstance."),
+          ]),
+        ]),
+      ]),
+    ]),
+    h("section", { className: "panel", key: "clinics" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("h2", { className: "panel-title", key: "title" }, "Зарегистрированные клиники"),
+        h(StatusBadge, { key: "badge", tone: "active" }, clinics.length),
+      ]),
+      h("div", { className: "panel-body platform-grid", key: "body" },
+        clinics.length
+          ? clinics.map((clinic) =>
+              h("div", { className: "clinic-card", key: clinic.id }, [
+                h("div", { className: "clinic-card-head", key: "head" }, [
+                  h("div", { key: "title" }, [
+                    h("div", { className: "cell-main", key: "name" }, `#${clinic.id} ${clinic.name}`),
+                    h("div", { className: "cell-sub", key: "admins" }, clinic.admin_emails_display),
+                    clinic.address && h("div", { className: "cell-sub", key: "address" }, clinic.address),
+                  ]),
+                  h(StatusBadge, { key: "channels", tone: clinic.channels_count ? "completed" : "closed" }, `${clinic.channels_count} каналов`),
+                ]),
+                clinic.channels?.length
+                  ? h("div", { className: "channel-list compact", key: "channels" }, clinic.channels.map((channel) =>
+                      h("div", { className: "channel-card", key: channel.id }, [
+                        h("div", { key: "info" }, [
+                          h("div", { className: "cell-main", key: "name" }, channel.channel_name || "WhatsApp клиники"),
+                          h("div", { className: "cell-sub", key: "meta" }, `idInstance: ${channel.channel_key} · token: ${channel.channel_token_masked || "не указан"}`),
+                        ]),
+                        h("button", { className: "btn red", type: "button", onClick: () => onPlatformDeleteChannel(channel.id), key: "delete" }, "Отключить"),
+                      ])
+                    ))
+                  : h(EmptyState, { key: "empty", text: "WhatsApp ещё не подключён" }),
+              ])
+            )
+          : h(EmptyState, { text: "Зарегистрированных клиник пока нет" })
+      ),
+    ]),
+    canManageUsers && h("section", { className: "panel", key: "users" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("div", { key: "title" }, [
+          h("h2", { className: "panel-title", key: "main" }, "Доступ к платформе"),
+          h("div", { className: "cell-sub", key: "sub" }, `Выдавать и забирать доступ может только ${data.platform_admin.root_email}.`),
+        ]),
+        h(StatusBadge, { key: "root", tone: "active" }, "root only"),
+      ]),
+      h("div", { className: "panel-body", key: "body" },
+        users.length
+          ? h("div", { className: "table-wrap" },
+              h("table", { className: "data-table" }, [
+                h("thead", { key: "head" },
+                  h("tr", null, [
+                    h("th", { key: "email" }, "Пользователь"),
+                    h("th", { key: "clinic" }, "Клиника"),
+                    h("th", { key: "access" }, "Доступ"),
+                    h("th", { key: "actions" }, "Действия"),
+                  ])
+                ),
+                h("tbody", { key: "body" }, users.map((user) =>
+                  h("tr", { key: user.id }, [
+                    h("td", { key: "email" }, [
+                      h("div", { className: "cell-main", key: "main" }, user.email),
+                      user.is_root && h("div", { className: "cell-sub", key: "root" }, "Владелец платформы"),
+                    ]),
+                    h("td", { key: "clinic" }, user.clinic_name),
+                    h("td", { key: "access" }, h(StatusBadge, { tone: user.has_platform_access ? "completed" : "closed" }, user.has_platform_access ? "Есть" : "Нет")),
+                    h("td", { key: "actions" },
+                      user.is_root
+                        ? h(StatusBadge, { tone: "active" }, "Нельзя изменить")
+                        : h("button", {
+                            className: cls("btn", user.has_platform_access ? "red" : "green"),
+                            type: "button",
+                            onClick: () => onPlatformUserAction(user.id, user.has_platform_access ? "revoke" : "grant"),
+                          }, user.has_platform_access ? "Забрать доступ" : "Выдать доступ")
+                    ),
+                  ])
+                )),
+              ])
+            )
+          : h(EmptyState, { text: "Пользователей пока нет" })
+      ),
+    ]),
+  ].filter(Boolean));
+}
+
 function App() {
   const [data, setData] = useState(null);
   const [view, setView] = useState(() => window.location.hash.replace("#", "") || "dashboard");
@@ -791,6 +952,20 @@ function App() {
     return () => window.clearInterval(timer);
   }, [selectedId]);
 
+  const navItems = useMemo(() => {
+    if (!data?.platform_admin?.can_manage_all_clinics) return NAV;
+    return [
+      ...NAV,
+      { id: "platform", label: "Платформа", icon: "🧭" },
+    ];
+  }, [data]);
+
+  useEffect(() => {
+    if (data && view === "platform" && !data.platform_admin?.can_manage_all_clinics) {
+      setView("dashboard");
+    }
+  }, [data, view]);
+
   const counts = useMemo(() => {
     if (!data) return {};
     return {
@@ -800,6 +975,7 @@ function App() {
       services: (data.services || []).length,
       doctors: (data.doctors || []).length,
       settings: "",
+      platform: (data.platform_clinics || []).length,
     };
   }, [data]);
 
@@ -902,6 +1078,64 @@ function App() {
       } else {
         showToast(payload?.error || "Не удалось отключить канал", "error");
       }
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onPlatformAddChannel(form) {
+    setSaving(true);
+    try {
+      const payload = await api("/admin/api/react/platform/channels", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Green API instance привязан к выбранной клинике");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось привязать instance", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onPlatformDeleteChannel(channelId) {
+    if (!window.confirm("Отключить этот WhatsApp instance?")) return false;
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/platform/channels/${channelId}/delete`, {
+        method: "POST",
+        body: "{}",
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("WhatsApp instance отключён");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось отключить instance", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onPlatformUserAction(userId, action) {
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/platform/users/${userId}/${action}`, {
+        method: "POST",
+        body: "{}",
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast(action === "grant" ? "Доступ к платформе выдан" : "Доступ к платформе забран");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось обновить доступ", "error");
+      return false;
     } finally {
       setSaving(false);
     }
@@ -1048,7 +1282,7 @@ function App() {
           h("div", { className: "brand-subtitle", key: "sub" }, data.clinic.user_email || "CRM администратора"),
         ]),
       ]),
-      h("nav", { className: "nav-list", key: "nav" }, NAV.map((item) =>
+      h("nav", { className: "nav-list", key: "nav" }, navItems.map((item) =>
         h("button", { className: cls("nav-button", view === item.id && "active"), onClick: () => setView(item.id), key: item.id }, [
           h("span", { className: "nav-left", key: "left" }, [
             h("span", { key: "icon" }, item.icon),
@@ -1089,6 +1323,12 @@ function App() {
         view === "services" && h(ServicesView, { data, onAddService, onUpdateService, onDeleteService }),
         view === "doctors" && h(DoctorsView, { data, onAddDoctor, onUpdateDoctor, onDeleteDoctor }),
         view === "settings" && h(SettingsView, { data, onSave: onSaveSettings, onAddChannel, onDeleteChannel }),
+        view === "platform" && data.platform_admin?.can_manage_all_clinics && h(PlatformView, {
+          data,
+          onPlatformAddChannel,
+          onPlatformDeleteChannel,
+          onPlatformUserAction,
+        }),
       ]),
     ]),
     toast && h("div", { className: cls("toast", toast.type === "error" && "error"), key: "toast" }, toast.text),

@@ -707,6 +707,36 @@ button {
   background: #fff;
 }
 
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 12px;
+}
+
+.clinic-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.clinic-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.channel-list.compact {
+  margin-top: 0;
+}
+
+.channel-list.compact .channel-card {
+  background: var(--surface-soft);
+}
+
 .weekday-row {
   display: flex;
   flex-wrap: wrap;

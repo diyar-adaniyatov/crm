@@ -292,6 +292,17 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
         VALUES (1, '10:00', '19:00', 30, '0,1,2,3,4,5', 12, 'Клиника', '')
         """)
 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS platform_admins (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT NOT NULL UNIQUE,
+        granted_by TEXT NOT NULL,
+        is_active INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
     # Create clinic_admins table if missing
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS clinic_admins (

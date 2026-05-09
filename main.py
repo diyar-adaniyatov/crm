@@ -109,6 +109,7 @@ ADMIN_USERNAME = (os.getenv("ADMIN_USERNAME") or "").strip()
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD") or ""
 ADMIN_PASSWORD_HASH = (os.getenv("ADMIN_PASSWORD_HASH") or "").strip()
 ADMIN_SESSION_SECRET = (os.getenv("ADMIN_SESSION_SECRET") or os.getenv("SESSION_SECRET") or "").strip()
+PLATFORM_ROOT_EMAIL = "adaniyatov.diyar@gmail.com"
 
 if not ADMIN_SESSION_SECRET:
     ADMIN_SESSION_SECRET = secrets.token_urlsafe(32)
@@ -3504,8 +3505,198 @@ def deactivate_clinic_channel(channel_id: int, clinic_id: int) -> bool:
     return changed > 0
 
 
+def normalize_user_email(email: str) -> str:
+    return (email or "").strip().lower()
+
+
+def is_platform_root_email(email: str) -> bool:
+    return normalize_user_email(email) == PLATFORM_ROOT_EMAIL
+
+
+def is_platform_admin_email(email: str) -> bool:
+    normalized_email = normalize_user_email(email)
+    if not normalized_email:
+        return False
+    if is_platform_root_email(normalized_email):
+        return True
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT 1
+    FROM platform_admins
+    WHERE lower(email) = ? AND is_active = 1
+    LIMIT 1
+    """, (normalized_email,))
+    row = cursor.fetchone()
+    conn.close()
+    return bool(row)
+
+
+def get_current_user_email(request: Request) -> str:
+    return normalize_user_email(request.session.get("user_email") or "")
+
+
+def has_platform_access(request: Request) -> bool:
+    return is_platform_admin_email(get_current_user_email(request))
+
+
+def has_platform_root_access(request: Request) -> bool:
+    return is_platform_root_email(get_current_user_email(request))
+
+
+def get_platform_access_payload(request: Request) -> dict:
+    user_email = get_current_user_email(request)
+    is_root = is_platform_root_email(user_email)
+    return {
+        "enabled": is_root or is_platform_admin_email(user_email),
+        "is_root": is_root,
+        "can_manage_all_clinics": is_root or is_platform_admin_email(user_email),
+        "can_manage_platform_admins": is_root,
+        "root_email": PLATFORM_ROOT_EMAIL,
+    }
+
+
+def get_platform_clinics_for_admin() -> list[dict]:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT
+        c.id,
+        COALESCE(NULLIF(cs.clinic_name, ''), c.name, 'Клиника') AS clinic_name,
+        COALESCE(NULLIF(cs.address, ''), c.address, '') AS address,
+        COALESCE(c.is_active, 1) AS is_active,
+        GROUP_CONCAT(DISTINCT u.email) AS admin_emails
+    FROM clinics c
+    LEFT JOIN clinic_settings cs
+        ON cs.id = (
+            SELECT id
+            FROM clinic_settings
+            WHERE clinic_id = c.id
+            ORDER BY id DESC
+            LIMIT 1
+        )
+    LEFT JOIN users u ON u.clinic_id = c.id
+    GROUP BY c.id
+    ORDER BY c.id DESC
+    """)
+    rows = cursor.fetchall()
+    conn.close()
+
+    clinics = []
+    for row in rows:
+        clinic_id = int(row[0])
+        admin_emails = [item for item in (row[4] or "").split(",") if item]
+        channels = get_clinic_channels_for_admin(clinic_id)
+        clinics.append({
+            "id": clinic_id,
+            "name": row[1] or "Клиника",
+            "address": row[2] or "",
+            "is_active": bool(row[3]),
+            "admin_emails": admin_emails,
+            "admin_emails_display": ", ".join(admin_emails) if admin_emails else "Администратор не найден",
+            "channels": channels,
+            "channels_count": len(channels),
+        })
+    return clinics
+
+
+def get_platform_users_for_root() -> list[dict]:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT
+        u.id,
+        u.email,
+        u.clinic_id,
+        COALESCE(NULLIF(cs.clinic_name, ''), c.name, 'Клиника') AS clinic_name,
+        COALESCE(pa.is_active, 0) AS platform_access,
+        pa.granted_by,
+        pa.created_at
+    FROM users u
+    LEFT JOIN clinics c ON c.id = u.clinic_id
+    LEFT JOIN clinic_settings cs
+        ON cs.id = (
+            SELECT id
+            FROM clinic_settings
+            WHERE clinic_id = u.clinic_id
+            ORDER BY id DESC
+            LIMIT 1
+        )
+    LEFT JOIN platform_admins pa ON lower(pa.email) = lower(u.email)
+    ORDER BY lower(u.email)
+    """)
+    rows = cursor.fetchall()
+    conn.close()
+
+    users = []
+    for row in rows:
+        email = normalize_user_email(row[1])
+        is_root = is_platform_root_email(email)
+        users.append({
+            "id": row[0],
+            "email": email,
+            "clinic_id": row[2],
+            "clinic_name": row[3] or "Клиника",
+            "is_root": is_root,
+            "has_platform_access": is_root or bool(row[4]),
+            "granted_by": row[5] or "",
+            "created_at": row[6] or "",
+            "created_display": format_admin_datetime(row[6] or "") if row[6] else "",
+        })
+    return users
+
+
+def clinic_exists(clinic_id: int) -> bool:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT 1 FROM clinics WHERE id = ? LIMIT 1", (clinic_id,))
+    row = cursor.fetchone()
+    conn.close()
+    return bool(row)
+
+
+def get_user_email_by_id(user_id: int) -> str:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT email FROM users WHERE id = ?", (user_id,))
+    row = cursor.fetchone()
+    conn.close()
+    return normalize_user_email(row[0]) if row else ""
+
+
+def set_platform_admin_access(email: str, granted_by: str, enabled: bool) -> bool:
+    normalized_email = normalize_user_email(email)
+    granted_by = normalize_user_email(granted_by)
+    if not normalized_email or is_platform_root_email(normalized_email):
+        return False
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    if enabled:
+        cursor.execute("""
+        INSERT INTO platform_admins (email, granted_by, is_active, created_at, updated_at)
+        VALUES (?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        ON CONFLICT(email) DO UPDATE SET
+            granted_by = excluded.granted_by,
+            is_active = 1,
+            updated_at = CURRENT_TIMESTAMP
+        """, (normalized_email, granted_by))
+    else:
+        cursor.execute("""
+        UPDATE platform_admins
+        SET is_active = 0, updated_at = CURRENT_TIMESTAMP
+        WHERE lower(email) = ?
+        """, (normalized_email,))
+    changed = cursor.rowcount
+    conn.commit()
+    conn.close()
+    return changed > 0
+
+
 def get_admin_react_payload(request: Request) -> dict:
     clinic_id = get_current_clinic_id(request)
+    platform_access = get_platform_access_payload(request)
     owner_metrics = get_owner_metrics(clinic_id)
     settings = get_clinic_settings(clinic_id)
     active_bookings = get_clinic_active_bookings(clinic_id)
@@ -3549,6 +3740,9 @@ def get_admin_react_payload(request: Request) -> dict:
         "webhooks": {
             "whatsapp": str(request.base_url).rstrip("/") + "/webhook/whatsapp",
         },
+        "platform_admin": platform_access,
+        "platform_clinics": get_platform_clinics_for_admin() if platform_access["can_manage_all_clinics"] else [],
+        "platform_users": get_platform_users_for_root() if platform_access["can_manage_platform_admins"] else [],
         "metrics": owner_metrics,
         "bookings": {
             "active": [serialize_admin_booking(item) for item in active_bookings],
@@ -3745,6 +3939,91 @@ async def admin_api_react_delete_channel(request: Request, channel_id: int):
     clinic_id = get_current_clinic_id(request)
     ok = deactivate_clinic_channel(channel_id, clinic_id)
     return {"ok": bool(ok), "data": get_admin_react_payload(request), "error": "" if ok else "Канал не найден"}
+
+
+@app.post("/admin/api/react/platform/channels")
+async def admin_api_react_platform_add_channel(request: Request):
+    if not has_platform_access(request):
+        return {"ok": False, "error": "Нет доступа к управлению платформой"}
+
+    data = await request.json()
+
+    try:
+        clinic_id = int(data.get("clinic_id") or 0)
+    except (TypeError, ValueError):
+        clinic_id = 0
+
+    channel_type = (data.get("channel_type") or "whatsapp").strip().lower()
+    channel_key = (data.get("channel_key") or "").strip()
+    channel_token = (data.get("channel_token") or "").strip()
+    channel_name = (data.get("channel_name") or "").strip()
+
+    if not clinic_id or not clinic_exists(clinic_id):
+        return {"ok": False, "error": "Выберите клинику"}
+    if channel_type != "whatsapp":
+        return {"ok": False, "error": "Сейчас доступно подключение только WhatsApp / Green API"}
+    if not channel_key:
+        return {"ok": False, "error": "Введите idInstance из Green API"}
+    if not channel_key.isdigit():
+        return {"ok": False, "error": "idInstance должен состоять из цифр"}
+    if not channel_token:
+        return {"ok": False, "error": "Введите apiTokenInstance"}
+
+    owner_clinic_id = get_channel_owner(channel_type, channel_key)
+    if owner_clinic_id and owner_clinic_id != clinic_id:
+        return {"ok": False, "error": "Этот idInstance уже привязан к другой клинике"}
+
+    add_clinic_channel(
+        clinic_id=clinic_id,
+        channel_type=channel_type,
+        channel_key=channel_key,
+        channel_token=channel_token,
+        channel_name=channel_name or "WhatsApp клиники",
+    )
+
+    return {"ok": True, "data": get_admin_react_payload(request)}
+
+
+@app.post("/admin/api/react/platform/channels/{channel_id}/delete")
+async def admin_api_react_platform_delete_channel(request: Request, channel_id: int):
+    if not has_platform_access(request):
+        return {"ok": False, "error": "Нет доступа к управлению платформой"}
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    UPDATE clinic_channels
+    SET is_active = 0
+    WHERE id = ?
+    """, (channel_id,))
+    changed = cursor.rowcount
+    conn.commit()
+    conn.close()
+
+    return {"ok": bool(changed), "data": get_admin_react_payload(request), "error": "" if changed else "Канал не найден"}
+
+
+@app.post("/admin/api/react/platform/users/{user_id}/{action}")
+async def admin_api_react_platform_user_action(request: Request, user_id: int, action: str):
+    if not has_platform_root_access(request):
+        return {"ok": False, "error": "Выдавать доступ может только владелец платформы"}
+
+    if action not in {"grant", "revoke"}:
+        return {"ok": False, "error": "Неизвестное действие"}
+
+    email = get_user_email_by_id(user_id)
+    if not email:
+        return {"ok": False, "error": "Пользователь не найден"}
+    if is_platform_root_email(email):
+        return {"ok": False, "error": "Root-аккаунт нельзя изменить из панели"}
+
+    ok = set_platform_admin_access(
+        email=email,
+        granted_by=get_current_user_email(request),
+        enabled=action == "grant",
+    )
+
+    return {"ok": bool(ok), "data": get_admin_react_payload(request), "error": "" if ok else "Не удалось обновить доступ"}
 
 
 @app.post("/admin/api/react/doctors")
