@@ -695,6 +695,10 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel }) {
               h("label", null, "Адрес"),
               h("input", { value: form.address || "", placeholder: "Например: Алматы, Абая 10", onChange: (event) => update("address", event.target.value) }),
             ]),
+            h("div", { className: "form-field", key: "notify-whatsapp" }, [
+              h("label", null, "WhatsApp администратора"),
+              h("input", { value: form.admin_notify_whatsapp || "", placeholder: "+7 777 123 45 67", onChange: (event) => update("admin_notify_whatsapp", event.target.value) }),
+            ]),
             h("div", { className: "form-field", key: "start" }, [
               h("label", null, "Начало рабочего дня"),
               h("input", { type: "time", value: form.work_start || "", onChange: (event) => update("work_start", event.target.value) }),
@@ -720,6 +724,27 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel }) {
               h("button", { type: "button", className: cls("weekday", (form.working_days || []).includes(day) && "active"), onClick: () => toggleDay(day), key: day }, label)
             )),
           ]),
+          h("div", { className: "form-field", style: { marginTop: 14 }, key: "notifications" }, [
+            h("label", null, "Уведомления и напоминания"),
+            h("div", { className: "check-list" }, [
+              h("label", { className: "check-row", key: "lead" }, [
+                h("input", { type: "checkbox", checked: Boolean(form.notify_new_leads), onChange: (event) => update("notify_new_leads", event.target.checked) }),
+                h("span", null, "Уведомлять о новом лиде"),
+              ]),
+              h("label", { className: "check-row", key: "booking" }, [
+                h("input", { type: "checkbox", checked: Boolean(form.notify_new_bookings), onChange: (event) => update("notify_new_bookings", event.target.checked) }),
+                h("span", null, "Уведомлять о новой записи или переносе"),
+              ]),
+              h("label", { className: "check-row", key: "operator" }, [
+                h("input", { type: "checkbox", checked: Boolean(form.notify_operator_requests), onChange: (event) => update("notify_operator_requests", event.target.checked) }),
+                h("span", null, "Уведомлять, когда клиент просит оператора"),
+              ]),
+              h("label", { className: "check-row", key: "reminders" }, [
+                h("input", { type: "checkbox", checked: Boolean(form.whatsapp_reminders_enabled), onChange: (event) => update("whatsapp_reminders_enabled", event.target.checked) }),
+                h("span", null, "Отправлять клиентам WhatsApp-напоминания за 24 часа и за 2 часа"),
+              ]),
+            ]),
+          ]),
           h("div", { className: "toolbar", style: { marginTop: 18 }, key: "save" }, [
             h("button", { className: "btn primary", type: "submit" }, "Сохранить настройки"),
             h("span", { className: "cell-sub" }, "Эти параметры применяются только к текущей клинике."),
@@ -731,7 +756,7 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel }) {
   ]);
 }
 
-function PlatformView({ data, onPlatformAddChannel, onPlatformDeleteChannel, onPlatformUserAction }) {
+function PlatformView({ data, onSwitchClinic, onPlatformAddChannel, onPlatformDeleteChannel, onPlatformUserAction }) {
   const clinics = data.platform_clinics || [];
   const users = data.platform_users || [];
   const canManageUsers = Boolean(data.platform_admin?.can_manage_platform_admins);
@@ -826,7 +851,12 @@ function PlatformView({ data, onPlatformAddChannel, onPlatformDeleteChannel, onP
                     h("div", { className: "cell-sub", key: "admins" }, clinic.admin_emails_display),
                     clinic.address && h("div", { className: "cell-sub", key: "address" }, clinic.address),
                   ]),
-                  h(StatusBadge, { key: "channels", tone: clinic.channels_count ? "completed" : "closed" }, `${clinic.channels_count} каналов`),
+                  h("div", { className: "row-actions", key: "actions" }, [
+                    Number(data.clinic.id) === Number(clinic.id)
+                      ? h(StatusBadge, { key: "current", tone: "active" }, "Открыта")
+                      : h("button", { className: "btn", type: "button", onClick: () => onSwitchClinic(clinic.id), key: "open" }, "Открыть CRM"),
+                    h(StatusBadge, { key: "channels", tone: clinic.channels_count ? "completed" : "closed" }, `${clinic.channels_count} каналов`),
+                  ]),
                 ]),
                 clinic.channels?.length
                   ? h("div", { className: "channel-list compact", key: "channels" }, clinic.channels.map((channel) =>
@@ -1083,6 +1113,28 @@ function App() {
     }
   }
 
+  async function onSwitchClinic(clinicId) {
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/platform/switch-clinic/${clinicId}`, {
+        method: "POST",
+        body: "{}",
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        setSelectedId(null);
+        setThread(null);
+        setView("dashboard");
+        showToast("Открыта CRM выбранной клиники");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось открыть клинику", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
   async function onPlatformAddChannel(form) {
     setSaving(true);
     try {
@@ -1325,6 +1377,7 @@ function App() {
         view === "settings" && h(SettingsView, { data, onSave: onSaveSettings, onAddChannel, onDeleteChannel }),
         view === "platform" && data.platform_admin?.can_manage_all_clinics && h(PlatformView, {
           data,
+          onSwitchClinic,
           onPlatformAddChannel,
           onPlatformDeleteChannel,
           onPlatformUserAction,

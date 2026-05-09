@@ -981,8 +981,11 @@ def create_booking(chat_id: str, state: dict) -> dict:
         doctor_id = doctor["id"] if doctor else None
 
         cursor.execute("""
-        INSERT INTO bookings (clinic_id, chat_id, service, full_name, phone, appointment_at, duration_minutes, doctor_id, status, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?)
+        INSERT INTO bookings (
+            clinic_id, chat_id, service, full_name, phone, appointment_at,
+            duration_minutes, doctor_id, status, created_at, updated_at, source_channel
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?)
         """, (
             clinic_id,
             normalized_chat_id,
@@ -994,6 +997,7 @@ def create_booking(chat_id: str, state: dict) -> dict:
             doctor_id,
             now,
             now,
+            safe_state.get("source_channel", ""),
         ))
 
         booking_id = cursor.lastrowid
@@ -2016,7 +2020,7 @@ def get_booking_by_id(booking_id: int):
         cursor.execute("""
         SELECT id, clinic_id, chat_id, service, full_name, phone, appointment_at,
                duration_minutes, status, created_at, updated_at,
-               reminder_24h_sent, reminder_2h_sent
+               reminder_24h_sent, reminder_2h_sent, source_channel
         FROM bookings
         WHERE id = ?
         """, (booking_id,))
@@ -2040,6 +2044,7 @@ def get_booking_by_id(booking_id: int):
             "updated_at": row[10],
             "reminder_24h_sent": row[11],
             "reminder_2h_sent": row[12],
+            "source_channel": row[13] or "",
         }
     except Exception as e:
         logger.exception("BOOKING_GET_BY_ID failed booking_id=%s: %s", booking_id, e)
@@ -2393,7 +2398,8 @@ def get_bookings_needing_24h_reminder() -> list:
     check_before = now + timedelta(hours=25)
 
     cursor.execute("""
-    SELECT id, chat_id, service, full_name, phone, appointment_at, status, created_at, updated_at, reminder_24h_sent, reminder_2h_sent
+    SELECT id, clinic_id, chat_id, service, full_name, phone, appointment_at, status,
+           created_at, updated_at, reminder_24h_sent, reminder_2h_sent, source_channel
     FROM bookings
     WHERE status = 'active'
     AND reminder_24h_sent = 0
@@ -2402,20 +2408,22 @@ def get_bookings_needing_24h_reminder() -> list:
     bookings = []
     for row in cursor.fetchall():
         try:
-            appointment = datetime.fromisoformat(row[5])
+            appointment = datetime.fromisoformat(row[6])
             if check_after <= appointment <= check_before:
                 booking = {
                     "id": row[0],
-                    "chat_id": row[1],
-                    "service": row[2],
-                    "full_name": row[3],
-                    "phone": row[4],
-                    "appointment_at": row[5],
-                    "status": row[6],
-                    "created_at": row[7],
-                    "updated_at": row[8],
-                    "reminder_24h_sent": row[9],
-                    "reminder_2h_sent": row[10],
+                    "clinic_id": row[1],
+                    "chat_id": row[2],
+                    "service": row[3],
+                    "full_name": row[4],
+                    "phone": row[5],
+                    "appointment_at": row[6],
+                    "status": row[7],
+                    "created_at": row[8],
+                    "updated_at": row[9],
+                    "reminder_24h_sent": row[10],
+                    "reminder_2h_sent": row[11],
+                    "source_channel": row[12] or "",
                 }
                 bookings.append(booking)
         except (ValueError, TypeError):
@@ -2445,7 +2453,8 @@ def get_bookings_needing_2h_reminder() -> list:
     check_before = now + timedelta(minutes=150)
 
     cursor.execute("""
-    SELECT id, chat_id, service, full_name, phone, appointment_at, status, created_at, updated_at, reminder_24h_sent, reminder_2h_sent
+    SELECT id, clinic_id, chat_id, service, full_name, phone, appointment_at, status,
+           created_at, updated_at, reminder_24h_sent, reminder_2h_sent, source_channel
     FROM bookings
     WHERE status = 'active'
     AND reminder_2h_sent = 0
@@ -2454,20 +2463,22 @@ def get_bookings_needing_2h_reminder() -> list:
     bookings = []
     for row in cursor.fetchall():
         try:
-            appointment = datetime.fromisoformat(row[5])
+            appointment = datetime.fromisoformat(row[6])
             if check_after <= appointment <= check_before:
                 booking = {
                     "id": row[0],
-                    "chat_id": row[1],
-                    "service": row[2],
-                    "full_name": row[3],
-                    "phone": row[4],
-                    "appointment_at": row[5],
-                    "status": row[6],
-                    "created_at": row[7],
-                    "updated_at": row[8],
-                    "reminder_24h_sent": row[9],
-                    "reminder_2h_sent": row[10],
+                    "clinic_id": row[1],
+                    "chat_id": row[2],
+                    "service": row[3],
+                    "full_name": row[4],
+                    "phone": row[5],
+                    "appointment_at": row[6],
+                    "status": row[7],
+                    "created_at": row[8],
+                    "updated_at": row[9],
+                    "reminder_24h_sent": row[10],
+                    "reminder_2h_sent": row[11],
+                    "source_channel": row[12] or "",
                 }
                 bookings.append(booking)
         except (ValueError, TypeError):
@@ -2631,7 +2642,9 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
     cursor = conn.cursor()
 
     cursor.execute("""
-    SELECT work_start, work_end, slot_step_minutes, clinic_name, working_days, bot_pause_hours, address
+    SELECT work_start, work_end, slot_step_minutes, clinic_name, working_days, bot_pause_hours, address,
+           admin_notify_whatsapp, notify_new_leads, notify_new_bookings,
+           notify_operator_requests, whatsapp_reminders_enabled
     FROM clinic_settings
     WHERE clinic_id = ?
     ORDER BY id DESC
@@ -2655,9 +2668,27 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
         address = clinic_row[5] if clinic_row and len(clinic_row) > 5 and clinic_row[5] else ""
         bot_pause_hours = 12
 
+        cursor.execute("PRAGMA table_info(clinic_settings)")
+        settings_columns = {column[1] for column in cursor.fetchall()}
+        if "admin_notify_whatsapp" not in settings_columns:
+            cursor.execute("ALTER TABLE clinic_settings ADD COLUMN admin_notify_whatsapp TEXT DEFAULT ''")
+        if "notify_new_leads" not in settings_columns:
+            cursor.execute("ALTER TABLE clinic_settings ADD COLUMN notify_new_leads INTEGER NOT NULL DEFAULT 1")
+        if "notify_new_bookings" not in settings_columns:
+            cursor.execute("ALTER TABLE clinic_settings ADD COLUMN notify_new_bookings INTEGER NOT NULL DEFAULT 1")
+        if "notify_operator_requests" not in settings_columns:
+            cursor.execute("ALTER TABLE clinic_settings ADD COLUMN notify_operator_requests INTEGER NOT NULL DEFAULT 1")
+        if "whatsapp_reminders_enabled" not in settings_columns:
+            cursor.execute("ALTER TABLE clinic_settings ADD COLUMN whatsapp_reminders_enabled INTEGER NOT NULL DEFAULT 1")
+
         cursor.execute("""
-        INSERT INTO clinic_settings (clinic_id, work_start, work_end, slot_step_minutes, working_days, bot_pause_hours, clinic_name, address)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO clinic_settings (
+            clinic_id, work_start, work_end, slot_step_minutes, working_days,
+            bot_pause_hours, clinic_name, address, admin_notify_whatsapp,
+            notify_new_leads, notify_new_bookings, notify_operator_requests,
+            whatsapp_reminders_enabled
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, '', 1, 1, 1, 1)
         """, (clinic_id, work_start, work_end, slot_step, working_days, bot_pause_hours, clinic_name, address))
 
         conn.commit()
@@ -2672,6 +2703,11 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
             "bot_pause_hours": bot_pause_hours,
             "clinic_name": clinic_name,
             "address": address,
+            "admin_notify_whatsapp": "",
+            "notify_new_leads": True,
+            "notify_new_bookings": True,
+            "notify_operator_requests": True,
+            "whatsapp_reminders_enabled": True,
         }
 
     conn.close()
@@ -2685,6 +2721,11 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
         "working_days": _normalize_working_days(row[4]),
         "bot_pause_hours": row[5] or 12,
         "address": row[6] or "",
+        "admin_notify_whatsapp": row[7] or "",
+        "notify_new_leads": bool(row[8]),
+        "notify_new_bookings": bool(row[9]),
+        "notify_operator_requests": bool(row[10]),
+        "whatsapp_reminders_enabled": bool(row[11]),
     }
 
 
@@ -2715,6 +2756,47 @@ def update_clinic_profile(clinic_name: str, address: str = "", clinic_id: int = 
         return True
     except Exception as e:
         print(f"ERROR updating clinic profile: {e}")
+        return False
+
+
+def update_clinic_notification_settings(
+    clinic_id: int = 1,
+    admin_notify_whatsapp: str = "",
+    notify_new_leads: bool = True,
+    notify_new_bookings: bool = True,
+    notify_operator_requests: bool = True,
+    whatsapp_reminders_enabled: bool = True,
+) -> bool:
+    try:
+        clinic_id = int(clinic_id or 1)
+        admin_notify_whatsapp = (admin_notify_whatsapp or "").strip()
+        get_clinic_settings(clinic_id)
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+        UPDATE clinic_settings
+        SET admin_notify_whatsapp = ?,
+            notify_new_leads = ?,
+            notify_new_bookings = ?,
+            notify_operator_requests = ?,
+            whatsapp_reminders_enabled = ?
+        WHERE clinic_id = ?
+        """, (
+            admin_notify_whatsapp,
+            1 if notify_new_leads else 0,
+            1 if notify_new_bookings else 0,
+            1 if notify_operator_requests else 0,
+            1 if whatsapp_reminders_enabled else 0,
+            clinic_id,
+        ))
+
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"ERROR updating notification settings: {e}")
         return False
 
 

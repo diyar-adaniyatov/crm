@@ -661,6 +661,30 @@ button {
   grid-column: 1 / -1;
 }
 
+.check-list {
+  display: grid;
+  gap: 8px;
+}
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 11px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.check-row input {
+  width: 16px;
+  height: 16px;
+}
+
 .channel-form {
   margin-top: 14px;
   padding-top: 14px;

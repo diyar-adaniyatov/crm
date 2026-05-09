@@ -118,6 +118,7 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
         updated_at TEXT NOT NULL,
         reminder_24h_sent INTEGER NOT NULL DEFAULT 0,
         reminder_2h_sent INTEGER NOT NULL DEFAULT 0,
+        source_channel TEXT DEFAULT '',
         FOREIGN KEY(clinic_id) REFERENCES clinics(id)
     )
     """)
@@ -133,6 +134,11 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
         bot_pause_hours INTEGER NOT NULL DEFAULT 12,
         clinic_name TEXT DEFAULT 'Клиника',
         address TEXT DEFAULT '',
+        admin_notify_whatsapp TEXT DEFAULT '',
+        notify_new_leads INTEGER NOT NULL DEFAULT 1,
+        notify_new_bookings INTEGER NOT NULL DEFAULT 1,
+        notify_operator_requests INTEGER NOT NULL DEFAULT 1,
+        whatsapp_reminders_enabled INTEGER NOT NULL DEFAULT 1,
         FOREIGN KEY(clinic_id) REFERENCES clinics(id)
     )
     """)
@@ -208,6 +214,10 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
         cursor.execute("""
         ALTER TABLE bookings ADD COLUMN duration_minutes INTEGER NOT NULL DEFAULT 60
         """)
+    if "source_channel" not in booking_columns:
+        cursor.execute("""
+        ALTER TABLE bookings ADD COLUMN source_channel TEXT DEFAULT ''
+        """)
 
     # Migrate services table
     cursor.execute("PRAGMA table_info(services)")
@@ -275,6 +285,26 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
     if "address" not in settings_columns:
         cursor.execute("""
         ALTER TABLE clinic_settings ADD COLUMN address TEXT DEFAULT ''
+        """)
+    if "admin_notify_whatsapp" not in settings_columns:
+        cursor.execute("""
+        ALTER TABLE clinic_settings ADD COLUMN admin_notify_whatsapp TEXT DEFAULT ''
+        """)
+    if "notify_new_leads" not in settings_columns:
+        cursor.execute("""
+        ALTER TABLE clinic_settings ADD COLUMN notify_new_leads INTEGER NOT NULL DEFAULT 1
+        """)
+    if "notify_new_bookings" not in settings_columns:
+        cursor.execute("""
+        ALTER TABLE clinic_settings ADD COLUMN notify_new_bookings INTEGER NOT NULL DEFAULT 1
+        """)
+    if "notify_operator_requests" not in settings_columns:
+        cursor.execute("""
+        ALTER TABLE clinic_settings ADD COLUMN notify_operator_requests INTEGER NOT NULL DEFAULT 1
+        """)
+    if "whatsapp_reminders_enabled" not in settings_columns:
+        cursor.execute("""
+        ALTER TABLE clinic_settings ADD COLUMN whatsapp_reminders_enabled INTEGER NOT NULL DEFAULT 1
         """)
 
     # Ensure default clinic exists

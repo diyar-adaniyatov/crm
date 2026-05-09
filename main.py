@@ -72,7 +72,7 @@ from booking_service import (
     reschedule_booking_by_chat_id,
     get_service_duration, check_slot_available, find_alternative_slots, get_slot_issue_message,
     cancel_booking_by_id, mark_booking_completed, mark_booking_no_show, mark_reminder_24h_sent, mark_reminder_2h_sent, get_bookings_needing_24h_reminder,
-    get_bookings_needing_2h_reminder, get_bookings_by_status, get_clinic_settings, update_work_hours, update_slot_step, update_working_days, update_bot_pause_hours, update_clinic_profile,
+    get_bookings_needing_2h_reminder, get_bookings_by_status, get_clinic_settings, update_work_hours, update_slot_step, update_working_days, update_bot_pause_hours, update_clinic_profile, update_clinic_notification_settings,
     get_active_services, get_all_active_services, get_all_services, get_service_by_name, add_service, update_service, deactivate_service, deactivate_service_by_id, add_faq_item, remove_faq_item,
     get_all_active_faq_items, find_faq_answer, get_booking_history_by_chat_id, is_returning_client,
     get_default_clinic, assign_user_to_clinic, get_clinic_by_chat_id,
@@ -3726,6 +3726,11 @@ def get_admin_react_payload(request: Request) -> dict:
             "slot_step_minutes": settings.get("slot_step_minutes") or 30,
             "working_days": working_days,
             "bot_pause_hours": settings.get("bot_pause_hours") or 12,
+            "admin_notify_whatsapp": settings.get("admin_notify_whatsapp") or "",
+            "notify_new_leads": bool(settings.get("notify_new_leads")),
+            "notify_new_bookings": bool(settings.get("notify_new_bookings")),
+            "notify_operator_requests": bool(settings.get("notify_operator_requests")),
+            "whatsapp_reminders_enabled": bool(settings.get("whatsapp_reminders_enabled")),
         },
         "channels": get_clinic_channels_for_admin(clinic_id),
         "doctors": [
@@ -3861,6 +3866,12 @@ async def admin_api_react_settings(request: Request):
 
     clinic_name = (data.get("clinic_name") or "").strip()
     address = (data.get("address") or "").strip()
+    admin_notify_whatsapp = (data.get("admin_notify_whatsapp") or "").strip()
+    admin_notify_digits = re.sub(r"\D", "", admin_notify_whatsapp)
+    notify_new_leads = bool(data.get("notify_new_leads"))
+    notify_new_bookings = bool(data.get("notify_new_bookings"))
+    notify_operator_requests = bool(data.get("notify_operator_requests"))
+    whatsapp_reminders_enabled = bool(data.get("whatsapp_reminders_enabled"))
     work_start = normalize_admin_time(data.get("work_start", ""))
     work_end = normalize_admin_time(data.get("work_end", ""))
     try:
@@ -3880,6 +3891,8 @@ async def admin_api_react_settings(request: Request):
         return {"ok": False, "error": "Название клиники слишком длинное"}
     if len(address) > 300:
         return {"ok": False, "error": "Адрес слишком длинный"}
+    if admin_notify_whatsapp and len(admin_notify_digits) < 10:
+        return {"ok": False, "error": "Введите корректный WhatsApp номер администратора"}
     if not work_start or not work_end:
         return {"ok": False, "error": "Введите время в формате ЧЧ:ММ"}
     if admin_time_to_minutes(work_start) >= admin_time_to_minutes(work_end):
@@ -3896,6 +3909,14 @@ async def admin_api_react_settings(request: Request):
     update_slot_step(slot_step_minutes, clinic_id)
     update_working_days(working_days, clinic_id)
     update_bot_pause_hours(bot_pause_hours, clinic_id)
+    update_clinic_notification_settings(
+        clinic_id=clinic_id,
+        admin_notify_whatsapp=admin_notify_whatsapp,
+        notify_new_leads=notify_new_leads,
+        notify_new_bookings=notify_new_bookings,
+        notify_operator_requests=notify_operator_requests,
+        whatsapp_reminders_enabled=whatsapp_reminders_enabled,
+    )
 
     return {"ok": True, "data": get_admin_react_payload(request)}
 
@@ -3981,6 +4002,17 @@ async def admin_api_react_platform_add_channel(request: Request):
         channel_name=channel_name or "WhatsApp клиники",
     )
 
+    return {"ok": True, "data": get_admin_react_payload(request)}
+
+
+@app.post("/admin/api/react/platform/switch-clinic/{clinic_id}")
+async def admin_api_react_platform_switch_clinic(request: Request, clinic_id: int):
+    if not has_platform_access(request):
+        return {"ok": False, "error": "Нет доступа к управлению платформой"}
+    if not clinic_exists(clinic_id):
+        return {"ok": False, "error": "Клиника не найдена"}
+
+    request.session["clinic_id"] = int(clinic_id)
     return {"ok": True, "data": get_admin_react_payload(request)}
 
 
@@ -5422,6 +5454,129 @@ def send_whatsapp_green(chat_id, text, id_instance, api_token_instance):
     except Exception as e:
         logger.exception("WhatsApp send error: %s", e)
         return False
+
+
+def normalize_whatsapp_chat_id(value: str) -> str:
+    raw_value = (value or "").strip()
+    if not raw_value:
+        return ""
+    if raw_value.endswith("@c.us"):
+        return raw_value
+
+    digits = re.sub(r"\D", "", raw_value)
+    if len(digits) == 10:
+        digits = "7" + digits
+    elif len(digits) >= 11:
+        if digits.startswith("8"):
+            digits = "7" + digits[1:11]
+        else:
+            digits = digits[:11]
+
+    if len(digits) < 10:
+        return ""
+    return f"{digits}@c.us"
+
+
+def normalize_phone_digits(value: str) -> str:
+    chat_id = normalize_whatsapp_chat_id(value)
+    return chat_id.replace("@c.us", "") if chat_id else ""
+
+
+def get_whatsapp_channel_for_clinic(clinic_id: int) -> dict | None:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT channel_key, channel_token, channel_name
+    FROM clinic_channels
+    WHERE clinic_id = ? AND channel_type = 'whatsapp' AND is_active = 1
+      AND COALESCE(channel_key, '') <> '' AND COALESCE(channel_token, '') <> ''
+    ORDER BY id DESC
+    LIMIT 1
+    """, (clinic_id,))
+    row = cursor.fetchone()
+    conn.close()
+
+    if not row:
+        return None
+
+    return {
+        "channel_key": row[0],
+        "channel_token": row[1],
+        "channel_name": row[2] or "",
+    }
+
+
+def send_clinic_whatsapp_message(clinic_id: int, recipient: str, text: str) -> bool:
+    chat_id = normalize_whatsapp_chat_id(recipient)
+    if not chat_id:
+        logger.warning("Clinic WhatsApp send skipped: invalid recipient=%r clinic_id=%s", recipient, clinic_id)
+        return False
+
+    channel = get_whatsapp_channel_for_clinic(clinic_id)
+    if not channel:
+        logger.warning("Clinic WhatsApp send skipped: no active Green API channel clinic_id=%s", clinic_id)
+        return False
+
+    return send_whatsapp_green(
+        chat_id,
+        text,
+        channel["channel_key"],
+        channel["channel_token"],
+    )
+
+
+async def notify_clinic_owner(clinic_id: int, event_key: str, text: str) -> bool:
+    settings = get_clinic_settings(clinic_id)
+    enabled_key = {
+        "lead": "notify_new_leads",
+        "booking": "notify_new_bookings",
+        "operator": "notify_operator_requests",
+    }.get(event_key)
+
+    if enabled_key and not settings.get(enabled_key):
+        return False
+
+    admin_whatsapp = (settings.get("admin_notify_whatsapp") or "").strip()
+    if not admin_whatsapp:
+        logger.info("Clinic notification skipped: admin_notify_whatsapp is empty clinic_id=%s", clinic_id)
+        return False
+
+    return await asyncio.to_thread(send_clinic_whatsapp_message, clinic_id, admin_whatsapp, text)
+
+
+async def send_booking_reminder_message(app, booking: dict, label: str) -> bool:
+    clinic_id = int(booking.get("clinic_id") or 1)
+    chat_id_raw = str(booking.get("chat_id") or "").strip()
+    service_text = f" на услугу {booking.get('service')}" if booking.get("service") else ""
+    message = (
+        f"Напоминаем: у вас запись {label} на "
+        f"{format_slot_for_display(booking.get('appointment_at', ''))}{service_text}. "
+        "Если что-то изменится, напишите сюда."
+    )
+
+    source_channel = (booking.get("source_channel") or "").strip().lower()
+    chat_digits = normalize_phone_digits(chat_id_raw)
+    phone_digits = normalize_phone_digits(booking.get("phone") or "")
+    should_use_whatsapp = source_channel == "whatsapp" or (
+        not source_channel and chat_digits and phone_digits and chat_digits == phone_digits
+    )
+
+    if should_use_whatsapp:
+        settings = get_clinic_settings(clinic_id)
+        if not settings.get("whatsapp_reminders_enabled"):
+            logger.info("AUTOMATION: WhatsApp reminders disabled clinic_id=%s booking=%s", clinic_id, booking.get("id"))
+            return False
+        return await asyncio.to_thread(send_clinic_whatsapp_message, clinic_id, chat_id_raw, message)
+
+    if not app:
+        logger.info("AUTOMATION: Skip Telegram reminder because Telegram app is not running")
+        return False
+    if not chat_id_raw or not chat_id_raw.lstrip("-").isdigit():
+        logger.info("AUTOMATION: Skip Telegram reminder for non-Telegram chat_id=%s", chat_id_raw)
+        return False
+
+    await app.bot.send_message(chat_id=int(chat_id_raw), text=message)
+    return True
     
 # =========================
 # Telegram Bot Commands & Handlers
@@ -6313,6 +6468,7 @@ async def process_client_message(chat_id, user_text, user_name, send_func, sourc
         session = RUNTIME_SESSIONS.get(chat_id, session)
         selected_suggested_slot = pick_suggested_slot(user_text, session.get("suggested_slots", []))
 
+        conversation_before_message = get_conversation_by_chat_id(clinic_id, chat_id)
         conversation = update_conversation_from_user_message(
             clinic_id,
             chat_id,
@@ -6320,6 +6476,18 @@ async def process_client_message(chat_id, user_text, user_name, send_func, sourc
             phone=session.get("phone", ""),
             user_message=user_text,
         )
+
+        if not conversation_before_message:
+            await notify_clinic_owner(
+                clinic_id,
+                "lead",
+                (
+                    "Новый лид в CRM\n"
+                    f"Клиент: {session.get('full_name') or telegram_name or 'Клиент'}\n"
+                    f"Телефон/chat: {session.get('phone') or chat_id}\n"
+                    f"Сообщение: {user_text[:400]}"
+                ),
+            )
 
         if conversation and conversation.get("needs_operator"):
             if is_bot_pause_expired(conversation):
@@ -6493,6 +6661,7 @@ async def process_client_message(chat_id, user_text, user_name, send_func, sourc
                 "booking_status": "in_progress",
                 "intent": "booking",
                 "chat_id": chat_id,
+                "source_channel": "whatsapp" if source_clinic_id else "telegram",
             }
 
             missing_field = get_first_missing_field(payload)
@@ -6545,6 +6714,15 @@ async def process_client_message(chat_id, user_text, user_name, send_func, sourc
                         created_booking,
                         payload,
                     )
+                )
+                await notify_clinic_owner(
+                    clinic_id,
+                    "booking",
+                    build_admin_booking_notification(
+                        "Запись перенесена" if is_reschedule else "Новая запись",
+                        created_booking,
+                        payload,
+                    ),
                 )
                 return
 
@@ -6660,6 +6838,16 @@ async def process_client_message(chat_id, user_text, user_name, send_func, sourc
 
         if intent == "operator":
             mark_conversation_waiting_operator(clinic_id, chat_id, bot_paused_until=get_bot_pause_until(clinic_id))
+            await notify_clinic_owner(
+                clinic_id,
+                "operator",
+                (
+                    "Клиент просит оператора\n"
+                    f"Клиент: {session.get('full_name') or telegram_name or 'Клиент'}\n"
+                    f"Телефон/chat: {session.get('phone') or chat_id}\n"
+                    f"Сообщение: {user_text[:400]}"
+                ),
+            )
             await reply_and_track(get_operator_request_response(), flow_state=flow_state, intent="operator")
             return
 
@@ -7202,9 +7390,11 @@ automation_metrics = {
     "followups_sent_today": 0,
     "last_reset_date": datetime.now().date()
 }
+AUTOMATION_TASK = None
+AUTOMATION_TELEGRAM_APP = None
 
 
-async def automation_checker(app):
+async def automation_checker():
     """
     Safe background automation task that handles booking reminders and lead follow-ups.
     Runs every 60 seconds, protected with try/except to prevent bot crashes.
@@ -7223,20 +7413,15 @@ async def automation_checker(app):
             clinic_id = get_default_clinic()
 
             # 1. BOOKING REMINDERS - 24 hours
+            telegram_app = AUTOMATION_TELEGRAM_APP
             try:
                 bookings_24h = get_bookings_needing_24h_reminder()
                 for booking in bookings_24h:
                     try:
-                        chat_id_raw = str(booking["chat_id"]).strip()
-                        if not chat_id_raw or not chat_id_raw.lstrip("-").isdigit():
-                            logger.info(f"AUTOMATION: Skip 24h reminder for non-Telegram chat_id={booking['chat_id']}")
-                            continue
-                        service_text = f" на услугу {booking['service']}" if booking['service'] else ""
-                        message = f"Напоминаем: у вас запись на {format_slot_for_display(booking['appointment_at'])}{service_text}. Если что-то изменится, напишите сюда."
-                        await app.bot.send_message(chat_id=int(chat_id_raw), text=message)
-                        mark_reminder_24h_sent(booking["id"])
-                        automation_metrics["reminders_sent_today"] += 1
-                        logger.info(f"AUTOMATION: Sent 24h reminder to chat {chat_id_raw}")
+                        if await send_booking_reminder_message(telegram_app, booking, "завтра"):
+                            mark_reminder_24h_sent(booking["id"])
+                            automation_metrics["reminders_sent_today"] += 1
+                            logger.info("AUTOMATION: Sent 24h reminder booking=%s", booking["id"])
                     except Exception as e:
                         logger.error(f"AUTOMATION: Failed 24h reminder booking {booking['id']}: {e}")
             except Exception as e:
@@ -7247,16 +7432,10 @@ async def automation_checker(app):
                 bookings_2h = get_bookings_needing_2h_reminder()
                 for booking in bookings_2h:
                     try:
-                        chat_id_raw = str(booking["chat_id"]).strip()
-                        if not chat_id_raw or not chat_id_raw.lstrip("-").isdigit():
-                            logger.info(f"AUTOMATION: Skip 2h reminder for non-Telegram chat_id={booking['chat_id']}")
-                            continue
-                        service_text = f" на услугу {booking['service']}" if booking['service'] else ""
-                        message = f"Напоминаем: у вас запись на {format_slot_for_display(booking['appointment_at'])}{service_text}. Если что-то изменится, напишите сюда."
-                        await app.bot.send_message(chat_id=int(chat_id_raw), text=message)
-                        mark_reminder_2h_sent(booking["id"])
-                        automation_metrics["reminders_sent_today"] += 1
-                        logger.info(f"AUTOMATION: Sent 2h reminder to chat {chat_id_raw}")
+                        if await send_booking_reminder_message(telegram_app, booking, "через 2 часа"):
+                            mark_reminder_2h_sent(booking["id"])
+                            automation_metrics["reminders_sent_today"] += 1
+                            logger.info("AUTOMATION: Sent 2h reminder booking=%s", booking["id"])
                     except Exception as e:
                         logger.error(f"AUTOMATION: Failed 2h reminder booking {booking['id']}: {e}")
             except Exception as e:
@@ -7267,6 +7446,9 @@ async def automation_checker(app):
                 conversations = get_conversations_needing_followup(clinic_id)
                 for conv in conversations:
                     try:
+                        if not telegram_app:
+                            logger.info("AUTOMATION: Skip Telegram follow-up because Telegram app is not running")
+                            continue
                         chat_id_raw = str(conv["chat_id"]).strip()
                         if not chat_id_raw or not chat_id_raw.lstrip("-").isdigit():
                             logger.info(f"AUTOMATION: Skip follow-up for non-Telegram chat_id={conv['chat_id']}")
@@ -7294,8 +7476,22 @@ async def automation_checker(app):
 
 async def post_init_callback(app):
     """Start background automation after the Telegram bot initializes."""
+    start_automation_once(app)
+
+
+def start_automation_once(telegram_app=None):
+    global AUTOMATION_TASK, AUTOMATION_TELEGRAM_APP
+    if telegram_app:
+        AUTOMATION_TELEGRAM_APP = telegram_app
+    if AUTOMATION_TASK and not AUTOMATION_TASK.done():
+        return
     logger.info("AUTOMATION: Initializing background automation")
-    asyncio.create_task(automation_checker(app))
+    AUTOMATION_TASK = asyncio.create_task(automation_checker())
+
+
+@app.on_event("startup")
+async def fastapi_startup_callback():
+    start_automation_once(None)
 
 
 
