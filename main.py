@@ -3412,6 +3412,16 @@ def serialize_admin_message(message: dict) -> dict:
     }
 
 
+def serialize_admin_doctor(doctor: dict) -> dict:
+    return {
+        "id": doctor.get("id"),
+        "clinic_id": doctor.get("clinic_id"),
+        "full_name": doctor.get("full_name") or "",
+        "profession": doctor.get("profession") or "",
+        "is_active": bool(doctor.get("is_active", 1)),
+    }
+
+
 def mask_secret(value: str) -> str:
     value = (value or "").strip()
     if not value:
@@ -3508,6 +3518,10 @@ def get_admin_react_payload(request: Request) -> dict:
             "bot_pause_hours": settings.get("bot_pause_hours") or 12,
         },
         "channels": get_clinic_channels_for_admin(clinic_id),
+        "doctors": [
+            serialize_admin_doctor(item)
+            for item in get_active_doctors(clinic_id)
+        ],
         "webhooks": {
             "whatsapp": str(request.base_url).rstrip("/") + "/webhook/whatsapp",
         },
@@ -3698,6 +3712,54 @@ async def admin_api_react_delete_channel(request: Request, channel_id: int):
     clinic_id = get_current_clinic_id(request)
     ok = deactivate_clinic_channel(channel_id, clinic_id)
     return {"ok": bool(ok), "data": get_admin_react_payload(request), "error": "" if ok else "Канал не найден"}
+
+
+@app.post("/admin/api/react/doctors")
+async def admin_api_react_add_doctor(request: Request):
+    clinic_id = get_current_clinic_id(request)
+    data = await request.json()
+
+    full_name = (data.get("full_name") or "").strip()
+    profession = (data.get("profession") or "").strip()
+
+    if not full_name:
+        return {"ok": False, "error": "Введите имя врача"}
+    if not profession:
+        return {"ok": False, "error": "Введите профессию врача"}
+
+    ok = add_doctor(full_name, profession, clinic_id)
+    return {"ok": bool(ok), "data": get_admin_react_payload(request), "error": "" if ok else "Не удалось добавить врача"}
+
+
+@app.post("/admin/api/react/doctors/{doctor_id}/update")
+async def admin_api_react_update_doctor(request: Request, doctor_id: int):
+    clinic_id = get_current_clinic_id(request)
+    doctor = get_doctor_by_id(doctor_id, clinic_id)
+    if not doctor:
+        return {"ok": False, "error": "Врач не найден"}
+
+    data = await request.json()
+    full_name = (data.get("full_name") or "").strip()
+    profession = (data.get("profession") or "").strip()
+
+    if not full_name:
+        return {"ok": False, "error": "Введите имя врача"}
+    if not profession:
+        return {"ok": False, "error": "Введите профессию врача"}
+
+    ok = update_doctor(doctor_id, full_name, profession, clinic_id)
+    return {"ok": bool(ok), "data": get_admin_react_payload(request), "error": "" if ok else "Не удалось обновить врача"}
+
+
+@app.post("/admin/api/react/doctors/{doctor_id}/delete")
+async def admin_api_react_delete_doctor(request: Request, doctor_id: int):
+    clinic_id = get_current_clinic_id(request)
+    doctor = get_doctor_by_id(doctor_id, clinic_id)
+    if not doctor:
+        return {"ok": False, "error": "Врач не найден"}
+
+    ok = deactivate_doctor(doctor_id, clinic_id)
+    return {"ok": bool(ok), "data": get_admin_react_payload(request), "error": "" if ok else "Не удалось отключить врача"}
 
 
 @app.post("/admin/bookings/{booking_id}/cancel")

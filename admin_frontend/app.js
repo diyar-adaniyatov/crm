@@ -7,6 +7,7 @@ const NAV = [
   { id: "dashboard", label: "Сводка", icon: "📊" },
   { id: "bookings", label: "Записи", icon: "📅" },
   { id: "conversations", label: "Диалоги", icon: "💬" },
+  { id: "doctors", label: "Врачи", icon: "🩺" },
   { id: "settings", label: "Настройки", icon: "⚙️" },
 ];
 
@@ -73,6 +74,7 @@ function titleForView(view) {
     dashboard: ["Операционная сводка", "Сегодня"],
     bookings: ["Управление записями", "Расписание"],
     conversations: ["Диалоги и лиды", "CRM"],
+    doctors: ["Врачи клиники", "Команда"],
     settings: ["Настройки клиники", "График"],
   };
   return titles[view] || titles.dashboard;
@@ -328,6 +330,117 @@ function ConversationsView({ data, selectedId, setSelectedId, thread, loadingThr
   ]);
 }
 
+function DoctorsView({ data, onAddDoctor, onUpdateDoctor, onDeleteDoctor }) {
+  const doctors = data.doctors || [];
+  const [form, setForm] = useState({ full_name: "", profession: "" });
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState({ full_name: "", profession: "" });
+
+  function updateForm(key, value) {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function updateEditForm(key, value) {
+    setEditForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  async function submit(event) {
+    event.preventDefault();
+    const ok = await onAddDoctor(form);
+    if (ok) setForm({ full_name: "", profession: "" });
+  }
+
+  function startEdit(doctor) {
+    setEditingId(doctor.id);
+    setEditForm({
+      full_name: doctor.full_name || "",
+      profession: doctor.profession || "",
+    });
+  }
+
+  async function saveEdit(doctorId) {
+    const ok = await onUpdateDoctor(doctorId, editForm);
+    if (ok) setEditingId(null);
+  }
+
+  return h("div", { className: "settings-stack" }, [
+    h("section", { className: "panel", key: "add" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("div", { key: "title" }, [
+          h("h2", { className: "panel-title", key: "main" }, "Добавить врача"),
+          h("div", { className: "cell-sub", key: "sub" }, "Врачи видны боту только внутри текущей клиники"),
+        ]),
+        h(StatusBadge, { key: "count", tone: doctors.length ? "completed" : "closed" }, `${doctors.length} врачей`),
+      ]),
+      h("div", { className: "panel-body", key: "body" },
+        h("form", { onSubmit: submit }, [
+          h("div", { className: "form-grid", key: "grid" }, [
+            h("div", { className: "form-field", key: "name" }, [
+              h("label", null, "Имя врача"),
+              h("input", { value: form.full_name, placeholder: "Например: Алина Петрова", onChange: (event) => updateForm("full_name", event.target.value) }),
+            ]),
+            h("div", { className: "form-field", key: "profession" }, [
+              h("label", null, "Профессия"),
+              h("input", { value: form.profession, placeholder: "Например: стоматолог", onChange: (event) => updateForm("profession", event.target.value) }),
+            ]),
+          ]),
+          h("div", { className: "toolbar", style: { marginTop: 14, marginBottom: 0 }, key: "actions" }, [
+            h("button", { className: "btn primary", type: "submit" }, "Добавить врача"),
+            h("span", { className: "cell-sub" }, "По имени или профессии бот сможет выбрать нужного специалиста."),
+          ]),
+        ])
+      ),
+    ]),
+    h("section", { className: "panel", key: "list" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("h2", { className: "panel-title", key: "title" }, "Список врачей"),
+        h(StatusBadge, { key: "active", tone: "active" }, "Активные"),
+      ]),
+      h("div", { className: "panel-body", key: "body" },
+        doctors.length
+          ? h("div", { className: "table-wrap" },
+              h("table", { className: "data-table" }, [
+                h("thead", { key: "head" },
+                  h("tr", null, [
+                    h("th", { key: "name" }, "Имя"),
+                    h("th", { key: "profession" }, "Профессия"),
+                    h("th", { key: "status" }, "Статус"),
+                    h("th", { key: "actions" }, "Действия"),
+                  ])
+                ),
+                h("tbody", { key: "body" }, doctors.map((doctor) => {
+                  const editing = editingId === doctor.id;
+                  return h("tr", { key: doctor.id }, [
+                    h("td", { key: "name" }, editing
+                      ? h("input", { className: "table-input", value: editForm.full_name, onChange: (event) => updateEditForm("full_name", event.target.value) })
+                      : h("div", { className: "cell-main" }, doctor.full_name)
+                    ),
+                    h("td", { key: "profession" }, editing
+                      ? h("input", { className: "table-input", value: editForm.profession, onChange: (event) => updateEditForm("profession", event.target.value) })
+                      : h("div", { className: "cell-sub" }, doctor.profession || "—")
+                    ),
+                    h("td", { key: "status" }, h(StatusBadge, { tone: "completed" }, "Активен")),
+                    h("td", { key: "actions" },
+                      h("div", { className: "row-actions" }, editing
+                        ? [
+                            h("button", { className: "btn green", type: "button", onClick: () => saveEdit(doctor.id), key: "save" }, "Сохранить"),
+                            h("button", { className: "btn", type: "button", onClick: () => setEditingId(null), key: "cancel" }, "Отмена"),
+                          ]
+                        : [
+                            h("button", { className: "btn", type: "button", onClick: () => startEdit(doctor), key: "edit" }, "Редактировать"),
+                            h("button", { className: "btn red", type: "button", onClick: () => onDeleteDoctor(doctor.id), key: "delete" }, "Отключить"),
+                          ])
+                    ),
+                  ]);
+                })),
+              ])
+            )
+          : h(EmptyState, { text: "Врачей пока нет. Добавьте первого специалиста выше." })
+      ),
+    ]),
+  ]);
+}
+
 function ChannelManager({ data, onAddChannel, onDeleteChannel }) {
   const [form, setForm] = useState({
     channel_name: "",
@@ -536,6 +649,7 @@ function App() {
       dashboard: data.metrics.needs_operator || 0,
       bookings: data.bookings.active.length,
       conversations: data.conversations.inbox.length,
+      doctors: (data.doctors || []).length,
       settings: "",
     };
   }, [data]);
@@ -644,6 +758,64 @@ function App() {
     }
   }
 
+  async function onAddDoctor(form) {
+    setSaving(true);
+    try {
+      const payload = await api("/admin/api/react/doctors", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Врач добавлен");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось добавить врача", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onUpdateDoctor(doctorId, form) {
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/doctors/${doctorId}/update`, {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Врач обновлён");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось обновить врача", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onDeleteDoctor(doctorId) {
+    if (!window.confirm("Отключить врача?")) return false;
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/doctors/${doctorId}/delete`, {
+        method: "POST",
+        body: "{}",
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Врач отключён");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось отключить врача", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
   function openConversation(id) {
     setView("conversations");
     setSelectedId(id);
@@ -707,6 +879,7 @@ function App() {
           onReply,
           onConversationAction,
         }),
+        view === "doctors" && h(DoctorsView, { data, onAddDoctor, onUpdateDoctor, onDeleteDoctor }),
         view === "settings" && h(SettingsView, { data, onSave: onSaveSettings, onAddChannel, onDeleteChannel }),
       ]),
     ]),

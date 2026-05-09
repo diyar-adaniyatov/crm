@@ -413,6 +413,22 @@ button {
   border-bottom: 0;
 }
 
+.table-input {
+  width: 100%;
+  min-width: 180px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  padding: 8px 10px;
+}
+
+.table-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
 .cell-main {
   font-weight: 820;
 }
