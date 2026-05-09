@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
     CREATE TABLE IF NOT EXISTS clinics (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
+        address TEXT DEFAULT '',
         timezone TEXT DEFAULT 'Asia/Almaty',
         work_start TEXT DEFAULT '09:00',
         work_end TEXT DEFAULT '18:00',
@@ -72,6 +73,8 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
 
     if "timezone" not in clinic_columns:
         cursor.execute("ALTER TABLE clinics ADD COLUMN timezone TEXT DEFAULT 'Asia/Almaty'")
+    if "address" not in clinic_columns:
+        cursor.execute("ALTER TABLE clinics ADD COLUMN address TEXT DEFAULT ''")
     if "work_start" not in clinic_columns:
         cursor.execute("ALTER TABLE clinics ADD COLUMN work_start TEXT DEFAULT '09:00'")
     if "work_end" not in clinic_columns:
@@ -129,6 +132,7 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
         working_days TEXT NOT NULL DEFAULT '0,1,2,3,4,5',
         bot_pause_hours INTEGER NOT NULL DEFAULT 12,
         clinic_name TEXT DEFAULT 'Клиника',
+        address TEXT DEFAULT '',
         FOREIGN KEY(clinic_id) REFERENCES clinics(id)
     )
     """)
@@ -264,6 +268,14 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
         cursor.execute("""
         ALTER TABLE clinic_settings ADD COLUMN bot_pause_hours INTEGER NOT NULL DEFAULT 12
         """)
+    if "clinic_name" not in settings_columns:
+        cursor.execute("""
+        ALTER TABLE clinic_settings ADD COLUMN clinic_name TEXT DEFAULT 'Клиника'
+        """)
+    if "address" not in settings_columns:
+        cursor.execute("""
+        ALTER TABLE clinic_settings ADD COLUMN address TEXT DEFAULT ''
+        """)
 
     # Ensure default clinic exists
     cursor.execute("SELECT COUNT(*) FROM clinics")
@@ -276,8 +288,8 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
     cursor.execute("SELECT COUNT(*) FROM clinic_settings WHERE clinic_id = 1")
     if cursor.fetchone()[0] == 0:
         cursor.execute("""
-        INSERT INTO clinic_settings (clinic_id, work_start, work_end, slot_step_minutes, working_days, bot_pause_hours, clinic_name)
-        VALUES (1, '10:00', '19:00', 30, '0,1,2,3,4,5', 12, 'Клиника')
+        INSERT INTO clinic_settings (clinic_id, work_start, work_end, slot_step_minutes, working_days, bot_pause_hours, clinic_name, address)
+        VALUES (1, '10:00', '19:00', 30, '0,1,2,3,4,5', 12, 'Клиника', '')
         """)
 
     # Create clinic_admins table if missing

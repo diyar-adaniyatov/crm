@@ -680,12 +680,20 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel }) {
   return h("div", { className: "settings-stack" }, [
     h("section", { className: "panel", key: "schedule" }, [
       h("div", { className: "panel-header", key: "head" }, [
-        h("h2", { className: "panel-title", key: "title" }, "График и ручной режим"),
+        h("h2", { className: "panel-title", key: "title" }, "Профиль, график и ручной режим"),
         h("span", { className: "cell-sub", key: "hint" }, data.clinic.name),
       ]),
       h("div", { className: "panel-body", key: "body" },
         h("form", { onSubmit: submit }, [
           h("div", { className: "form-grid", key: "grid" }, [
+            h("div", { className: "form-field", key: "clinic-name" }, [
+              h("label", null, "Название клиники"),
+              h("input", { value: form.clinic_name || "", placeholder: "Например: Dental House", onChange: (event) => update("clinic_name", event.target.value) }),
+            ]),
+            h("div", { className: "form-field", key: "address" }, [
+              h("label", null, "Адрес"),
+              h("input", { value: form.address || "", placeholder: "Например: Алматы, Абая 10", onChange: (event) => update("address", event.target.value) }),
+            ]),
             h("div", { className: "form-field", key: "start" }, [
               h("label", null, "Начало рабочего дня"),
               h("input", { type: "time", value: form.work_start || "", onChange: (event) => update("work_start", event.target.value) }),

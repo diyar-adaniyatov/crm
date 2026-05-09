@@ -2631,7 +2631,7 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
     cursor = conn.cursor()
 
     cursor.execute("""
-    SELECT work_start, work_end, slot_step_minutes, clinic_name, working_days, bot_pause_hours
+    SELECT work_start, work_end, slot_step_minutes, clinic_name, working_days, bot_pause_hours, address
     FROM clinic_settings
     WHERE clinic_id = ?
     ORDER BY id DESC
@@ -2642,7 +2642,7 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
 
     if not row:
         cursor.execute(
-            "SELECT name, work_start, work_end, slot_step_minutes, working_days FROM clinics WHERE id = ?",
+            "SELECT name, work_start, work_end, slot_step_minutes, working_days, address FROM clinics WHERE id = ?",
             (clinic_id,)
         )
         clinic_row = cursor.fetchone()
@@ -2652,12 +2652,13 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
         work_end = clinic_row[2] if clinic_row and clinic_row[2] else "19:00"
         slot_step = clinic_row[3] if clinic_row and clinic_row[3] else 30
         working_days = _normalize_working_days(clinic_row[4] if clinic_row and len(clinic_row) > 4 else "0,1,2,3,4,5")
+        address = clinic_row[5] if clinic_row and len(clinic_row) > 5 and clinic_row[5] else ""
         bot_pause_hours = 12
 
         cursor.execute("""
-        INSERT INTO clinic_settings (clinic_id, work_start, work_end, slot_step_minutes, working_days, bot_pause_hours, clinic_name)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (clinic_id, work_start, work_end, slot_step, working_days, bot_pause_hours, clinic_name))
+        INSERT INTO clinic_settings (clinic_id, work_start, work_end, slot_step_minutes, working_days, bot_pause_hours, clinic_name, address)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (clinic_id, work_start, work_end, slot_step, working_days, bot_pause_hours, clinic_name, address))
 
         conn.commit()
         conn.close()
@@ -2670,6 +2671,7 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
             "working_days": working_days,
             "bot_pause_hours": bot_pause_hours,
             "clinic_name": clinic_name,
+            "address": address,
         }
 
     conn.close()
@@ -2682,7 +2684,38 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
         "clinic_name": row[3],
         "working_days": _normalize_working_days(row[4]),
         "bot_pause_hours": row[5] or 12,
+        "address": row[6] or "",
     }
+
+
+def update_clinic_profile(clinic_name: str, address: str = "", clinic_id: int = 1) -> bool:
+    try:
+        clinic_id = int(clinic_id or 1)
+        clinic_name = (clinic_name or "").strip() or "Клиника"
+        address = (address or "").strip()
+        get_clinic_settings(clinic_id)
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+        UPDATE clinic_settings
+        SET clinic_name = ?, address = ?
+        WHERE clinic_id = ?
+        """, (clinic_name, address, clinic_id))
+
+        cursor.execute("""
+        UPDATE clinics
+        SET name = ?, address = ?
+        WHERE id = ?
+        """, (clinic_name, address, clinic_id))
+
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"ERROR updating clinic profile: {e}")
+        return False
 
 
 

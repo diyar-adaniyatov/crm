@@ -72,7 +72,7 @@ from booking_service import (
     reschedule_booking_by_chat_id,
     get_service_duration, check_slot_available, find_alternative_slots, get_slot_issue_message,
     cancel_booking_by_id, mark_booking_completed, mark_booking_no_show, mark_reminder_24h_sent, mark_reminder_2h_sent, get_bookings_needing_24h_reminder,
-    get_bookings_needing_2h_reminder, get_bookings_by_status, get_clinic_settings, update_work_hours, update_slot_step, update_working_days, update_bot_pause_hours,
+    get_bookings_needing_2h_reminder, get_bookings_by_status, get_clinic_settings, update_work_hours, update_slot_step, update_working_days, update_bot_pause_hours, update_clinic_profile,
     get_active_services, get_all_active_services, get_all_services, get_service_by_name, add_service, update_service, deactivate_service, deactivate_service_by_id, add_faq_item, remove_faq_item,
     get_all_active_faq_items, find_faq_answer, get_booking_history_by_chat_id, is_returning_client,
     get_default_clinic, assign_user_to_clinic, get_clinic_by_chat_id,
@@ -3528,6 +3528,8 @@ def get_admin_react_payload(request: Request) -> dict:
             "user_email": request.session.get("user_email") or "",
         },
         "settings": {
+            "clinic_name": settings.get("clinic_name") or "Клиника",
+            "address": settings.get("address") or "",
             "work_start": settings.get("work_start") or "10:00",
             "work_end": settings.get("work_end") or "19:00",
             "slot_step_minutes": settings.get("slot_step_minutes") or 30,
@@ -3663,6 +3665,8 @@ async def admin_api_react_settings(request: Request):
     clinic_id = get_current_clinic_id(request)
     data = await request.json()
 
+    clinic_name = (data.get("clinic_name") or "").strip()
+    address = (data.get("address") or "").strip()
     work_start = normalize_admin_time(data.get("work_start", ""))
     work_end = normalize_admin_time(data.get("work_end", ""))
     try:
@@ -3676,6 +3680,12 @@ async def admin_api_react_settings(request: Request):
 
     working_days = [str(item) for item in data.get("working_days", []) if str(item).strip() in {"0", "1", "2", "3", "4", "5", "6"}]
 
+    if not clinic_name:
+        return {"ok": False, "error": "Введите название клиники"}
+    if len(clinic_name) > 120:
+        return {"ok": False, "error": "Название клиники слишком длинное"}
+    if len(address) > 300:
+        return {"ok": False, "error": "Адрес слишком длинный"}
     if not work_start or not work_end:
         return {"ok": False, "error": "Введите время в формате ЧЧ:ММ"}
     if admin_time_to_minutes(work_start) >= admin_time_to_minutes(work_end):
@@ -3687,6 +3697,7 @@ async def admin_api_react_settings(request: Request):
     if bot_pause_hours not in {2, 6, 12, 24}:
         return {"ok": False, "error": "Выберите корректное время авто-включения бота"}
 
+    update_clinic_profile(clinic_name, address, clinic_id)
     update_work_hours(work_start, work_end, clinic_id)
     update_slot_step(slot_step_minutes, clinic_id)
     update_working_days(working_days, clinic_id)
@@ -4219,6 +4230,8 @@ QUESTION_TOPIC_KEYWORDS = {
         "адрес", "где вы", "где находитесь", "как добраться", "как вас найти",
         "где клиника", "где приём", "location", "where are you", "where located",
         "ориентир", "как проехать", "как пройти",
+        "локация", "местоположение", "куда подъехать", "куда приехать",
+        "где находится", "где вас найти", "карта", "2гис", "2gis",
     ],
     "schedule": [
         "график", "время работы", "режим работы", "расписание", "во сколько открываетесь",
@@ -4256,6 +4269,28 @@ def get_working_hours_reply(clinic_id: int = 1) -> str:
     ]
     days_text = ", ".join(working_days) if working_days else "по рабочим дням"
     return f"Мы работаем с {work_start} до {work_end} ({days_text}). Могу помочь подобрать удобное время для записи."
+
+
+def get_clinic_location_reply(clinic_id: int = 1) -> str:
+    settings = get_clinic_settings(clinic_id)
+    clinic_name = (settings.get("clinic_name") or "клиника").strip()
+    address = (settings.get("address") or "").strip()
+
+    if address:
+        return f"Клиника «{clinic_name}» находится по адресу: {address}."
+
+    return "Адрес пока не добавлен в настройках клиники. Я могу передать вопрос администратору."
+
+
+def get_clinic_greeting_reply(clinic_id: int = 1, user_name: str = "") -> str:
+    settings = get_clinic_settings(clinic_id)
+    clinic_name = (settings.get("clinic_name") or "наша клиника").strip()
+    first_name = (user_name or "").strip().split()[0] if user_name else ""
+    name_part = f", {first_name}" if first_name else ""
+    return (
+        f"Здравствуйте{name_part}! Рады видеть вас в клинике «{clinic_name}».\n\n"
+        "Помогу записаться, перенести визит, отменить запись или ответить на вопрос."
+    )
 
 
 def detect_question_topic(message: str) -> str:
@@ -4427,7 +4462,7 @@ def answer_direct_question(user_text: str, clinic_id: int = 1) -> str:
     if topic == "doctor":
         return get_info_missing_response("врачу")
     if topic == "location":
-        return get_info_missing_response("адресу")
+        return get_clinic_location_reply(clinic_id)
 
     if topic == "general":
         # Fuzzy FAQ search: find the FAQ item with most keyword overlap
@@ -6298,10 +6333,8 @@ async def process_client_message(chat_id, user_text, user_name, send_func, sourc
             is_returning = is_returning_client(chat_id)
             if is_returning:
                 greeting_text = get_returning_client_greeting()
-            elif telegram_name:
-                greeting_text = get_personalized_greeting(telegram_name)
             else:
-                greeting_text = get_greeting()
+                greeting_text = get_clinic_greeting_reply(clinic_id, telegram_name)
 
             await reply_and_track(greeting_text, flow_state="idle", intent="greeting")
             return
