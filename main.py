@@ -5411,6 +5411,9 @@ async def whatsapp_webhook(request: Request):
 
     if not message or not sender:
         return {"ok": True}
+    if not str(sender).endswith("@c.us"):
+        logger.info("WhatsApp webhook skipped non-private chat_id=%s", sender)
+        return {"ok": True}
 
     phone = sender.replace("@c.us", "")
 
@@ -7371,6 +7374,9 @@ async def process_client_message(chat_id, user_text, user_name, send_func, sourc
     
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not update.message or not update.message.text:
+        return
+    if update.effective_chat and update.effective_chat.type != "private":
+        logger.info("Telegram message skipped non-private chat_id=%s type=%s", update.effective_chat.id, update.effective_chat.type)
         return
 
     chat_id = str(update.message.chat.id)
