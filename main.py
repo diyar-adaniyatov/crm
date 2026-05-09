@@ -1,6 +1,7 @@
 import code
 import email
 from email import message
+import html
 import os
 import re
 import ssl
@@ -501,9 +502,72 @@ app.add_middleware(
     max_age=60 * 60 * 12,
 )
 
-ADMIN_FRONTEND_DIR = os.path.join(os.path.dirname(__file__), "admin_frontend")
-if os.path.isdir(ADMIN_FRONTEND_DIR):
-    app.mount("/admin/assets", StaticFiles(directory=ADMIN_FRONTEND_DIR), name="admin_frontend")
+def get_admin_frontend_candidates() -> list[str]:
+    module_dir = os.path.dirname(os.path.abspath(__file__))
+    cwd = os.path.abspath(os.getcwd())
+    roots = [module_dir, cwd, os.path.dirname(module_dir)]
+    candidates = []
+
+    for root in roots:
+        candidate = os.path.abspath(os.path.join(root, "admin_frontend"))
+        if candidate not in candidates:
+            candidates.append(candidate)
+
+    return candidates
+
+
+def resolve_admin_frontend_dir() -> str:
+    candidates = get_admin_frontend_candidates()
+
+    for candidate in candidates:
+        if os.path.isfile(os.path.join(candidate, "index.html")):
+            return candidate
+
+    for candidate in candidates:
+        if os.path.isdir(candidate):
+            return candidate
+
+    return candidates[0]
+
+
+def get_admin_frontend_file(asset_path: str) -> str | None:
+    frontend_dir = os.path.abspath(resolve_admin_frontend_dir())
+    file_path = os.path.abspath(os.path.join(frontend_dir, asset_path))
+
+    if file_path != frontend_dir and not file_path.startswith(frontend_dir + os.sep):
+        return None
+
+    if not os.path.isfile(file_path):
+        return None
+
+    return file_path
+
+
+def render_admin_frontend_missing() -> str:
+    searched = "".join(
+        f"<li><code>{html.escape(os.path.join(path, 'index.html'))}</code></li>"
+        for path in get_admin_frontend_candidates()
+    )
+    return f"""
+    <div class='empty' style='text-align:left;'>
+        <p><b>React-интерфейс не найден на сервере.</b></p>
+        <p style='margin-top:10px;'>Backend работает, но папка <code>admin_frontend</code> не попала на VDS или лежит не рядом с <code>main.py</code>.</p>
+        <p style='margin-top:10px;'>Сервер искал файл здесь:</p>
+        <ul style='margin:10px 0 0 18px; line-height:1.8;'>{searched}</ul>
+        <p style='margin-top:14px;'>Скопируйте на VDS всю папку <code>admin_frontend</code> с файлами <code>index.html</code>, <code>app.js</code>, <code>styles.css</code> и перезапустите сервер.</p>
+    </div>
+    """
+
+
+ADMIN_FRONTEND_DIR = resolve_admin_frontend_dir()
+
+
+@app.get("/admin/assets/{asset_path:path}")
+async def admin_frontend_asset(asset_path: str):
+    asset_file = get_admin_frontend_file(asset_path)
+    if not asset_file:
+        return HTMLResponse("Admin frontend asset not found", status_code=404)
+    return FileResponse(asset_file)
 
 # =========================
 # Web Admin Routes
@@ -3473,11 +3537,11 @@ def get_admin_react_payload(request: Request) -> dict:
 
 @app.get("/admin/react", response_class=HTMLResponse)
 async def admin_react_page(request: Request):
-    index_path = os.path.join(ADMIN_FRONTEND_DIR, "index.html")
-    if not os.path.exists(index_path):
+    index_path = get_admin_frontend_file("index.html")
+    if not index_path:
         return HTMLResponse(render_admin_layout(
             "✨ Новый CRM",
-            "<div class='empty'><p>React-интерфейс ещё не собран.</p></div>",
+            render_admin_frontend_missing(),
         ))
     return FileResponse(index_path)
 
