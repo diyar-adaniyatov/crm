@@ -3422,6 +3422,23 @@ def serialize_admin_doctor(doctor: dict) -> dict:
     }
 
 
+def serialize_admin_service(service: dict) -> dict:
+    price = service.get("price")
+    duration = service.get("duration_minutes") or 60
+    return {
+        "id": service.get("id"),
+        "name": service.get("name") or "",
+        "price": price,
+        "price_display": f"{int(price):,}".replace(",", " ") + " тг" if price is not None else "не указана",
+        "duration_minutes": duration,
+        "duration_display": f"{int(duration)} мин",
+        "category": service.get("category") or "",
+        "description": service.get("description") or "",
+        "sort_order": service.get("sort_order") or 0,
+        "is_active": bool(service.get("is_active", 1)),
+    }
+
+
 def mask_secret(value: str) -> str:
     value = (value or "").strip()
     if not value:
@@ -3521,6 +3538,11 @@ def get_admin_react_payload(request: Request) -> dict:
         "doctors": [
             serialize_admin_doctor(item)
             for item in get_active_doctors(clinic_id)
+        ],
+        "services": [
+            serialize_admin_service(item)
+            for item in get_all_services(clinic_id)
+            if item.get("is_active", 1)
         ],
         "webhooks": {
             "whatsapp": str(request.base_url).rstrip("/") + "/webhook/whatsapp",
@@ -3760,6 +3782,97 @@ async def admin_api_react_delete_doctor(request: Request, doctor_id: int):
 
     ok = deactivate_doctor(doctor_id, clinic_id)
     return {"ok": bool(ok), "data": get_admin_react_payload(request), "error": "" if ok else "Не удалось отключить врача"}
+
+
+def parse_admin_money(value) -> int | None:
+    value_text = str(value if value is not None else "").strip().replace(" ", "")
+    if value_text == "":
+        return None
+    try:
+        parsed = int(value_text)
+    except (TypeError, ValueError):
+        return None
+    return parsed if parsed >= 0 else None
+
+
+def parse_admin_duration(value, default: int = 60) -> int:
+    try:
+        parsed = int(value)
+    except (TypeError, ValueError):
+        return default
+    return parsed
+
+
+@app.post("/admin/api/react/services")
+async def admin_api_react_add_service(request: Request):
+    clinic_id = get_current_clinic_id(request)
+    data = await request.json()
+
+    name = (data.get("name") or "").strip()
+    category = (data.get("category") or "").strip()
+    description = (data.get("description") or "").strip()
+    price = parse_admin_money(data.get("price"))
+    duration_minutes = parse_admin_duration(data.get("duration_minutes") or 60)
+
+    if not name:
+        return {"ok": False, "error": "Введите название услуги"}
+    if price is None:
+        return {"ok": False, "error": "Введите цену услуги числом"}
+    if duration_minutes < 5 or duration_minutes > 480:
+        return {"ok": False, "error": "Длительность должна быть от 5 до 480 минут"}
+
+    ok = add_service(
+        name=name,
+        price=price,
+        duration_minutes=duration_minutes,
+        clinic_id=clinic_id,
+        category=category or None,
+        description=description or None,
+    )
+    return {"ok": bool(ok), "data": get_admin_react_payload(request), "error": "" if ok else "Не удалось добавить услугу"}
+
+
+@app.post("/admin/api/react/services/{service_id}/update")
+async def admin_api_react_update_service(request: Request, service_id: int):
+    clinic_id = get_current_clinic_id(request)
+    service = get_service_by_id(service_id, clinic_id)
+    if not service:
+        return {"ok": False, "error": "Услуга не найдена"}
+
+    data = await request.json()
+    name = (data.get("name") or "").strip()
+    category = (data.get("category") or "").strip()
+    description = (data.get("description") or "").strip()
+    price = parse_admin_money(data.get("price"))
+    duration_minutes = parse_admin_duration(data.get("duration_minutes") or service.get("duration_minutes") or 60)
+
+    if not name:
+        return {"ok": False, "error": "Введите название услуги"}
+    if price is None:
+        return {"ok": False, "error": "Введите цену услуги числом"}
+    if duration_minutes < 5 or duration_minutes > 480:
+        return {"ok": False, "error": "Длительность должна быть от 5 до 480 минут"}
+
+    ok = update_service(
+        service_id=service_id,
+        name=name,
+        price=price,
+        duration_minutes=duration_minutes,
+        category=category,
+        description=description,
+    )
+    return {"ok": bool(ok), "data": get_admin_react_payload(request), "error": "" if ok else "Не удалось обновить услугу"}
+
+
+@app.post("/admin/api/react/services/{service_id}/delete")
+async def admin_api_react_delete_service(request: Request, service_id: int):
+    clinic_id = get_current_clinic_id(request)
+    service = get_service_by_id(service_id, clinic_id)
+    if not service:
+        return {"ok": False, "error": "Услуга не найдена"}
+
+    ok = deactivate_service_by_id(service_id)
+    return {"ok": bool(ok), "data": get_admin_react_payload(request), "error": "" if ok else "Не удалось отключить услугу"}
 
 
 @app.post("/admin/bookings/{booking_id}/cancel")

@@ -7,6 +7,7 @@ const NAV = [
   { id: "dashboard", label: "Сводка", icon: "📊" },
   { id: "bookings", label: "Записи", icon: "📅" },
   { id: "conversations", label: "Диалоги", icon: "💬" },
+  { id: "services", label: "Услуги", icon: "🧾" },
   { id: "doctors", label: "Врачи", icon: "🩺" },
   { id: "settings", label: "Настройки", icon: "⚙️" },
 ];
@@ -74,6 +75,7 @@ function titleForView(view) {
     dashboard: ["Операционная сводка", "Сегодня"],
     bookings: ["Управление записями", "Расписание"],
     conversations: ["Диалоги и лиды", "CRM"],
+    services: ["Услуги и цены", "Прайс"],
     doctors: ["Врачи клиники", "Команда"],
     settings: ["Настройки клиники", "График"],
   };
@@ -327,6 +329,144 @@ function ConversationsView({ data, selectedId, setSelectedId, thread, loadingThr
       ),
     ]),
     h(ChatPanel, { key: "chat", selectedId, thread, loadingThread, onReply, onConversationAction }),
+  ]);
+}
+
+function ServicesView({ data, onAddService, onUpdateService, onDeleteService }) {
+  const services = data.services || [];
+  const emptyForm = { name: "", price: "", duration_minutes: 60, category: "", description: "" };
+  const [form, setForm] = useState(emptyForm);
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState(emptyForm);
+
+  function updateForm(key, value) {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function updateEditForm(key, value) {
+    setEditForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  async function submit(event) {
+    event.preventDefault();
+    const ok = await onAddService(form);
+    if (ok) setForm(emptyForm);
+  }
+
+  function startEdit(service) {
+    setEditingId(service.id);
+    setEditForm({
+      name: service.name || "",
+      price: service.price ?? "",
+      duration_minutes: service.duration_minutes || 60,
+      category: service.category || "",
+      description: service.description || "",
+    });
+  }
+
+  async function saveEdit(serviceId) {
+    const ok = await onUpdateService(serviceId, editForm);
+    if (ok) setEditingId(null);
+  }
+
+  return h("div", { className: "settings-stack" }, [
+    h("section", { className: "panel", key: "add" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("div", { key: "title" }, [
+          h("h2", { className: "panel-title", key: "main" }, "Добавить услугу"),
+          h("div", { className: "cell-sub", key: "sub" }, "Прайс применяется только к текущей клинике"),
+        ]),
+        h(StatusBadge, { key: "count", tone: services.length ? "completed" : "closed" }, `${services.length} услуг`),
+      ]),
+      h("div", { className: "panel-body", key: "body" },
+        h("form", { onSubmit: submit }, [
+          h("div", { className: "form-grid", key: "grid" }, [
+            h("div", { className: "form-field", key: "name" }, [
+              h("label", null, "Название услуги"),
+              h("input", { value: form.name, placeholder: "Например: Чистка зубов", onChange: (event) => updateForm("name", event.target.value) }),
+            ]),
+            h("div", { className: "form-field", key: "price" }, [
+              h("label", null, "Цена, тг"),
+              h("input", { type: "number", min: "0", step: "100", value: form.price, placeholder: "15000", onChange: (event) => updateForm("price", event.target.value) }),
+            ]),
+            h("div", { className: "form-field", key: "duration" }, [
+              h("label", null, "Длительность, минут"),
+              h("input", { type: "number", min: "5", max: "480", step: "5", value: form.duration_minutes, onChange: (event) => updateForm("duration_minutes", event.target.value) }),
+            ]),
+            h("div", { className: "form-field", key: "category" }, [
+              h("label", null, "Категория"),
+              h("input", { value: form.category, placeholder: "Например: Стоматология", onChange: (event) => updateForm("category", event.target.value) }),
+            ]),
+            h("div", { className: "form-field wide", key: "description" }, [
+              h("label", null, "Описание"),
+              h("input", { value: form.description, placeholder: "Короткое уточнение для администратора", onChange: (event) => updateForm("description", event.target.value) }),
+            ]),
+          ]),
+          h("div", { className: "toolbar", style: { marginTop: 14, marginBottom: 0 }, key: "actions" }, [
+            h("button", { className: "btn primary", type: "submit" }, "Добавить услугу"),
+            h("span", { className: "cell-sub" }, "Бот будет использовать цену при вопросах о стоимости."),
+          ]),
+        ])
+      ),
+    ]),
+    h("section", { className: "panel", key: "list" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("h2", { className: "panel-title", key: "title" }, "Прайс клиники"),
+        h(StatusBadge, { key: "active", tone: "active" }, "Активные"),
+      ]),
+      h("div", { className: "panel-body", key: "body" },
+        services.length
+          ? h("div", { className: "table-wrap" },
+              h("table", { className: "data-table" }, [
+                h("thead", { key: "head" },
+                  h("tr", null, [
+                    h("th", { key: "name" }, "Услуга"),
+                    h("th", { key: "price" }, "Цена"),
+                    h("th", { key: "duration" }, "Длительность"),
+                    h("th", { key: "category" }, "Категория"),
+                    h("th", { key: "actions" }, "Действия"),
+                  ])
+                ),
+                h("tbody", { key: "body" }, services.map((service) => {
+                  const editing = editingId === service.id;
+                  return h("tr", { key: service.id }, [
+                    h("td", { key: "name" }, editing
+                      ? h("input", { className: "table-input", value: editForm.name, onChange: (event) => updateEditForm("name", event.target.value) })
+                      : [
+                          h("div", { className: "cell-main", key: "main" }, service.name),
+                          service.description && h("div", { className: "cell-sub", key: "sub" }, service.description),
+                        ].filter(Boolean)
+                    ),
+                    h("td", { key: "price" }, editing
+                      ? h("input", { className: "table-input", type: "number", min: "0", step: "100", value: editForm.price, onChange: (event) => updateEditForm("price", event.target.value) })
+                      : h("div", { className: "cell-main" }, service.price_display)
+                    ),
+                    h("td", { key: "duration" }, editing
+                      ? h("input", { className: "table-input", type: "number", min: "5", max: "480", step: "5", value: editForm.duration_minutes, onChange: (event) => updateEditForm("duration_minutes", event.target.value) })
+                      : h("div", { className: "cell-sub" }, service.duration_display)
+                    ),
+                    h("td", { key: "category" }, editing
+                      ? h("input", { className: "table-input", value: editForm.category, onChange: (event) => updateEditForm("category", event.target.value) })
+                      : h("div", { className: "cell-sub" }, service.category || "—")
+                    ),
+                    h("td", { key: "actions" },
+                      h("div", { className: "row-actions" }, editing
+                        ? [
+                            h("button", { className: "btn green", type: "button", onClick: () => saveEdit(service.id), key: "save" }, "Сохранить"),
+                            h("button", { className: "btn", type: "button", onClick: () => setEditingId(null), key: "cancel" }, "Отмена"),
+                          ]
+                        : [
+                            h("button", { className: "btn", type: "button", onClick: () => startEdit(service), key: "edit" }, "Редактировать"),
+                            h("button", { className: "btn red", type: "button", onClick: () => onDeleteService(service.id), key: "delete" }, "Отключить"),
+                          ])
+                    ),
+                  ]);
+                })),
+              ])
+            )
+          : h(EmptyState, { text: "Услуг пока нет. Добавьте первую услугу выше." })
+      ),
+    ]),
   ]);
 }
 
@@ -649,6 +789,7 @@ function App() {
       dashboard: data.metrics.needs_operator || 0,
       bookings: data.bookings.active.length,
       conversations: data.conversations.inbox.length,
+      services: (data.services || []).length,
       doctors: (data.doctors || []).length,
       settings: "",
     };
@@ -753,6 +894,64 @@ function App() {
       } else {
         showToast(payload?.error || "Не удалось отключить канал", "error");
       }
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onAddService(form) {
+    setSaving(true);
+    try {
+      const payload = await api("/admin/api/react/services", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Услуга добавлена");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось добавить услугу", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onUpdateService(serviceId, form) {
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/services/${serviceId}/update`, {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Услуга обновлена");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось обновить услугу", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onDeleteService(serviceId) {
+    if (!window.confirm("Отключить услугу?")) return false;
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/services/${serviceId}/delete`, {
+        method: "POST",
+        body: "{}",
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Услуга отключена");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось отключить услугу", "error");
+      return false;
     } finally {
       setSaving(false);
     }
@@ -879,6 +1078,7 @@ function App() {
           onReply,
           onConversationAction,
         }),
+        view === "services" && h(ServicesView, { data, onAddService, onUpdateService, onDeleteService }),
         view === "doctors" && h(DoctorsView, { data, onAddDoctor, onUpdateDoctor, onDeleteDoctor }),
         view === "settings" && h(SettingsView, { data, onSave: onSaveSettings, onAddChannel, onDeleteChannel }),
       ]),
