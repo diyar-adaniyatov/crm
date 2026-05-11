@@ -3772,6 +3772,177 @@ def get_admin_react_payload(request: Request) -> dict:
     }
 
 
+def get_admin_assistant_action(label: str, view: str) -> dict:
+    return {"label": label, "view": view}
+
+
+def get_admin_assistant_booking_lines(bookings: list[dict], limit: int = 5) -> str:
+    if not bookings:
+        return ""
+
+    lines = []
+    for item in bookings[:limit]:
+        lines.append(
+            f"• {item.get('appointment_display', '—')} — "
+            f"{item.get('full_name', 'Клиент')}, "
+            f"{item.get('service', 'визит')}, "
+            f"{item.get('phone', '—')}"
+        )
+    return "\n".join(lines)
+
+
+def build_admin_assistant_reply(request: Request, message: str) -> dict:
+    payload = get_admin_react_payload(request)
+    text = re.sub(r"\s+", " ", (message or "").lower().replace("ё", "е")).strip()
+    metrics = payload.get("metrics", {})
+    bookings = payload.get("bookings", {})
+    conversations = payload.get("conversations", {})
+    settings = payload.get("settings", {})
+    channels = payload.get("channels", [])
+    doctors = payload.get("doctors", [])
+    services = payload.get("services", [])
+
+    suggestions = [
+        "Какие записи сегодня?",
+        "Что требует внимания?",
+        "Как добавить врача?",
+        "Как подключить WhatsApp?",
+    ]
+
+    def response(answer: str, actions: list[dict] | None = None, extra_suggestions: list[str] | None = None) -> dict:
+        return {
+            "answer": answer,
+            "actions": actions or [],
+            "suggestions": extra_suggestions or suggestions,
+        }
+
+    if not text or any(word in text for word in ["помощ", "что умеешь", "ориентир", "подскажи", "с чего начать"]):
+        answer = (
+            "Я помогу ориентироваться в CRM.\n\n"
+            f"Сейчас: записей сегодня — {metrics.get('bookings_today', 0)}, "
+            f"ожидают ответа — {metrics.get('needs_operator', 0)}, "
+            f"лидов без записи — {metrics.get('open_leads', 0)}, "
+            f"услуг — {len(services)}, врачей — {len(doctors)}.\n\n"
+            "Можно спросить: «какие записи сегодня», «как добавить врача», "
+            "«как подключить WhatsApp», «что требует внимания»."
+        )
+        return response(answer, [
+            get_admin_assistant_action("Открыть входящие", "conversations"),
+            get_admin_assistant_action("Открыть записи", "bookings"),
+            get_admin_assistant_action("Открыть настройки", "settings"),
+        ])
+
+    if any(word in text for word in ["запис", "распис", "сегодня", "ближайш", "прием", "приём"]):
+        today = bookings.get("today", [])
+        upcoming = bookings.get("upcoming", [])
+        today_lines = get_admin_assistant_booking_lines(today)
+        if today_lines:
+            details = f"\n\nБлижайшие записи сегодня:\n{today_lines}"
+        else:
+            details = "\n\nНа сегодня записей пока нет."
+        answer = (
+            f"По записям: сегодня — {len(today)}, "
+            f"ближайших — {len(upcoming)}, активных всего — {len(bookings.get('active', []))}."
+            f"{details}"
+        )
+        return response(answer, [
+            get_admin_assistant_action("Открыть записи", "bookings"),
+            get_admin_assistant_action("Открыть сводку", "dashboard"),
+        ], ["Что требует внимания?", "Есть ли лиды без записи?", "Как закрыть запись?"])
+
+    if any(word in text for word in ["лид", "входящ", "оператор", "ответ", "вниман", "новые", "диалог"]):
+        inbox = conversations.get("inbox", [])
+        leads = conversations.get("leads", [])
+        first_items = "\n".join([
+            f"• {item.get('full_name', 'Клиент')} — {item.get('latest_message', 'сообщение')}"
+            for item in inbox[:4]
+        ])
+        details = f"\n\nПервые диалоги:\n{first_items}" if first_items else "\n\nСейчас нет диалогов, которые требуют оператора."
+        answer = (
+            f"Внимание сейчас нужно здесь: входящих оператору — {len(inbox)}, "
+            f"лидов без записи — {len(leads)}, активных диалогов — {metrics.get('active_conversations', 0)}."
+            f"{details}"
+        )
+        return response(answer, [
+            get_admin_assistant_action("Открыть диалоги", "conversations"),
+            get_admin_assistant_action("Открыть сводку", "dashboard"),
+        ], ["Какие записи сегодня?", "Как включить бота обратно?", "Как ответить клиенту?"])
+
+    if any(word in text for word in ["врач", "доктор", "специалист"]):
+        answer = (
+            "Чтобы добавить врача:\n"
+            "1. Откройте раздел «Врачи».\n"
+            "2. Введите имя врача и профессию, например «стоматолог».\n"
+            "3. Нажмите «Добавить врача».\n\n"
+            f"Сейчас в этой клинике активных врачей: {len(doctors)}. "
+            "После добавления бот сможет понимать вопросы клиентов про врачей и запись к специалисту."
+        )
+        return response(answer, [
+            get_admin_assistant_action("Открыть врачей", "doctors"),
+        ], ["Как добавить услугу?", "Какие записи сегодня?", "Как клиент выберет врача?"])
+
+    if any(word in text for word in ["услуг", "цен", "стоим", "прайс", "процедур"]):
+        answer = (
+            "Чтобы добавить услугу и цену:\n"
+            "1. Откройте раздел «Услуги».\n"
+            "2. Заполните название, цену, длительность и при необходимости категорию.\n"
+            "3. Нажмите «Добавить услугу».\n\n"
+            f"Сейчас в клинике активных услуг: {len(services)}. "
+            "Бот будет использовать эти цены, когда клиент спросит стоимость."
+        )
+        return response(answer, [
+            get_admin_assistant_action("Открыть услуги", "services"),
+        ], ["Как добавить врача?", "Как бот отвечает на цены?", "Как изменить график?"])
+
+    if any(word in text for word in ["whatsapp", "ватсап", "green", "api", "instance", "инстанс", "канал", "webhook"]):
+        answer = (
+            "Чтобы подключить WhatsApp через Green API:\n"
+            "1. Откройте «Настройки».\n"
+            "2. В блоке WhatsApp / Green API вставьте idInstance и apiTokenInstance.\n"
+            "3. В Green API укажите webhook: /webhook/whatsapp на вашем домене.\n"
+            "4. Сохраните и отправьте тестовое сообщение в личный чат WhatsApp.\n\n"
+            f"Сейчас подключено активных WhatsApp-каналов: {len(channels)}."
+        )
+        return response(answer, [
+            get_admin_assistant_action("Открыть настройки", "settings"),
+        ], ["Почему бот не отвечает?", "Как проверить webhook?", "Что требует внимания?"])
+
+    if any(word in text for word in ["график", "работ", "адрес", "настрой", "часы", "название", "клиник"]):
+        days = ", ".join(settings.get("working_days") or [])
+        answer = (
+            "Настройки клиники находятся в разделе «Настройки».\n\n"
+            f"Сейчас указано: {settings.get('clinic_name', 'Клиника')}, "
+            f"график {settings.get('work_start', '10:00')}–{settings.get('work_end', '19:00')}, "
+            f"рабочие дни: {days or 'не указаны'}, "
+            f"адрес: {settings.get('address') or 'не заполнен'}.\n\n"
+            "Эти данные бот использует в ответах клиентам про график, адрес и запись."
+        )
+        return response(answer, [
+            get_admin_assistant_action("Открыть настройки", "settings"),
+        ], ["Как подключить WhatsApp?", "Как добавить услугу?", "Какие записи сегодня?"])
+
+    if any(word in text for word in ["бот", "человек", "ручн", "включить", "выключить", "пауза"]):
+        answer = (
+            "Если оператор отвечает клиенту из CRM, бот ставится на паузу только в этом конкретном диалоге. "
+            "Чтобы вернуть автоответы, откройте диалог клиента и нажмите «Включить бота».\n\n"
+            "Это не отключает бота для всей клиники, остальные клиенты продолжают получать автоответы."
+        )
+        return response(answer, [
+            get_admin_assistant_action("Открыть диалоги", "conversations"),
+        ], ["Что требует внимания?", "Как ответить клиенту?", "Какие лиды без записи?"])
+
+    answer = (
+        "Я не до конца понял вопрос, но могу помочь по основным разделам CRM: "
+        "записи, диалоги, врачи, услуги, настройки и WhatsApp.\n\n"
+        "Попробуйте спросить проще: «какие записи сегодня», «как добавить врача», "
+        "«как подключить WhatsApp» или «что требует внимания»."
+    )
+    return response(answer, [
+        get_admin_assistant_action("Открыть сводку", "dashboard"),
+        get_admin_assistant_action("Открыть настройки", "settings"),
+    ])
+
+
 @app.get("/admin/react", response_class=HTMLResponse)
 async def admin_react_page(request: Request):
     index_path = get_admin_frontend_file("index.html")
@@ -3786,6 +3957,16 @@ async def admin_react_page(request: Request):
 @app.get("/admin/api/react/bootstrap")
 async def admin_api_react_bootstrap(request: Request):
     return get_admin_react_payload(request)
+
+
+@app.post("/admin/api/react/assistant")
+async def admin_api_react_assistant(request: Request):
+    data = await request.json()
+    message = (data.get("message") or "").strip()
+    return {
+        "ok": True,
+        **build_admin_assistant_reply(request, message),
+    }
 
 
 @app.post("/admin/api/react/bookings/{booking_id}/{action}")

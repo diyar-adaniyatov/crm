@@ -29,6 +29,13 @@ const QUICK_REPLIES = [
   "Передала информацию администратору. Скоро вам ответим.",
 ];
 
+const ASSISTANT_QUICK_QUESTIONS = [
+  "Что требует внимания?",
+  "Какие записи сегодня?",
+  "Как добавить врача?",
+  "Как подключить WhatsApp?",
+];
+
 async function api(path, options = {}) {
   const response = await fetch(path, {
     cache: "no-store",
@@ -939,6 +946,121 @@ function PlatformView({ data, onSwitchClinic, onPlatformAddChannel, onPlatformDe
   ].filter(Boolean));
 }
 
+function AssistantWidget({ data, setView }) {
+  const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const endRef = useRef(null);
+
+  useEffect(() => {
+    setMessages([
+      {
+        role: "assistant",
+        text: `Я помогу ориентироваться в CRM «${data.clinic.name}». Могу подсказать, где добавить врачей, показать записи, лиды, настройки и WhatsApp.`,
+        suggestions: ASSISTANT_QUICK_QUESTIONS,
+        actions: [
+          { label: "Открыть сводку", view: "dashboard" },
+          { label: "Открыть настройки", view: "settings" },
+        ],
+      },
+    ]);
+  }, [data.clinic.id]);
+
+  useEffect(() => {
+    if (endRef.current) endRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [messages, loading, open]);
+
+  async function ask(text) {
+    const question = (text || "").trim();
+    if (!question || loading) return;
+
+    setOpen(true);
+    setInput("");
+    setMessages((prev) => [...prev, { role: "user", text: question }]);
+    setLoading(true);
+
+    try {
+      const payload = await api("/admin/api/react/assistant", {
+        method: "POST",
+        body: JSON.stringify({ message: question }),
+      });
+
+      if (payload?.ok) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            text: payload.answer || "Готово. Подскажите, что ещё нужно найти в CRM?",
+            actions: payload.actions || [],
+            suggestions: payload.suggestions || ASSISTANT_QUICK_QUESTIONS,
+          },
+        ]);
+      } else {
+        setMessages((prev) => [...prev, { role: "assistant", text: payload?.error || "Не удалось получить ответ помощника." }]);
+      }
+    } catch (error) {
+      setMessages((prev) => [...prev, { role: "assistant", text: error.message || "Помощник сейчас недоступен. Попробуйте ещё раз." }]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function submit(event) {
+    event.preventDefault();
+    ask(input);
+  }
+
+  function runAction(action) {
+    if (action.view) setView(action.view);
+    if (action.href) window.location.href = action.href;
+  }
+
+  const latestAssistant = [...messages].reverse().find((item) => item.role === "assistant");
+  const suggestions = latestAssistant?.suggestions?.length ? latestAssistant.suggestions : ASSISTANT_QUICK_QUESTIONS;
+
+  return h("div", { className: cls("assistant-widget", open && "open") }, [
+    open && h("section", { className: "assistant-panel", key: "panel" }, [
+      h("div", { className: "assistant-head", key: "head" }, [
+        h("div", { key: "title" }, [
+          h("div", { className: "assistant-title", key: "main" }, "AI помощник"),
+          h("div", { className: "assistant-subtitle", key: "sub" }, "Подсказывает по текущей клинике"),
+        ]),
+        h("button", { className: "assistant-close", type: "button", onClick: () => setOpen(false), key: "close" }, "×"),
+      ]),
+      h("div", { className: "assistant-messages", key: "messages" }, [
+        messages.map((msg, index) =>
+          h("div", { className: cls("assistant-message", msg.role), key: `${msg.role}-${index}` }, [
+            h("div", { className: "assistant-message-text", key: "text" }, msg.text),
+            msg.actions?.length
+              ? h("div", { className: "assistant-actions", key: "actions" }, msg.actions.map((action, actionIndex) =>
+                  h("button", { className: "assistant-action", type: "button", key: `${action.label}-${actionIndex}`, onClick: () => runAction(action) }, action.label)
+                ))
+              : null,
+          ])
+        ),
+        loading && h("div", { className: "assistant-message assistant typing", key: "typing" }, "Думаю..."),
+        h("div", { ref: endRef, key: "end" }),
+      ]),
+      h("div", { className: "assistant-suggestions", key: "suggestions" }, suggestions.map((text, index) =>
+        h("button", { type: "button", key: `${text}-${index}`, onClick: () => ask(text) }, text)
+      )),
+      h("form", { className: "assistant-form", onSubmit: submit, key: "form" }, [
+        h("input", {
+          value: input,
+          onChange: (event) => setInput(event.target.value),
+          placeholder: "Спросите про записи, врачей, WhatsApp...",
+        }),
+        h("button", { type: "submit", disabled: loading || !input.trim() }, "Спросить"),
+      ]),
+    ]),
+    h("button", { className: "assistant-launcher", type: "button", onClick: () => setOpen((value) => !value), key: "launcher" }, [
+      h("span", { key: "icon" }, "✨"),
+      h("span", { key: "text" }, open ? "Скрыть" : "Помощник"),
+    ]),
+  ]);
+}
+
 function App() {
   const [data, setData] = useState(null);
   const [view, setView] = useState(() => window.location.hash.replace("#", "") || "dashboard");
@@ -1412,6 +1534,7 @@ function App() {
         }),
       ]),
     ]),
+    h(AssistantWidget, { key: "assistant", data, setView }),
     toast && h("div", { className: cls("toast", toast.type === "error" && "error"), key: "toast" }, toast.text),
   ]);
 }
