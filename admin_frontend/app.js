@@ -263,6 +263,7 @@ const EN_TRANSLATIONS = {
   "Автосохранение": "Autosave",
   "Сохраняем...": "Saving...",
   "Русский": "Russian",
+  "Английский": "English",
   "Синий": "Blue",
   "Зелёный": "Green",
   "Оранжевый": "Orange",
@@ -270,10 +271,57 @@ const EN_TRANSLATIONS = {
   "Жёлтый": "Yellow",
   "Фиолетовый": "Violet",
   "Графит": "Slate",
+  "Пн": "Mon",
+  "Вт": "Tue",
+  "Ср": "Wed",
+  "Чт": "Thu",
+  "Пт": "Fri",
+  "Сб": "Sat",
+  "Вс": "Sun",
+  "Здравствуйте! Сейчас помогу вам.": "Hello! I’ll help you now.",
+  "Подскажите, пожалуйста, номер телефона для связи.": "Please send a phone number for contact.",
+  "Могу предложить ближайшее удобное время. Какой день вам подходит?": "I can suggest the nearest convenient time. Which day works for you?",
+  "Передала информацию администратору. Скоро вам ответим.": "I’ve passed the information to the administrator. We’ll reply soon.",
+  "Что требует внимания?": "What needs attention?",
+  "Какие записи сегодня?": "What bookings are today?",
+  "Что есть в ERP?": "What is in ERP?",
+  "Как добавить врача?": "How do I add a doctor?",
+  "Как подключить WhatsApp?": "How do I connect WhatsApp?",
+  "Подключить WhatsApp клинике": "Connect WhatsApp for a Clinic",
+  "Клиника получит сообщения только со своего idInstance.": "The clinic will receive messages only from its own idInstance.",
+  "Спросите про записи, врачей, WhatsApp...": "Ask about bookings, doctors, WhatsApp...",
+  "Готово. Подскажите, что ещё нужно найти в CRM?": "Done. What else should I find in the CRM?",
+  "Не удалось получить ответ помощника.": "Could not get an assistant response.",
+  "Помощник сейчас недоступен. Попробуйте ещё раз.": "The assistant is unavailable right now. Try again.",
+  "WhatsApp подключён к клинике": "WhatsApp connected to the clinic",
+  "Не удалось подключить WhatsApp": "Could not connect WhatsApp",
+  "WhatsApp-канал отключён": "WhatsApp channel disabled",
+  "Не удалось отключить канал": "Could not disable the channel",
+  "Отключить этот WhatsApp instance?": "Disable this WhatsApp instance?",
+  "WhatsApp instance отключён": "WhatsApp instance disabled",
+  "Не удалось отключить instance": "Could not disable the instance",
+  "Отключить услугу?": "Disable this service?",
+  "Услуга отключена": "Service disabled",
+  "Не удалось отключить услугу": "Could not disable the service",
+  "Зарплата врача сохранена": "Doctor salary saved",
+  "Удалить зарплату врача за этот месяц?": "Delete this doctor salary for the month?",
+  "Врач добавлен": "Doctor added",
+  "Не удалось добавить врача": "Could not add the doctor",
+  "Врач обновлён": "Doctor updated",
+  "Не удалось обновить врача": "Could not update the doctor",
+  "Отключить врача?": "Disable this doctor?",
+  "Врач отключён": "Doctor disabled",
+  "Не удалось отключить врача": "Could not disable the doctor",
+  "Сервер вернул неожиданный ответ": "The server returned an unexpected response",
   "Не удалось загрузить данные": "Could not load data",
   "Настройки сохранены": "Settings saved",
   "Не удалось сохранить настройки": "Could not save settings",
 };
+
+const RU_TRANSLATIONS = Object.entries(EN_TRANSLATIONS).reduce((acc, [ru, en]) => {
+  acc[en] = ru;
+  return acc;
+}, {});
 
 async function api(path, options = {}) {
   const response = await fetch(path, {
@@ -311,11 +359,58 @@ function applyPanelPreferences(settings = {}) {
 }
 
 function translateTextValue(text, language) {
-  if (language !== "en" || !text) return text;
+  if (!text) return text;
   const trimmed = text.trim();
   if (!trimmed) return text;
-  const translated = EN_TRANSLATIONS[trimmed];
-  if (!translated) return text;
+  const translated = language === "en"
+    ? EN_TRANSLATIONS[trimmed]
+    : RU_TRANSLATIONS[trimmed];
+  if (!translated) {
+    const hourMatch = trimmed.match(/^(\d+)\s*(ч|h)$/i);
+    if (hourMatch) {
+      return text.replace(trimmed, language === "en" ? `${hourMatch[1]} h` : `${hourMatch[1]} ч`);
+    }
+
+    const dynamicRules = language === "en"
+      ? [
+          [/^(\d+)\s+врач(?:ей|а)?$/i, "$1 doctors"],
+          [/^(\d+)\s+канал(?:ов|а)?$/i, "$1 channels"],
+          [/^(\d+)\s+позици(?:й|я|и)$/i, "$1 items"],
+          [/^выплачено:\s*(.+)$/i, "paid: $1"],
+          [/^в плане:\s*(.+)$/i, "planned: $1"],
+        ]
+      : [
+          [/^(\d+)\s+doctors$/i, "$1 врачей"],
+          [/^(\d+)\s+channels$/i, "$1 каналов"],
+          [/^(\d+)\s+items$/i, "$1 позиций"],
+          [/^paid:\s*(.+)$/i, "выплачено: $1"],
+          [/^planned:\s*(.+)$/i, "в плане: $1"],
+        ];
+
+    for (const [pattern, replacement] of dynamicRules) {
+      if (pattern.test(trimmed)) {
+        return text.replace(trimmed, trimmed.replace(pattern, replacement));
+      }
+    }
+
+    const assistantIntroRu = trimmed.match(/^Я помогу ориентироваться в CRM «(.+)»\. Могу подсказать, где добавить врачей, показать записи, лиды, настройки и WhatsApp\.$/);
+    if (language === "en" && assistantIntroRu) {
+      return text.replace(
+        trimmed,
+        `I’ll help you navigate CRM "${assistantIntroRu[1]}". I can show where to add doctors, bookings, leads, settings, and WhatsApp.`
+      );
+    }
+
+    const assistantIntroEn = trimmed.match(/^I’ll help you navigate CRM "(.+)"\. I can show where to add doctors, bookings, leads, settings, and WhatsApp\.$/);
+    if (language !== "en" && assistantIntroEn) {
+      return text.replace(
+        trimmed,
+        `Я помогу ориентироваться в CRM «${assistantIntroEn[1]}». Могу подсказать, где добавить врачей, показать записи, лиды, настройки и WhatsApp.`
+      );
+    }
+
+    return text;
+  }
   return text.replace(trimmed, translated);
 }
 
@@ -325,7 +420,7 @@ function createTranslator(language) {
 }
 
 function translateStaticDom(language) {
-  if (language !== "en") return;
+  const panelLanguage = language === "en" ? "en" : "ru";
   const root = document.getElementById("root");
   if (!root) return;
 
@@ -335,7 +430,8 @@ function translateStaticDom(language) {
       if (!parent || ["SCRIPT", "STYLE", "TEXTAREA"].includes(parent.tagName)) {
         return NodeFilter.FILTER_REJECT;
       }
-      return /[А-Яа-яЁё]/.test(node.nodeValue || "")
+      const value = node.nodeValue || "";
+      return translateTextValue(value, panelLanguage) !== value
         ? NodeFilter.FILTER_ACCEPT
         : NodeFilter.FILTER_SKIP;
     },
@@ -344,11 +440,11 @@ function translateStaticDom(language) {
   const nodes = [];
   while (walker.nextNode()) nodes.push(walker.currentNode);
   nodes.forEach((node) => {
-    node.nodeValue = translateTextValue(node.nodeValue, language);
+    node.nodeValue = translateTextValue(node.nodeValue, panelLanguage);
   });
 
   root.querySelectorAll("input[placeholder], textarea[placeholder]").forEach((node) => {
-    node.placeholder = translateTextValue(node.placeholder, language);
+    node.placeholder = translateTextValue(node.placeholder, panelLanguage);
   });
 }
 
@@ -2489,7 +2585,7 @@ function App() {
     ]);
   }
 
-  return h("div", { className: "app-shell" }, [
+  return h("div", { className: "app-shell", key: `shell-${panelLanguage}` }, [
     h("aside", { className: "sidebar", key: "side" }, [
       h("div", { className: "brand", key: "brand" }, [
         h("div", { className: "brand-mark", key: "mark" }, "AI"),
