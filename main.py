@@ -72,7 +72,7 @@ from booking_service import (
     reschedule_booking_by_chat_id,
     get_service_duration, check_slot_available, find_alternative_slots, get_slot_issue_message,
     cancel_booking_by_id, mark_booking_completed, mark_booking_no_show, mark_reminder_24h_sent, mark_reminder_2h_sent, get_bookings_needing_24h_reminder,
-    get_bookings_needing_2h_reminder, get_bookings_by_status, get_clinic_settings, update_work_hours, update_slot_step, update_working_days, update_bot_pause_hours, update_clinic_profile, update_clinic_notification_settings,
+    get_bookings_needing_2h_reminder, get_bookings_by_status, get_clinic_settings, update_work_hours, update_slot_step, update_working_days, update_bot_pause_hours, update_clinic_profile, update_clinic_notification_settings, update_clinic_ui_settings,
     get_active_services, get_all_active_services, get_all_services, get_service_by_name, add_service, update_service, deactivate_service, deactivate_service_by_id, add_faq_item, remove_faq_item,
     get_all_active_faq_items, find_faq_answer, get_booking_history_by_chat_id, is_returning_client,
     get_default_clinic, assign_user_to_clinic, get_clinic_by_chat_id,
@@ -4059,6 +4059,8 @@ def get_admin_react_payload(request: Request) -> dict:
             "notify_new_bookings": bool(settings.get("notify_new_bookings")),
             "notify_operator_requests": bool(settings.get("notify_operator_requests")),
             "whatsapp_reminders_enabled": bool(settings.get("whatsapp_reminders_enabled")),
+            "panel_language": settings.get("panel_language") or "ru",
+            "panel_theme": settings.get("panel_theme") or "blue",
         },
         "channels": get_clinic_channels_for_admin(clinic_id),
         "doctors": [
@@ -4403,6 +4405,8 @@ async def admin_api_react_settings(request: Request):
     notify_new_bookings = bool(data.get("notify_new_bookings"))
     notify_operator_requests = bool(data.get("notify_operator_requests"))
     whatsapp_reminders_enabled = bool(data.get("whatsapp_reminders_enabled"))
+    panel_language = (data.get("panel_language") or "ru").strip().lower()
+    panel_theme = (data.get("panel_theme") or "blue").strip().lower()
     work_start = normalize_admin_time(data.get("work_start", ""))
     work_end = normalize_admin_time(data.get("work_end", ""))
     try:
@@ -4434,6 +4438,10 @@ async def admin_api_react_settings(request: Request):
         return {"ok": False, "error": "Выберите хотя бы один рабочий день"}
     if bot_pause_hours not in {2, 6, 12, 24}:
         return {"ok": False, "error": "Выберите корректное время авто-включения бота"}
+    if panel_language not in {"ru", "en"}:
+        return {"ok": False, "error": "Выберите корректный язык панели"}
+    if panel_theme not in {"blue", "green", "orange", "red", "yellow", "violet", "slate"}:
+        return {"ok": False, "error": "Выберите корректную тему панели"}
 
     update_clinic_profile(clinic_name, address, clinic_id)
     update_work_hours(work_start, work_end, clinic_id)
@@ -4447,6 +4455,11 @@ async def admin_api_react_settings(request: Request):
         notify_new_bookings=notify_new_bookings,
         notify_operator_requests=notify_operator_requests,
         whatsapp_reminders_enabled=whatsapp_reminders_enabled,
+    )
+    update_clinic_ui_settings(
+        clinic_id=clinic_id,
+        panel_language=panel_language,
+        panel_theme=panel_theme,
     )
 
     return {"ok": True, "data": get_admin_react_payload(request)}

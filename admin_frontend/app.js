@@ -23,6 +23,21 @@ const DAY_LABELS = [
   ["6", "Вс"],
 ];
 
+const PANEL_THEMES = [
+  { value: "blue", label: "Синий", color: "#2563eb" },
+  { value: "green", label: "Зелёный", color: "#059669" },
+  { value: "orange", label: "Оранжевый", color: "#ea580c" },
+  { value: "red", label: "Красный", color: "#dc2626" },
+  { value: "yellow", label: "Жёлтый", color: "#ca8a04" },
+  { value: "violet", label: "Фиолетовый", color: "#7c3aed" },
+  { value: "slate", label: "Графит", color: "#475569" },
+];
+
+const LANGUAGE_OPTIONS = [
+  { value: "ru", label: "Русский" },
+  { value: "en", label: "English" },
+];
+
 const QUICK_REPLIES = [
   "Здравствуйте! Сейчас помогу вам.",
   "Подскажите, пожалуйста, номер телефона для связи.",
@@ -37,6 +52,225 @@ const ASSISTANT_QUICK_QUESTIONS = [
   "Как добавить врача?",
   "Как подключить WhatsApp?",
 ];
+
+const EN_TRANSLATIONS = {
+  "Сводка": "Dashboard",
+  "Записи": "Bookings",
+  "Диалоги": "Conversations",
+  "Услуги": "Services",
+  "Врачи": "Doctors",
+  "Настройки": "Settings",
+  "Платформа": "Platform",
+  "Загружаем панель": "Loading panel",
+  "Проверяем записи, диалоги и настройки.": "Checking bookings, conversations, and settings.",
+  "CRM администратора": "Admin CRM",
+  "Выйти": "Log out",
+  "Обновить": "Refresh",
+  "Работаем...": "Working...",
+  "Сначала сохраните изменения в настройках": "Save settings changes first",
+  "Ваш персональный помощник по CRM": "Your personal CRM assistant",
+  "Помощник": "Assistant",
+  "Скрыть": "Hide",
+  "Активна": "Active",
+  "Записан": "Booked",
+  "Оператор": "Operator",
+  "Завершена": "Completed",
+  "Отменена": "Cancelled",
+  "Не пришёл": "No-show",
+  "Закрыт": "Closed",
+  "Операционная сводка": "Operations Overview",
+  "Сегодня": "Today",
+  "Управление записями": "Booking Management",
+  "Расписание": "Schedule",
+  "Диалоги и лиды": "Conversations & Leads",
+  "Услуги и цены": "Services & Prices",
+  "Прайс": "Price List",
+  "Врачи клиники": "Clinic Doctors",
+  "Команда": "Team",
+  "ERP система": "ERP System",
+  "Склад и финансы": "Inventory & Finance",
+  "Настройки клиники": "Clinic Settings",
+  "График": "Work Schedule",
+  "Все клиники": "All Clinics",
+  "Новые лиды": "New Leads",
+  "за сегодня": "today",
+  "Записи сегодня": "Bookings Today",
+  "активный план дня": "active daily plan",
+  "Ждут ответа": "Waiting for Reply",
+  "ручной режим": "manual mode",
+  "Конверсия": "Conversion",
+  "лид → запись": "lead → booking",
+  "Записей пока нет": "No bookings yet",
+  "Время": "Time",
+  "Клиент": "Client",
+  "Услуга": "Service",
+  "Статус": "Status",
+  "Действия": "Actions",
+  "✓ Завершить": "✓ Complete",
+  "⊘ Не пришёл": "⊘ No-show",
+  "✕ Отменить": "✕ Cancel",
+  "Новое": "New",
+  "Ближайшие записи": "Upcoming Bookings",
+  "Открыть": "Open",
+  "Нужен оператор": "Needs Operator",
+  "Новых задач нет": "No new tasks",
+  "Лиды без записи": "Leads without Booking",
+  "Лидов без записи нет": "No leads without booking",
+  "Ближайшие": "Upcoming",
+  "Все активные": "All Active",
+  "Расписание клиники": "Clinic Schedule",
+  "Выберите диалог слева": "Select a conversation on the left",
+  "Загружаем переписку": "Loading conversation",
+  "🤖 Включить бота": "🤖 Enable bot",
+  "Бот включен": "Bot enabled",
+  "✓ Закрыть": "✓ Close",
+  "Сообщений пока нет": "No messages yet",
+  "Ответить клиенту...": "Reply to client...",
+  "Отправить": "Send",
+  "Входящие": "Inbox",
+  "Лиды": "Leads",
+  "Все": "All",
+  "Добавить услугу": "Add Service",
+  "Прайс применяется только к текущей клинике": "The price list applies only to the current clinic",
+  "Название услуги": "Service Name",
+  "Например: Чистка зубов": "Example: Teeth cleaning",
+  "Цена, тг": "Price, KZT",
+  "Длительность, минут": "Duration, minutes",
+  "Категория": "Category",
+  "Например: Стоматология": "Example: Dentistry",
+  "Описание": "Description",
+  "Короткое уточнение для администратора": "Short note for the administrator",
+  "Бот будет использовать цену при вопросах о стоимости.": "The bot will use this price for cost questions.",
+  "Прайс клиники": "Clinic Price List",
+  "Активные": "Active",
+  "Цена": "Price",
+  "Длительность": "Duration",
+  "Сохранить": "Save",
+  "Отмена": "Cancel",
+  "Редактировать": "Edit",
+  "Отключить": "Disable",
+  "Услуг пока нет. Добавьте первую услугу выше.": "No services yet. Add the first service above.",
+  "Добавить врача": "Add Doctor",
+  "Врачи видны боту только внутри текущей клиники": "Doctors are visible to the bot only inside the current clinic",
+  "Имя врача": "Doctor Name",
+  "Например: Алина Петрова": "Example: Alina Petrova",
+  "Профессия": "Profession",
+  "Например: стоматолог": "Example: dentist",
+  "По имени или профессии бот сможет выбрать нужного специалиста.": "The bot can choose the right specialist by name or profession.",
+  "Список врачей": "Doctor List",
+  "Имя": "Name",
+  "Активен": "Active",
+  "Врачей пока нет. Добавьте первого специалиста выше.": "No doctors yet. Add the first specialist above.",
+  "Выручка месяца": "Monthly Revenue",
+  "по завершённым визитам": "from completed visits",
+  "Расходы месяца": "Monthly Expenses",
+  "Выплаченные зарплаты": "Paid Salaries",
+  "Оценка прибыли": "Estimated Profit",
+  "выручка минус расходы и выплаченные зарплаты": "revenue minus expenses and paid salaries",
+  "Низкий остаток": "Low Stock",
+  "Требуется пополнение склада": "Inventory Refill Needed",
+  "Склад расходников": "Supplies Inventory",
+  "Материалы, препараты, одноразовые позиции и контроль остатков": "Materials, products, disposables, and stock control",
+  "Название": "Name",
+  "Перчатки нитриловые": "Nitrile gloves",
+  "Расходники": "Supplies",
+  "Количество": "Quantity",
+  "Ед. изм.": "Unit",
+  "Минимум": "Minimum",
+  "Себестоимость за ед.": "Cost per Unit",
+  "Поставщик": "Supplier",
+  "Комментарий": "Comment",
+  "Размер, бренд, упаковка": "Size, brand, package",
+  "Добавить на склад": "Add to Inventory",
+  "Позиции с остатком ниже минимума появятся в предупреждении ERP.": "Items below the minimum will appear in ERP warnings.",
+  "Новый расход": "New Expense",
+  "Материалы, аренда, зарплаты, реклама и прочие платежи": "Materials, rent, salaries, ads, and other payments",
+  "Дата": "Date",
+  "Название расхода": "Expense Name",
+  "Закуп перчаток": "Gloves purchase",
+  "Сумма, тг": "Amount, KZT",
+  "Получатель": "Recipient",
+  "Поставщик или сотрудник": "Supplier or employee",
+  "Оплата": "Payment",
+  "карта / наличные / Kaspi": "card / cash / Kaspi",
+  "Номер счёта, причина, детали": "Invoice number, reason, details",
+  "Добавить расход": "Add Expense",
+  "Расход сразу попадёт в расчёт месяца.": "The expense will be included in this month immediately.",
+  "Зарплата врачу": "Doctor Salary",
+  "Ежемесячная зарплата по каждому врачу для расчёта прибыли": "Monthly salary per doctor for profit calculation",
+  "Месяц": "Month",
+  "Врач": "Doctor",
+  "Выберите врача": "Choose a doctor",
+  "Уже выплачено": "Already paid",
+  "Ставка, аванс, бонусы": "Base rate, advance, bonuses",
+  "Сохранить зарплату": "Save Salary",
+  "В прибыль месяца попадут только зарплаты с галочкой «выплачено».": "Only salaries marked as paid are included in monthly profit.",
+  "Сначала добавьте врачей в разделе «Врачи», затем назначьте им зарплату.": "Add doctors in the Doctors section first, then assign salaries.",
+  "Складские позиции": "Inventory Items",
+  "Позиция": "Item",
+  "Остаток": "Stock",
+  "Мин.": "Min.",
+  "Цена/ед.": "Price/unit",
+  "Списать": "Write off",
+  "Склад пока пуст. Добавьте расходники или материалы выше.": "Inventory is empty. Add supplies or materials above.",
+  "Зарплаты врачей": "Doctor Salaries",
+  "Суммы за текущий и прошлые месяцы": "Amounts for current and past months",
+  "Сумма": "Amount",
+  "Выплачено": "Paid",
+  "Удалить": "Delete",
+  "Зарплаты пока не добавлены. Назначьте сумму врачу выше.": "No salaries yet. Assign a doctor salary above.",
+  "Последние расходы": "Recent Expenses",
+  "Расход": "Expense",
+  "Расходов пока нет. Добавьте первый платёж выше.": "No expenses yet. Add the first payment above.",
+  "WhatsApp / Green API": "WhatsApp / Green API",
+  "Каждая клиника подключает свой отдельный idInstance": "Each clinic connects its own separate idInstance",
+  "Webhook URL для Green API": "Webhook URL for Green API",
+  "Вставьте этот адрес в настройки instance в Green API": "Paste this URL into the instance settings in Green API",
+  "Название канала": "Channel Name",
+  "WhatsApp ресепшена": "Reception WhatsApp",
+  "токен из Green API": "token from Green API",
+  "Привязать WhatsApp": "Connect WhatsApp",
+  "Этот instance будет работать только с этой клиникой.": "This instance will work only with this clinic.",
+  "WhatsApp клиники": "Clinic WhatsApp",
+  "не указан": "not set",
+  "WhatsApp ещё не подключён": "WhatsApp is not connected yet",
+  "Есть несохранённые изменения": "Unsaved changes",
+  "Автообновление не перезапишет эту форму. Нажмите «Сохранить настройки», когда закончите.": "Auto-refresh will not overwrite this form. Click Save Settings when done.",
+  "Профиль, график и ручной режим": "Profile, Schedule, and Manual Mode",
+  "Название клиники": "Clinic Name",
+  "Например: Dental House": "Example: Dental House",
+  "Адрес": "Address",
+  "Например: Алматы, Абая 10": "Example: Almaty, Abay 10",
+  "WhatsApp администратора": "Administrator WhatsApp",
+  "Начало рабочего дня": "Workday Start",
+  "Конец рабочего дня": "Workday End",
+  "Шаг записи": "Booking Step",
+  "Авто-включение бота": "Bot Auto-enable",
+  "Рабочие дни": "Working Days",
+  "Уведомления и напоминания": "Notifications and Reminders",
+  "Уведомлять о новом лиде": "Notify about new leads",
+  "Уведомлять о новой записи или переносе": "Notify about new bookings or reschedules",
+  "Уведомлять, когда клиент просит оператора": "Notify when a client asks for an operator",
+  "Отправлять клиентам WhatsApp-напоминания за 24 часа и за 2 часа": "Send WhatsApp reminders 24 hours and 2 hours before visits",
+  "Сохранить изменения": "Save Changes",
+  "Сохранить настройки": "Save Settings",
+  "Эти параметры применяются только к текущей клинике.": "These settings apply only to the current clinic.",
+  "Внешний вид панели": "Panel Appearance",
+  "Язык панели": "Panel Language",
+  "Цветовая тема": "Color Theme",
+  "Тема применяется только к текущей клинике.": "The theme applies only to the current clinic.",
+  "Русский": "Russian",
+  "Синий": "Blue",
+  "Зелёный": "Green",
+  "Оранжевый": "Orange",
+  "Красный": "Red",
+  "Жёлтый": "Yellow",
+  "Фиолетовый": "Violet",
+  "Графит": "Slate",
+  "Не удалось загрузить данные": "Could not load data",
+  "Настройки сохранены": "Settings saved",
+  "Не удалось сохранить настройки": "Could not save settings",
+};
 
 async function api(path, options = {}) {
   const response = await fetch(path, {
@@ -63,6 +297,51 @@ async function api(path, options = {}) {
   }
 
   return response.json();
+}
+
+function applyPanelPreferences(settings = {}) {
+  const language = settings.panel_language === "en" ? "en" : "ru";
+  const theme = settings.panel_theme || "blue";
+  document.documentElement.lang = language;
+  document.documentElement.dataset.panelLanguage = language;
+  document.documentElement.dataset.panelTheme = PANEL_THEMES.some((item) => item.value === theme) ? theme : "blue";
+}
+
+function translateTextValue(text, language) {
+  if (language !== "en" || !text) return text;
+  const trimmed = text.trim();
+  if (!trimmed) return text;
+  const translated = EN_TRANSLATIONS[trimmed];
+  if (!translated) return text;
+  return text.replace(trimmed, translated);
+}
+
+function translateStaticDom(language) {
+  if (language !== "en") return;
+  const root = document.getElementById("root");
+  if (!root) return;
+
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const parent = node.parentElement;
+      if (!parent || ["SCRIPT", "STYLE", "TEXTAREA"].includes(parent.tagName)) {
+        return NodeFilter.FILTER_REJECT;
+      }
+      return /[А-Яа-яЁё]/.test(node.nodeValue || "")
+        ? NodeFilter.FILTER_ACCEPT
+        : NodeFilter.FILTER_SKIP;
+    },
+  });
+
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach((node) => {
+    node.nodeValue = translateTextValue(node.nodeValue, language);
+  });
+
+  root.querySelectorAll("input[placeholder], textarea[placeholder]").forEach((node) => {
+    node.placeholder = translateTextValue(node.placeholder, language);
+  });
 }
 
 function statusLabel(status) {
@@ -1228,6 +1507,34 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel, onDirtyChan
               ),
             ]),
           ]),
+          h("div", { className: "appearance-box", key: "appearance" }, [
+            h("div", { key: "title" }, [
+              h("h3", { className: "section-title", key: "main" }, "Внешний вид панели"),
+              h("div", { className: "cell-sub", key: "sub" }, "Тема применяется только к текущей клинике."),
+            ]),
+            h("div", { className: "appearance-grid", key: "controls" }, [
+              h("div", { className: "form-field", key: "language" }, [
+                h("label", null, "Язык панели"),
+                h("select", { value: form.panel_language || "ru", onChange: (event) => update("panel_language", event.target.value) },
+                  LANGUAGE_OPTIONS.map((item) => h("option", { value: item.value, key: item.value }, item.label))
+                ),
+              ]),
+              h("div", { className: "form-field wide", key: "theme" }, [
+                h("label", null, "Цветовая тема"),
+                h("div", { className: "theme-picker" }, PANEL_THEMES.map((theme) =>
+                  h("button", {
+                    type: "button",
+                    key: theme.value,
+                    className: cls("theme-swatch", (form.panel_theme || "blue") === theme.value && "active"),
+                    onClick: () => update("panel_theme", theme.value),
+                  }, [
+                    h("span", { className: "theme-dot", style: { background: theme.color }, key: "dot" }),
+                    h("span", { key: "label" }, theme.label),
+                  ])
+                )),
+              ]),
+            ]),
+          ]),
           h("div", { className: "form-field", style: { marginTop: 14 }, key: "days" }, [
             h("label", null, "Рабочие дни"),
             h("div", { className: "weekday-row" }, DAY_LABELS.map(([day, label]) =>
@@ -1593,6 +1900,12 @@ function App() {
   useEffect(() => {
     loadData();
   }, []);
+
+  useEffect(() => {
+    if (!data?.settings) return;
+    applyPanelPreferences(data.settings);
+    window.requestAnimationFrame(() => translateStaticDom(data.settings.panel_language));
+  }, [data?.settings?.panel_language, data?.settings?.panel_theme, view, toast, selectedId, thread]);
 
   useEffect(() => {
     window.location.hash = view;

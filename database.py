@@ -139,6 +139,8 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
         notify_new_bookings INTEGER NOT NULL DEFAULT 1,
         notify_operator_requests INTEGER NOT NULL DEFAULT 1,
         whatsapp_reminders_enabled INTEGER NOT NULL DEFAULT 1,
+        panel_language TEXT NOT NULL DEFAULT 'ru',
+        panel_theme TEXT NOT NULL DEFAULT 'blue',
         FOREIGN KEY(clinic_id) REFERENCES clinics(id)
     )
     """)
@@ -359,6 +361,14 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
     if "whatsapp_reminders_enabled" not in settings_columns:
         cursor.execute("""
         ALTER TABLE clinic_settings ADD COLUMN whatsapp_reminders_enabled INTEGER NOT NULL DEFAULT 1
+        """)
+    if "panel_language" not in settings_columns:
+        cursor.execute("""
+        ALTER TABLE clinic_settings ADD COLUMN panel_language TEXT NOT NULL DEFAULT 'ru'
+        """)
+    if "panel_theme" not in settings_columns:
+        cursor.execute("""
+        ALTER TABLE clinic_settings ADD COLUMN panel_theme TEXT NOT NULL DEFAULT 'blue'
         """)
 
     # Ensure default clinic exists

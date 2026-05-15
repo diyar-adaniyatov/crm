@@ -2640,11 +2640,22 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
 
     conn = get_db_connection()
     cursor = conn.cursor()
+    cursor.execute("PRAGMA table_info(clinic_settings)")
+    settings_columns = {column[1] for column in cursor.fetchall()}
+    settings_schema_changed = False
+    if "panel_language" not in settings_columns:
+        cursor.execute("ALTER TABLE clinic_settings ADD COLUMN panel_language TEXT NOT NULL DEFAULT 'ru'")
+        settings_schema_changed = True
+    if "panel_theme" not in settings_columns:
+        cursor.execute("ALTER TABLE clinic_settings ADD COLUMN panel_theme TEXT NOT NULL DEFAULT 'blue'")
+        settings_schema_changed = True
+    if settings_schema_changed:
+        conn.commit()
 
     cursor.execute("""
     SELECT work_start, work_end, slot_step_minutes, clinic_name, working_days, bot_pause_hours, address,
            admin_notify_whatsapp, notify_new_leads, notify_new_bookings,
-           notify_operator_requests, whatsapp_reminders_enabled
+           notify_operator_requests, whatsapp_reminders_enabled, panel_language, panel_theme
     FROM clinic_settings
     WHERE clinic_id = ?
     ORDER BY id DESC
@@ -2708,10 +2719,14 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
             "notify_new_bookings": True,
             "notify_operator_requests": True,
             "whatsapp_reminders_enabled": True,
+            "panel_language": "ru",
+            "panel_theme": "blue",
         }
 
     conn.close()
 
+    panel_language = row[12] if len(row) > 12 else "ru"
+    panel_theme = row[13] if len(row) > 13 else "blue"
     return {
         "clinic_id": clinic_id,
         "work_start": row[0],
@@ -2726,6 +2741,8 @@ def get_clinic_settings(clinic_id: int = 1) -> dict:
         "notify_new_bookings": bool(row[9]),
         "notify_operator_requests": bool(row[10]),
         "whatsapp_reminders_enabled": bool(row[11]),
+        "panel_language": panel_language if panel_language in {"ru", "en"} else "ru",
+        "panel_theme": panel_theme if panel_theme in {"blue", "green", "orange", "red", "yellow", "violet", "slate"} else "blue",
     }
 
 
@@ -2797,6 +2814,37 @@ def update_clinic_notification_settings(
         return True
     except Exception as e:
         print(f"ERROR updating notification settings: {e}")
+        return False
+
+
+def update_clinic_ui_settings(
+    clinic_id: int = 1,
+    panel_language: str = "ru",
+    panel_theme: str = "blue",
+) -> bool:
+    try:
+        clinic_id = int(clinic_id or 1)
+        panel_language = (panel_language or "ru").strip().lower()
+        panel_theme = (panel_theme or "blue").strip().lower()
+        if panel_language not in {"ru", "en"}:
+            panel_language = "ru"
+        if panel_theme not in {"blue", "green", "orange", "red", "yellow", "violet", "slate"}:
+            panel_theme = "blue"
+        get_clinic_settings(clinic_id)
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+        UPDATE clinic_settings
+        SET panel_language = ?,
+            panel_theme = ?
+        WHERE clinic_id = ?
+        """, (panel_language, panel_theme, clinic_id))
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"ERROR updating UI settings: {e}")
         return False
 
 

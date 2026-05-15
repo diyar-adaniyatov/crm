@@ -16,8 +16,45 @@
   --red-soft: #ffe9e7;
   --violet: #6d5bd0;
   --violet-soft: #efedff;
+  --sidebar: #121c2b;
   --shadow: 0 16px 36px rgba(20, 32, 51, 0.08);
   --radius: 8px;
+}
+
+:root[data-panel-theme="green"] {
+  --brand: #059669;
+  --brand-soft: #e5f7ee;
+  --sidebar: #0f2d25;
+}
+
+:root[data-panel-theme="orange"] {
+  --brand: #ea580c;
+  --brand-soft: #fff1e7;
+  --sidebar: #2f2118;
+}
+
+:root[data-panel-theme="red"] {
+  --brand: #dc2626;
+  --brand-soft: #ffe9e7;
+  --sidebar: #321b1d;
+}
+
+:root[data-panel-theme="yellow"] {
+  --brand: #ca8a04;
+  --brand-soft: #fff8db;
+  --sidebar: #302713;
+}
+
+:root[data-panel-theme="violet"] {
+  --brand: #7c3aed;
+  --brand-soft: #f1edff;
+  --sidebar: #241d36;
+}
+
+:root[data-panel-theme="slate"] {
+  --brand: #475569;
+  --brand-soft: #eef2f7;
+  --sidebar: #111827;
 }
 
 * {
@@ -86,7 +123,7 @@ button {
   top: 0;
   height: 100vh;
   padding: 18px 14px;
-  background: #121c2b;
+  background: var(--sidebar);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -108,7 +145,7 @@ button {
   display: grid;
   place-items: center;
   background: #fff;
-  color: #121c2b;
+  color: var(--sidebar);
   font-weight: 900;
 }
 
@@ -646,6 +683,63 @@ button {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+}
+
+.section-title {
+  margin: 0 0 3px;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.appearance-box {
+  margin-top: 14px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #fff 0%, var(--surface-soft) 100%);
+}
+
+.appearance-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: end;
+}
+
+.theme-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.theme-swatch {
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.theme-swatch:hover,
+.theme-swatch.active {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 12%, transparent);
+}
+
+.theme-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
 .check-field {
@@ -1338,6 +1432,7 @@ body {
   .dashboard-grid,
   .conversation-layout,
   .settings-grid,
+  .appearance-grid,
   .erp-grid {
     grid-template-columns: 1fr;
   }
