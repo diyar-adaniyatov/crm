@@ -735,8 +735,8 @@ function ERPView({
     h("div", { className: "metric-grid", key: "metrics" }, [
       h(Metric, { key: "revenue", label: "Выручка месяца", value: metrics.completed_revenue_display || "0 тг", note: "по завершённым визитам" }),
       h(Metric, { key: "expenses", label: "Расходы месяца", value: metrics.month_expenses_display || "0 тг", note: `операц.: ${metrics.operating_expenses_display || "0 тг"}` }),
-      h(Metric, { key: "salary", label: "Зарплаты врачей", value: metrics.salary_total_display || "0 тг", note: `${metrics.salary_paid_count || 0}/${metrics.salary_count || 0} отмечены выплатой` }),
-      h(Metric, { key: "profit", label: "Оценка прибыли", value: metrics.estimated_profit_display || "0 тг", note: "выручка минус расходы и зарплаты" }),
+      h(Metric, { key: "salary", label: "Выплаченные зарплаты", value: metrics.salary_paid_total_display || "0 тг", note: `в плане: ${metrics.salary_planned_total_display || "0 тг"}` }),
+      h(Metric, { key: "profit", label: "Оценка прибыли", value: metrics.estimated_profit_display || "0 тг", note: "выручка минус расходы и выплаченные зарплаты" }),
       h(Metric, { key: "stock", label: "Низкий остаток", value: metrics.low_stock_count || 0, note: `склад: ${metrics.inventory_value_display || "0 тг"}` }),
     ]),
 
@@ -893,7 +893,7 @@ function ERPView({
                 ]),
                 h("div", { className: "toolbar", style: { marginTop: 14, marginBottom: 0 }, key: "actions" }, [
                   h("button", { className: "btn primary", type: "submit" }, "Сохранить зарплату"),
-                  h("span", { className: "cell-sub" }, "Если за этот месяц врач уже есть, сумма обновится."),
+                  h("span", { className: "cell-sub" }, "В прибыль месяца попадут только зарплаты с галочкой «выплачено»."),
                 ]),
               ])
             : h(EmptyState, { text: "Сначала добавьте врачей в разделе «Врачи», затем назначьте им зарплату." })
@@ -971,7 +971,7 @@ function ERPView({
           h("h2", { className: "panel-title", key: "main" }, "Зарплаты врачей"),
           h("div", { className: "cell-sub", key: "sub" }, "Суммы за текущий и прошлые месяцы"),
         ]),
-        h(StatusBadge, { key: "sum", tone: "active" }, metrics.salary_total_display || "0 тг"),
+        h(StatusBadge, { key: "sum", tone: "active" }, `выплачено: ${metrics.salary_paid_total_display || "0 тг"}`),
       ]),
       h("div", { className: "panel-body", key: "body" },
         salaries.length

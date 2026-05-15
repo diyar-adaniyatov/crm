@@ -3952,15 +3952,21 @@ def get_erp_finance_metrics(clinic_id: int) -> dict:
     operating_expenses = int(cursor.fetchone()[0] or 0)
 
     cursor.execute("""
-    SELECT COALESCE(SUM(amount), 0)
+    SELECT
+        COALESCE(SUM(CASE WHEN is_paid = 1 THEN amount ELSE 0 END), 0),
+        COALESCE(SUM(CASE WHEN is_paid = 0 THEN amount ELSE 0 END), 0),
+        COALESCE(SUM(amount), 0)
     FROM erp_doctor_salaries
     WHERE clinic_id = ?
       AND salary_month = ?
     """, (clinic_id, month_prefix))
-    salary_total = int(cursor.fetchone()[0] or 0)
+    salary_paid_total, salary_planned_total, salary_total = cursor.fetchone()
+    salary_paid_total = int(salary_paid_total or 0)
+    salary_planned_total = int(salary_planned_total or 0)
+    salary_total = int(salary_total or 0)
 
     conn.close()
-    month_expenses = operating_expenses + salary_total
+    month_expenses = operating_expenses + salary_paid_total
 
     return {
         "month": month_prefix,
@@ -3972,6 +3978,10 @@ def get_erp_finance_metrics(clinic_id: int) -> dict:
         "operating_expenses_display": format_admin_money(operating_expenses),
         "salary_total": salary_total,
         "salary_total_display": format_admin_money(salary_total),
+        "salary_paid_total": salary_paid_total,
+        "salary_paid_total_display": format_admin_money(salary_paid_total),
+        "salary_planned_total": salary_planned_total,
+        "salary_planned_total_display": format_admin_money(salary_planned_total),
         "month_expenses": month_expenses,
         "month_expenses_display": format_admin_money(month_expenses),
         "estimated_profit": completed_revenue - month_expenses,
@@ -4003,6 +4013,7 @@ def get_admin_erp_payload(clinic_id: int) -> dict:
             "expenses_count": len(expenses),
             "salary_count": len(current_month_salaries),
             "salary_paid_count": len([item for item in current_month_salaries if item["is_paid"]]),
+            "salary_planned_count": len([item for item in current_month_salaries if not item["is_paid"]]),
         },
         "inventory": inventory,
         "low_stock": [item for item in inventory if item["is_low_stock"]],
@@ -4236,7 +4247,8 @@ def build_admin_assistant_reply(request: Request, message: str) -> dict:
             f"Сейчас: складских позиций — {erp_metrics.get('inventory_count', 0)}, "
             f"низких остатков — {erp_metrics.get('low_stock_count', 0)}, "
             f"стоимость склада — {erp_metrics.get('inventory_value_display', '0 тг')}, "
-            f"зарплаты врачей — {erp_metrics.get('salary_total_display', '0 тг')}, "
+            f"выплаченные зарплаты врачей — {erp_metrics.get('salary_paid_total_display', '0 тг')}, "
+            f"запланированные зарплаты — {erp_metrics.get('salary_planned_total_display', '0 тг')}, "
             f"расходы месяца — {erp_metrics.get('month_expenses_display', '0 тг')}, "
             f"оценка прибыли — {erp_metrics.get('estimated_profit_display', '0 тг')}.\n\n"
             "Откройте ERP, чтобы добавить материалы, указать минимальный остаток, внести расход или назначить зарплату врачу."
