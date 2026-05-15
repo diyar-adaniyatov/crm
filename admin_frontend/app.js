@@ -319,6 +319,11 @@ function translateTextValue(text, language) {
   return text.replace(trimmed, translated);
 }
 
+function createTranslator(language) {
+  const panelLanguage = language === "en" ? "en" : "ru";
+  return (text) => translateTextValue(text, panelLanguage);
+}
+
 function translateStaticDom(language) {
   if (language !== "en") return;
   const root = document.getElementById("root");
@@ -1893,6 +1898,8 @@ function App() {
   const [settingsDirty, setSettingsDirty] = useState(false);
 
   const [pageTitle, pageKicker] = titleForView(view);
+  const panelLanguage = data?.settings?.panel_language === "en" ? "en" : "ru";
+  const t = useMemo(() => createTranslator(panelLanguage), [panelLanguage]);
 
   function showToast(text, type = "ok") {
     setToast({ text, type });
@@ -1932,8 +1939,9 @@ function App() {
   useEffect(() => {
     if (!data?.settings) return;
     applyPanelPreferences(data.settings);
-    window.requestAnimationFrame(() => translateStaticDom(data.settings.panel_language));
-  }, [data?.settings?.panel_language, data?.settings?.panel_theme, view, toast, selectedId, thread]);
+    const frame = window.requestAnimationFrame(() => translateStaticDom(data.settings.panel_language));
+    return () => window.cancelAnimationFrame(frame);
+  });
 
   useEffect(() => {
     window.location.hash = view;
@@ -2059,6 +2067,7 @@ function App() {
       settings: { ...prev.settings, ...nextSettings },
     }) : prev);
     applyPanelPreferences(nextSettings);
+    window.requestAnimationFrame(() => translateStaticDom(nextSettings.panel_language));
 
     try {
       const payload = await api("/admin/api/react/settings/appearance", {
@@ -2474,8 +2483,8 @@ function App() {
     return h("div", { className: "boot-screen" }, [
       h("div", { className: "boot-mark", key: "mark" }, "CRM"),
       h("div", { key: "text" }, [
-        h("strong", { key: "strong" }, "Загружаем панель"),
-        h("span", { key: "span" }, "Проверяем записи, диалоги и настройки."),
+        h("strong", { key: "strong" }, t("Загружаем панель")),
+        h("span", { key: "span" }, t("Проверяем записи, диалоги и настройки.")),
       ]),
     ]);
   }
@@ -2486,37 +2495,37 @@ function App() {
         h("div", { className: "brand-mark", key: "mark" }, "AI"),
         h("div", { key: "copy" }, [
           h("div", { className: "brand-title", key: "title" }, data.clinic.name),
-          h("div", { className: "brand-subtitle", key: "sub" }, data.clinic.user_email || "CRM администратора"),
+          h("div", { className: "brand-subtitle", key: "sub" }, data.clinic.user_email || t("CRM администратора")),
         ]),
       ]),
       h("nav", { className: "nav-list", key: "nav" }, navItems.map((item) =>
         h("button", { className: cls("nav-button", view === item.id && "active"), onClick: () => setView(item.id), key: item.id }, [
           h("span", { className: "nav-left", key: "left" }, [
             h("span", { key: "icon" }, item.icon),
-            h("span", { key: "label" }, item.label),
+            h("span", { key: "label" }, t(item.label)),
           ]),
           counts[item.id] !== "" && h("span", { className: "nav-count", key: "count" }, counts[item.id] || 0),
         ])
       )),
       h("div", { className: "sidebar-footer", key: "footer" }, [
-        h("a", { href: "/logout", key: "logout" }, "Выйти"),
+        h("a", { href: "/logout", key: "logout" }, t("Выйти")),
       ]),
     ]),
     h("main", { className: "main", key: "main" }, [
       h("header", { className: "topbar", key: "top" }, [
         h("div", { key: "title" }, [
-          h("div", { className: "page-kicker", key: "kicker" }, pageKicker),
-          h("div", { className: "page-title", key: "title" }, pageTitle),
+          h("div", { className: "page-kicker", key: "kicker" }, t(pageKicker)),
+          h("div", { className: "page-title", key: "title" }, t(pageTitle)),
         ]),
         h("div", { className: "top-actions", key: "actions" }, [
           h(StatusBadge, { status: "active", key: "hours" }, `${data.settings.work_start}–${data.settings.work_end}`),
           h("button", {
             className: "btn",
             disabled: saving,
-            onClick: () => settingsDirty ? showToast("Сначала сохраните изменения в настройках", "error") : loadData(),
+            onClick: () => settingsDirty ? showToast(t("Сначала сохраните изменения в настройках"), "error") : loadData(true),
             key: "refresh",
-          }, saving ? "Работаем..." : "Обновить"),
-          h("a", { className: "btn", href: "/logout", key: "logout" }, "Выйти"),
+          }, saving ? t("Работаем...") : t("Обновить")),
+          h("a", { className: "btn", href: "/logout", key: "logout" }, t("Выйти")),
         ]),
       ]),
       h("div", { className: "content", key: "content" }, [
