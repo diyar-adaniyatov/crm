@@ -4465,6 +4465,30 @@ async def admin_api_react_settings(request: Request):
     return {"ok": True, "data": get_admin_react_payload(request)}
 
 
+@app.post("/admin/api/react/settings/appearance")
+async def admin_api_react_settings_appearance(request: Request):
+    clinic_id = get_current_clinic_id(request)
+    data = await request.json()
+
+    panel_language = (data.get("panel_language") or "ru").strip().lower()
+    panel_theme = (data.get("panel_theme") or "blue").strip().lower()
+
+    if panel_language not in {"ru", "en"}:
+        return {"ok": False, "error": "Выберите корректный язык панели"}
+    if panel_theme not in {"blue", "green", "orange", "red", "yellow", "violet", "slate"}:
+        return {"ok": False, "error": "Выберите корректную тему панели"}
+
+    ok = update_clinic_ui_settings(
+        clinic_id=clinic_id,
+        panel_language=panel_language,
+        panel_theme=panel_theme,
+    )
+    if not ok:
+        return {"ok": False, "error": "Не удалось сохранить внешний вид панели"}
+
+    return {"ok": True, "data": get_admin_react_payload(request)}
+
+
 @app.post("/admin/api/react/channels")
 async def admin_api_react_add_channel(request: Request):
     clinic_id = get_current_clinic_id(request)

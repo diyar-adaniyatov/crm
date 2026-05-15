@@ -24,13 +24,13 @@ const DAY_LABELS = [
 ];
 
 const PANEL_THEMES = [
-  { value: "blue", label: "Синий", color: "#2563eb" },
-  { value: "green", label: "Зелёный", color: "#059669" },
-  { value: "orange", label: "Оранжевый", color: "#ea580c" },
-  { value: "red", label: "Красный", color: "#dc2626" },
-  { value: "yellow", label: "Жёлтый", color: "#ca8a04" },
-  { value: "violet", label: "Фиолетовый", color: "#7c3aed" },
-  { value: "slate", label: "Графит", color: "#475569" },
+  { value: "blue", label: "Синий", color: "#2563eb", accent: "#0f766e" },
+  { value: "green", label: "Зелёный", color: "#059669", accent: "#0f766e" },
+  { value: "orange", label: "Оранжевый", color: "#ea580c", accent: "#b45309" },
+  { value: "red", label: "Красный", color: "#dc2626", accent: "#991b1b" },
+  { value: "yellow", label: "Жёлтый", color: "#ca8a04", accent: "#a16207" },
+  { value: "violet", label: "Фиолетовый", color: "#7c3aed", accent: "#5b21b6" },
+  { value: "slate", label: "Графит", color: "#475569", accent: "#1f2937" },
 ];
 
 const LANGUAGE_OPTIONS = [
@@ -259,6 +259,9 @@ const EN_TRANSLATIONS = {
   "Язык панели": "Panel Language",
   "Цветовая тема": "Color Theme",
   "Тема применяется только к текущей клинике.": "The theme applies only to the current clinic.",
+  "Переключается сразу и сохраняется автоматически.": "Switches instantly and saves automatically.",
+  "Автосохранение": "Autosave",
+  "Сохраняем...": "Saving...",
   "Русский": "Russian",
   "Синий": "Blue",
   "Зелёный": "Green",
@@ -1426,9 +1429,10 @@ function ChannelManager({ data, onAddChannel, onDeleteChannel }) {
   ]);
 }
 
-function SettingsView({ data, onSave, onAddChannel, onDeleteChannel, onDirtyChange }) {
+function SettingsView({ data, onSave, onSaveAppearance, onAddChannel, onDeleteChannel, onDirtyChange }) {
   const [form, setForm] = useState(data.settings);
   const [dirty, setDirty] = useState(false);
+  const [appearanceSaving, setAppearanceSaving] = useState(false);
 
   useEffect(() => {
     if (!dirty) setForm(data.settings);
@@ -1445,6 +1449,22 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel, onDirtyChan
   function update(key, value) {
     setDirty(true);
     setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  async function updateAppearance(updates) {
+    const next = {
+      panel_language: form.panel_language || "ru",
+      panel_theme: form.panel_theme || "blue",
+      ...updates,
+    };
+    setForm((prev) => ({ ...prev, ...next }));
+    applyPanelPreferences(next);
+    setAppearanceSaving(true);
+    try {
+      await onSaveAppearance(next);
+    } finally {
+      setAppearanceSaving(false);
+    }
   }
 
   function toggleDay(day) {
@@ -1508,16 +1528,24 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel, onDirtyChan
             ]),
           ]),
           h("div", { className: "appearance-box", key: "appearance" }, [
-            h("div", { key: "title" }, [
-              h("h3", { className: "section-title", key: "main" }, "Внешний вид панели"),
-              h("div", { className: "cell-sub", key: "sub" }, "Тема применяется только к текущей клинике."),
+            h("div", { className: "appearance-head", key: "title" }, [
+              h("div", { key: "copy" }, [
+                h("h3", { className: "section-title", key: "main" }, "Внешний вид панели"),
+                h("div", { className: "cell-sub", key: "sub" }, "Переключается сразу и сохраняется автоматически."),
+              ]),
+              h(StatusBadge, { tone: appearanceSaving ? "waiting_operator" : "completed", key: "save" }, appearanceSaving ? "Сохраняем..." : "Автосохранение"),
             ]),
             h("div", { className: "appearance-grid", key: "controls" }, [
               h("div", { className: "form-field", key: "language" }, [
                 h("label", null, "Язык панели"),
-                h("select", { value: form.panel_language || "ru", onChange: (event) => update("panel_language", event.target.value) },
-                  LANGUAGE_OPTIONS.map((item) => h("option", { value: item.value, key: item.value }, item.label))
-                ),
+                h("div", { className: "language-toggle" }, LANGUAGE_OPTIONS.map((item) =>
+                  h("button", {
+                    type: "button",
+                    key: item.value,
+                    className: cls("language-option", (form.panel_language || "ru") === item.value && "active"),
+                    onClick: () => updateAppearance({ panel_language: item.value }),
+                  }, item.label)
+                )),
               ]),
               h("div", { className: "form-field wide", key: "theme" }, [
                 h("label", null, "Цветовая тема"),
@@ -1526,10 +1554,10 @@ function SettingsView({ data, onSave, onAddChannel, onDeleteChannel, onDirtyChan
                     type: "button",
                     key: theme.value,
                     className: cls("theme-swatch", (form.panel_theme || "blue") === theme.value && "active"),
-                    onClick: () => update("panel_theme", theme.value),
+                    onClick: () => updateAppearance({ panel_theme: theme.value }),
                   }, [
-                    h("span", { className: "theme-dot", style: { background: theme.color }, key: "dot" }),
-                    h("span", { key: "label" }, theme.label),
+                    h("span", { className: "theme-dot", style: { background: `linear-gradient(135deg, ${theme.color}, ${theme.accent})` }, key: "dot" }),
+                    h("span", { className: "theme-label", key: "label" }, theme.label),
                   ])
                 )),
               ]),
@@ -2021,6 +2049,34 @@ function App() {
     }
   }
 
+  async function onSaveAppearance(form) {
+    const nextSettings = {
+      panel_language: form.panel_language || data?.settings?.panel_language || "ru",
+      panel_theme: form.panel_theme || data?.settings?.panel_theme || "blue",
+    };
+    setData((prev) => prev ? ({
+      ...prev,
+      settings: { ...prev.settings, ...nextSettings },
+    }) : prev);
+    applyPanelPreferences(nextSettings);
+
+    try {
+      const payload = await api("/admin/api/react/settings/appearance", {
+        method: "POST",
+        body: JSON.stringify(nextSettings),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        return true;
+      }
+      showToast(payload?.error || "Не удалось сохранить внешний вид", "error");
+      return false;
+    } catch (error) {
+      showToast(error.message || "Не удалось сохранить внешний вид", "error");
+      return false;
+    }
+  }
+
   async function onAddChannel(form) {
     setSaving(true);
     try {
@@ -2479,7 +2535,7 @@ function App() {
         view === "services" && h(ServicesView, { data, onAddService, onUpdateService, onDeleteService }),
         view === "doctors" && h(DoctorsView, { data, onAddDoctor, onUpdateDoctor, onDeleteDoctor }),
         view === "erp" && h(ERPView, { data, onAddInventory, onUpdateInventory, onDeleteInventory, onAddExpense, onDeleteExpense, onAddSalary, onUpdateSalary, onDeleteSalary }),
-        view === "settings" && h(SettingsView, { data, onSave: onSaveSettings, onAddChannel, onDeleteChannel, onDirtyChange: setSettingsDirty }),
+        view === "settings" && h(SettingsView, { data, onSave: onSaveSettings, onSaveAppearance, onAddChannel, onDeleteChannel, onDirtyChange: setSettingsDirty }),
         view === "platform" && data.platform_admin?.can_manage_all_clinics && h(PlatformView, {
           data,
           onSwitchClinic,
