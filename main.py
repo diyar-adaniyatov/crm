@@ -3440,6 +3440,14 @@ def serialize_admin_service(service: dict) -> dict:
     }
 
 
+def format_admin_money(value) -> str:
+    try:
+        amount = int(float(value or 0))
+    except (TypeError, ValueError):
+        amount = 0
+    return f"{amount:,}".replace(",", " ") + " тг"
+
+
 def mask_secret(value: str) -> str:
     value = (value or "").strip()
     if not value:
@@ -3694,6 +3702,229 @@ def set_platform_admin_access(email: str, granted_by: str, enabled: bool) -> boo
     return changed > 0
 
 
+def ensure_erp_tables() -> None:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS erp_inventory_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        clinic_id INTEGER NOT NULL,
+        name TEXT NOT NULL,
+        category TEXT DEFAULT '',
+        unit TEXT DEFAULT 'шт',
+        quantity REAL NOT NULL DEFAULT 0,
+        min_quantity REAL NOT NULL DEFAULT 0,
+        cost_per_unit INTEGER NOT NULL DEFAULT 0,
+        supplier TEXT DEFAULT '',
+        notes TEXT DEFAULT '',
+        is_active INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(clinic_id) REFERENCES clinics(id)
+    )
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS erp_expenses (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        clinic_id INTEGER NOT NULL,
+        expense_date TEXT NOT NULL,
+        category TEXT DEFAULT '',
+        title TEXT NOT NULL,
+        amount INTEGER NOT NULL DEFAULT 0,
+        vendor TEXT DEFAULT '',
+        payment_method TEXT DEFAULT '',
+        notes TEXT DEFAULT '',
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(clinic_id) REFERENCES clinics(id)
+    )
+    """)
+
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_erp_inventory_clinic_active
+    ON erp_inventory_items (clinic_id, is_active, name)
+    """)
+
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_erp_expenses_clinic_date
+    ON erp_expenses (clinic_id, expense_date DESC, id DESC)
+    """)
+
+    conn.commit()
+    conn.close()
+
+
+def parse_admin_decimal(value, default: float = 0.0) -> float:
+    value_text = str(value if value is not None else "").strip().replace(",", ".")
+    if value_text == "":
+        return default
+    try:
+        parsed = float(value_text)
+    except (TypeError, ValueError):
+        return default
+    return parsed
+
+
+def serialize_erp_inventory_item(item: dict) -> dict:
+    quantity = float(item.get("quantity") or 0)
+    min_quantity = float(item.get("min_quantity") or 0)
+    cost_per_unit = int(item.get("cost_per_unit") or 0)
+    stock_value = int(round(quantity * cost_per_unit))
+    return {
+        "id": item.get("id"),
+        "name": item.get("name") or "",
+        "category": item.get("category") or "",
+        "unit": item.get("unit") or "шт",
+        "quantity": quantity,
+        "quantity_display": f"{quantity:g} {item.get('unit') or 'шт'}",
+        "min_quantity": min_quantity,
+        "min_quantity_display": f"{min_quantity:g} {item.get('unit') or 'шт'}",
+        "cost_per_unit": cost_per_unit,
+        "cost_per_unit_display": format_admin_money(cost_per_unit),
+        "stock_value": stock_value,
+        "stock_value_display": format_admin_money(stock_value),
+        "supplier": item.get("supplier") or "",
+        "notes": item.get("notes") or "",
+        "is_low_stock": quantity <= min_quantity if min_quantity > 0 else False,
+        "updated_at": item.get("updated_at") or "",
+        "updated_display": format_admin_datetime(item.get("updated_at") or ""),
+    }
+
+
+def serialize_erp_expense(expense: dict) -> dict:
+    amount = int(expense.get("amount") or 0)
+    return {
+        "id": expense.get("id"),
+        "expense_date": expense.get("expense_date") or "",
+        "expense_date_display": format_admin_datetime((expense.get("expense_date") or "") + " 00:00")[:10],
+        "category": expense.get("category") or "",
+        "title": expense.get("title") or "",
+        "amount": amount,
+        "amount_display": format_admin_money(amount),
+        "vendor": expense.get("vendor") or "",
+        "payment_method": expense.get("payment_method") or "",
+        "notes": expense.get("notes") or "",
+        "created_at": expense.get("created_at") or "",
+        "created_display": format_admin_datetime(expense.get("created_at") or ""),
+    }
+
+
+def get_erp_inventory_items(clinic_id: int) -> list[dict]:
+    ensure_erp_tables()
+    conn = get_db_connection()
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT *
+    FROM erp_inventory_items
+    WHERE clinic_id = ? AND is_active = 1
+    ORDER BY
+        CASE WHEN min_quantity > 0 AND quantity <= min_quantity THEN 0 ELSE 1 END,
+        lower(name)
+    """, (clinic_id,))
+    rows = [dict(row) for row in cursor.fetchall()]
+    conn.close()
+    return rows
+
+
+def get_erp_expenses(clinic_id: int, limit: int = 80) -> list[dict]:
+    ensure_erp_tables()
+    conn = get_db_connection()
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT *
+    FROM erp_expenses
+    WHERE clinic_id = ?
+    ORDER BY expense_date DESC, id DESC
+    LIMIT ?
+    """, (clinic_id, limit))
+    rows = [dict(row) for row in cursor.fetchall()]
+    conn.close()
+    return rows
+
+
+def get_erp_finance_metrics(clinic_id: int) -> dict:
+    ensure_erp_tables()
+    month_prefix = datetime.now().strftime("%Y-%m")
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT COALESCE(SUM(COALESCE(s.price, 0)), 0)
+    FROM bookings b
+    LEFT JOIN services s
+        ON s.clinic_id = b.clinic_id
+       AND lower(trim(s.name)) = lower(trim(COALESCE(b.service, '')))
+       AND COALESCE(s.is_active, 1) = 1
+    WHERE b.clinic_id = ?
+      AND b.status = 'completed'
+      AND substr(COALESCE(b.appointment_at, ''), 1, 7) = ?
+    """, (clinic_id, month_prefix))
+    completed_revenue = int(cursor.fetchone()[0] or 0)
+
+    cursor.execute("""
+    SELECT COALESCE(SUM(COALESCE(s.price, 0)), 0)
+    FROM bookings b
+    LEFT JOIN services s
+        ON s.clinic_id = b.clinic_id
+       AND lower(trim(s.name)) = lower(trim(COALESCE(b.service, '')))
+       AND COALESCE(s.is_active, 1) = 1
+    WHERE b.clinic_id = ?
+      AND b.status = 'active'
+      AND substr(COALESCE(b.appointment_at, ''), 1, 7) = ?
+    """, (clinic_id, month_prefix))
+    pipeline_revenue = int(cursor.fetchone()[0] or 0)
+
+    cursor.execute("""
+    SELECT COALESCE(SUM(amount), 0)
+    FROM erp_expenses
+    WHERE clinic_id = ?
+      AND substr(COALESCE(expense_date, ''), 1, 7) = ?
+    """, (clinic_id, month_prefix))
+    month_expenses = int(cursor.fetchone()[0] or 0)
+
+    conn.close()
+
+    return {
+        "month": month_prefix,
+        "completed_revenue": completed_revenue,
+        "completed_revenue_display": format_admin_money(completed_revenue),
+        "pipeline_revenue": pipeline_revenue,
+        "pipeline_revenue_display": format_admin_money(pipeline_revenue),
+        "month_expenses": month_expenses,
+        "month_expenses_display": format_admin_money(month_expenses),
+        "estimated_profit": completed_revenue - month_expenses,
+        "estimated_profit_display": format_admin_money(completed_revenue - month_expenses),
+    }
+
+
+def get_admin_erp_payload(clinic_id: int) -> dict:
+    inventory_raw = get_erp_inventory_items(clinic_id)
+    expenses_raw = get_erp_expenses(clinic_id)
+    inventory = [serialize_erp_inventory_item(item) for item in inventory_raw]
+    expenses = [serialize_erp_expense(item) for item in expenses_raw]
+
+    inventory_value = sum(item["stock_value"] for item in inventory)
+    low_stock_count = len([item for item in inventory if item["is_low_stock"]])
+    finance = get_erp_finance_metrics(clinic_id)
+
+    return {
+        "metrics": {
+            **finance,
+            "inventory_count": len(inventory),
+            "inventory_value": inventory_value,
+            "inventory_value_display": format_admin_money(inventory_value),
+            "low_stock_count": low_stock_count,
+            "expenses_count": len(expenses),
+        },
+        "inventory": inventory,
+        "low_stock": [item for item in inventory if item["is_low_stock"]],
+        "expenses": expenses,
+    }
+
+
 def get_admin_react_payload(request: Request) -> dict:
     clinic_id = get_current_clinic_id(request)
     platform_access = get_platform_access_payload(request)
@@ -3742,6 +3973,7 @@ def get_admin_react_payload(request: Request) -> dict:
             for item in get_all_services(clinic_id)
             if item.get("is_active", 1)
         ],
+        "erp": get_admin_erp_payload(clinic_id),
         "webhooks": {
             "whatsapp": str(request.base_url).rstrip("/") + "/webhook/whatsapp",
         },
@@ -3801,10 +4033,13 @@ def build_admin_assistant_reply(request: Request, message: str) -> dict:
     channels = payload.get("channels", [])
     doctors = payload.get("doctors", [])
     services = payload.get("services", [])
+    erp = payload.get("erp", {})
+    erp_metrics = erp.get("metrics", {})
 
     suggestions = [
         "Какие записи сегодня?",
         "Что требует внимания?",
+        "Что есть в ERP?",
         "Как добавить врача?",
         "Как подключить WhatsApp?",
     ]
@@ -3822,13 +4057,15 @@ def build_admin_assistant_reply(request: Request, message: str) -> dict:
             f"Сейчас: записей сегодня — {metrics.get('bookings_today', 0)}, "
             f"ожидают ответа — {metrics.get('needs_operator', 0)}, "
             f"лидов без записи — {metrics.get('open_leads', 0)}, "
-            f"услуг — {len(services)}, врачей — {len(doctors)}.\n\n"
+            f"услуг — {len(services)}, врачей — {len(doctors)}, "
+            f"низких остатков ERP — {erp_metrics.get('low_stock_count', 0)}.\n\n"
             "Можно спросить: «какие записи сегодня», «как добавить врача», "
-            "«как подключить WhatsApp», «что требует внимания»."
+            "«что есть в ERP», «как подключить WhatsApp», «что требует внимания»."
         )
         return response(answer, [
             get_admin_assistant_action("Открыть входящие", "conversations"),
             get_admin_assistant_action("Открыть записи", "bookings"),
+            get_admin_assistant_action("Открыть ERP", "erp"),
             get_admin_assistant_action("Открыть настройки", "settings"),
         ])
 
@@ -3906,6 +4143,20 @@ def build_admin_assistant_reply(request: Request, message: str) -> dict:
         return response(answer, [
             get_admin_assistant_action("Открыть настройки", "settings"),
         ], ["Почему бот не отвечает?", "Как проверить webhook?", "Что требует внимания?"])
+
+    if any(word in text for word in ["erp", "склад", "расход", "финанс", "остат", "прибыл", "выруч", "материал", "зарплат"]):
+        answer = (
+            "В ERP можно вести склад расходников, фиксировать расходы и смотреть финансы месяца.\n\n"
+            f"Сейчас: складских позиций — {erp_metrics.get('inventory_count', 0)}, "
+            f"низких остатков — {erp_metrics.get('low_stock_count', 0)}, "
+            f"стоимость склада — {erp_metrics.get('inventory_value_display', '0 тг')}, "
+            f"расходы месяца — {erp_metrics.get('month_expenses_display', '0 тг')}, "
+            f"оценка прибыли — {erp_metrics.get('estimated_profit_display', '0 тг')}.\n\n"
+            "Откройте ERP, чтобы добавить материалы, указать минимальный остаток или внести расход."
+        )
+        return response(answer, [
+            get_admin_assistant_action("Открыть ERP", "erp"),
+        ], ["Как добавить расход?", "Что требует внимания?", "Какие записи сегодня?"])
 
     if any(word in text for word in ["график", "работ", "адрес", "настрой", "часы", "название", "клиник"]):
         days = ", ".join(settings.get("working_days") or [])
@@ -4304,6 +4555,162 @@ def parse_admin_duration(value, default: int = 60) -> int:
     except (TypeError, ValueError):
         return default
     return parsed
+
+
+def normalize_erp_date(value: str) -> str:
+    value_text = (value or "").strip()
+    if not value_text:
+        return datetime.now().strftime("%Y-%m-%d")
+    try:
+        return datetime.strptime(value_text, "%Y-%m-%d").strftime("%Y-%m-%d")
+    except ValueError:
+        return ""
+
+
+@app.post("/admin/api/react/erp/inventory")
+async def admin_api_react_erp_add_inventory(request: Request):
+    ensure_erp_tables()
+    clinic_id = get_current_clinic_id(request)
+    data = await request.json()
+
+    name = (data.get("name") or "").strip()
+    category = (data.get("category") or "").strip()
+    unit = (data.get("unit") or "шт").strip()[:24] or "шт"
+    quantity = parse_admin_decimal(data.get("quantity"), 0)
+    min_quantity = parse_admin_decimal(data.get("min_quantity"), 0)
+    cost_per_unit = parse_admin_money(data.get("cost_per_unit")) or 0
+    supplier = (data.get("supplier") or "").strip()
+    notes = (data.get("notes") or "").strip()
+
+    if not name:
+        return {"ok": False, "error": "Введите название позиции"}
+    if quantity < 0 or min_quantity < 0:
+        return {"ok": False, "error": "Количество не может быть отрицательным"}
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    INSERT INTO erp_inventory_items (
+        clinic_id, name, category, unit, quantity, min_quantity,
+        cost_per_unit, supplier, notes, is_active, created_at, updated_at
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    """, (clinic_id, name, category, unit, quantity, min_quantity, cost_per_unit, supplier, notes))
+    conn.commit()
+    conn.close()
+
+    return {"ok": True, "data": get_admin_react_payload(request)}
+
+
+@app.post("/admin/api/react/erp/inventory/{item_id}/update")
+async def admin_api_react_erp_update_inventory(request: Request, item_id: int):
+    ensure_erp_tables()
+    clinic_id = get_current_clinic_id(request)
+    data = await request.json()
+
+    name = (data.get("name") or "").strip()
+    category = (data.get("category") or "").strip()
+    unit = (data.get("unit") or "шт").strip()[:24] or "шт"
+    quantity = parse_admin_decimal(data.get("quantity"), 0)
+    min_quantity = parse_admin_decimal(data.get("min_quantity"), 0)
+    cost_per_unit = parse_admin_money(data.get("cost_per_unit")) or 0
+    supplier = (data.get("supplier") or "").strip()
+    notes = (data.get("notes") or "").strip()
+
+    if not name:
+        return {"ok": False, "error": "Введите название позиции"}
+    if quantity < 0 or min_quantity < 0:
+        return {"ok": False, "error": "Количество не может быть отрицательным"}
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    UPDATE erp_inventory_items
+    SET name = ?,
+        category = ?,
+        unit = ?,
+        quantity = ?,
+        min_quantity = ?,
+        cost_per_unit = ?,
+        supplier = ?,
+        notes = ?,
+        updated_at = CURRENT_TIMESTAMP
+    WHERE id = ? AND clinic_id = ? AND is_active = 1
+    """, (name, category, unit, quantity, min_quantity, cost_per_unit, supplier, notes, item_id, clinic_id))
+    changed = cursor.rowcount
+    conn.commit()
+    conn.close()
+
+    return {"ok": bool(changed), "data": get_admin_react_payload(request), "error": "" if changed else "Позиция не найдена"}
+
+
+@app.post("/admin/api/react/erp/inventory/{item_id}/delete")
+async def admin_api_react_erp_delete_inventory(request: Request, item_id: int):
+    ensure_erp_tables()
+    clinic_id = get_current_clinic_id(request)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    UPDATE erp_inventory_items
+    SET is_active = 0, updated_at = CURRENT_TIMESTAMP
+    WHERE id = ? AND clinic_id = ?
+    """, (item_id, clinic_id))
+    changed = cursor.rowcount
+    conn.commit()
+    conn.close()
+    return {"ok": bool(changed), "data": get_admin_react_payload(request), "error": "" if changed else "Позиция не найдена"}
+
+
+@app.post("/admin/api/react/erp/expenses")
+async def admin_api_react_erp_add_expense(request: Request):
+    ensure_erp_tables()
+    clinic_id = get_current_clinic_id(request)
+    data = await request.json()
+
+    expense_date = normalize_erp_date(data.get("expense_date") or "")
+    category = (data.get("category") or "").strip()
+    title = (data.get("title") or "").strip()
+    amount = parse_admin_money(data.get("amount"))
+    vendor = (data.get("vendor") or "").strip()
+    payment_method = (data.get("payment_method") or "").strip()
+    notes = (data.get("notes") or "").strip()
+
+    if not expense_date:
+        return {"ok": False, "error": "Введите дату в формате YYYY-MM-DD"}
+    if not title:
+        return {"ok": False, "error": "Введите название расхода"}
+    if amount is None or amount <= 0:
+        return {"ok": False, "error": "Введите сумму расхода числом"}
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    INSERT INTO erp_expenses (
+        clinic_id, expense_date, category, title, amount,
+        vendor, payment_method, notes, created_at
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+    """, (clinic_id, expense_date, category, title, amount, vendor, payment_method, notes))
+    conn.commit()
+    conn.close()
+
+    return {"ok": True, "data": get_admin_react_payload(request)}
+
+
+@app.post("/admin/api/react/erp/expenses/{expense_id}/delete")
+async def admin_api_react_erp_delete_expense(request: Request, expense_id: int):
+    ensure_erp_tables()
+    clinic_id = get_current_clinic_id(request)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    DELETE FROM erp_expenses
+    WHERE id = ? AND clinic_id = ?
+    """, (expense_id, clinic_id))
+    changed = cursor.rowcount
+    conn.commit()
+    conn.close()
+    return {"ok": bool(changed), "data": get_admin_react_payload(request), "error": "" if changed else "Расход не найден"}
 
 
 @app.post("/admin/api/react/services")

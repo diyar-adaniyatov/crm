@@ -1057,6 +1057,45 @@ body {
   font-size: 13px;
 }
 
+.erp-page .metric-value {
+  font-size: 28px;
+}
+
+.erp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+
+.erp-alert {
+  border-color: #e7c878;
+  background: #fffdf7;
+}
+
+.erp-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.erp-stock-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #7c4d12;
+  background: #fff4db;
+  border: 1px solid #e7c878;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.erp-low-row td {
+  background: #fffaf0;
+}
+
 .assistant-widget {
   position: fixed;
   right: 22px;
@@ -1268,7 +1307,8 @@ body {
 
   .dashboard-grid,
   .conversation-layout,
-  .settings-grid {
+  .settings-grid,
+  .erp-grid {
     grid-template-columns: 1fr;
   }
 

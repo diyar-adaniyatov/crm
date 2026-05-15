@@ -169,6 +169,41 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
     """)
 
     cursor.execute("""
+    CREATE TABLE IF NOT EXISTS erp_inventory_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        clinic_id INTEGER NOT NULL,
+        name TEXT NOT NULL,
+        category TEXT DEFAULT '',
+        unit TEXT DEFAULT 'шт',
+        quantity REAL NOT NULL DEFAULT 0,
+        min_quantity REAL NOT NULL DEFAULT 0,
+        cost_per_unit INTEGER NOT NULL DEFAULT 0,
+        supplier TEXT DEFAULT '',
+        notes TEXT DEFAULT '',
+        is_active INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(clinic_id) REFERENCES clinics(id)
+    )
+    """)
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS erp_expenses (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        clinic_id INTEGER NOT NULL,
+        expense_date TEXT NOT NULL,
+        category TEXT DEFAULT '',
+        title TEXT NOT NULL,
+        amount INTEGER NOT NULL DEFAULT 0,
+        vendor TEXT DEFAULT '',
+        payment_method TEXT DEFAULT '',
+        notes TEXT DEFAULT '',
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(clinic_id) REFERENCES clinics(id)
+    )
+    """)
+
+    cursor.execute("""
     CREATE TABLE IF NOT EXISTS faq_items (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         clinic_id INTEGER NOT NULL DEFAULT 1,
@@ -683,6 +718,16 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
     cursor.execute("""
     CREATE INDEX IF NOT EXISTS idx_user_state_clinic
     ON user_state (clinic_id)
+    """)
+
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_erp_inventory_clinic_active
+    ON erp_inventory_items (clinic_id, is_active, name)
+    """)
+
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_erp_expenses_clinic_date
+    ON erp_expenses (clinic_id, expense_date DESC, id DESC)
     """)
 
     # Ensure default admin exists

@@ -9,6 +9,7 @@ const NAV = [
   { id: "conversations", label: "Диалоги", icon: "💬" },
   { id: "services", label: "Услуги", icon: "🧾" },
   { id: "doctors", label: "Врачи", icon: "🩺" },
+  { id: "erp", label: "ERP", icon: "🏢" },
   { id: "settings", label: "Настройки", icon: "⚙️" },
 ];
 
@@ -32,6 +33,7 @@ const QUICK_REPLIES = [
 const ASSISTANT_QUICK_QUESTIONS = [
   "Что требует внимания?",
   "Какие записи сегодня?",
+  "Что есть в ERP?",
   "Как добавить врача?",
   "Как подключить WhatsApp?",
 ];
@@ -84,6 +86,7 @@ function titleForView(view) {
     conversations: ["Диалоги и лиды", "CRM"],
     services: ["Услуги и цены", "Прайс"],
     doctors: ["Врачи клиники", "Команда"],
+    erp: ["ERP система", "Склад и финансы"],
     settings: ["Настройки клиники", "График"],
     platform: ["Платформа", "Все клиники"],
   };
@@ -589,6 +592,314 @@ function DoctorsView({ data, onAddDoctor, onUpdateDoctor, onDeleteDoctor }) {
   ]);
 }
 
+function getTodayInputValue() {
+  const date = new Date();
+  date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+  return date.toISOString().slice(0, 10);
+}
+
+function ERPView({ data, onAddInventory, onUpdateInventory, onDeleteInventory, onAddExpense, onDeleteExpense }) {
+  const erp = data.erp || {};
+  const metrics = erp.metrics || {};
+  const inventory = erp.inventory || [];
+  const expenses = erp.expenses || [];
+  const lowStock = erp.low_stock || [];
+  const emptyInventory = {
+    name: "",
+    category: "",
+    unit: "шт",
+    quantity: "",
+    min_quantity: "",
+    cost_per_unit: "",
+    supplier: "",
+    notes: "",
+  };
+  const emptyExpense = {
+    expense_date: getTodayInputValue(),
+    category: "Материалы",
+    title: "",
+    amount: "",
+    vendor: "",
+    payment_method: "карта",
+    notes: "",
+  };
+
+  const [inventoryForm, setInventoryForm] = useState(emptyInventory);
+  const [expenseForm, setExpenseForm] = useState(emptyExpense);
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState(emptyInventory);
+
+  function updateInventoryForm(key, value) {
+    setInventoryForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function updateExpenseForm(key, value) {
+    setExpenseForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function updateEditForm(key, value) {
+    setEditForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  async function submitInventory(event) {
+    event.preventDefault();
+    const ok = await onAddInventory(inventoryForm);
+    if (ok) setInventoryForm(emptyInventory);
+  }
+
+  async function submitExpense(event) {
+    event.preventDefault();
+    const ok = await onAddExpense(expenseForm);
+    if (ok) setExpenseForm({ ...emptyExpense, expense_date: getTodayInputValue() });
+  }
+
+  function startEditInventory(item) {
+    setEditingId(item.id);
+    setEditForm({
+      name: item.name || "",
+      category: item.category || "",
+      unit: item.unit || "шт",
+      quantity: item.quantity ?? "",
+      min_quantity: item.min_quantity ?? "",
+      cost_per_unit: item.cost_per_unit ?? "",
+      supplier: item.supplier || "",
+      notes: item.notes || "",
+    });
+  }
+
+  async function saveInventory(itemId) {
+    const ok = await onUpdateInventory(itemId, editForm);
+    if (ok) setEditingId(null);
+  }
+
+  return h("div", { className: "settings-stack erp-page" }, [
+    h("div", { className: "metric-grid", key: "metrics" }, [
+      h(Metric, { key: "revenue", label: "Выручка месяца", value: metrics.completed_revenue_display || "0 тг", note: "по завершённым визитам" }),
+      h(Metric, { key: "expenses", label: "Расходы месяца", value: metrics.month_expenses_display || "0 тг", note: "зарегистрированные расходы" }),
+      h(Metric, { key: "profit", label: "Оценка прибыли", value: metrics.estimated_profit_display || "0 тг", note: "выручка минус расходы" }),
+      h(Metric, { key: "stock", label: "Низкий остаток", value: metrics.low_stock_count || 0, note: `склад: ${metrics.inventory_value_display || "0 тг"}` }),
+    ]),
+
+    lowStock.length > 0 && h("section", { className: "panel erp-alert", key: "low-stock" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("h2", { className: "panel-title", key: "title" }, "Требуется пополнение склада"),
+        h(StatusBadge, { tone: "waiting_operator", key: "count" }, `${lowStock.length} поз.`),
+      ]),
+      h("div", { className: "panel-body", key: "body" },
+        h("div", { className: "erp-chip-row" }, lowStock.map((item) =>
+          h("span", { className: "erp-stock-chip", key: item.id }, `${item.name}: ${item.quantity_display}`)
+        ))
+      ),
+    ]),
+
+    h("div", { className: "erp-grid", key: "forms" }, [
+      h("section", { className: "panel", key: "inventory-add" }, [
+        h("div", { className: "panel-header", key: "head" }, [
+          h("div", { key: "title" }, [
+            h("h2", { className: "panel-title", key: "main" }, "Склад расходников"),
+            h("div", { className: "cell-sub", key: "sub" }, "Материалы, препараты, одноразовые позиции и контроль остатков"),
+          ]),
+          h(StatusBadge, { key: "count", tone: inventory.length ? "completed" : "closed" }, `${inventory.length} позиций`),
+        ]),
+        h("div", { className: "panel-body", key: "body" },
+          h("form", { onSubmit: submitInventory }, [
+            h("div", { className: "form-grid", key: "grid" }, [
+              h("div", { className: "form-field", key: "name" }, [
+                h("label", null, "Название"),
+                h("input", { value: inventoryForm.name, placeholder: "Перчатки нитриловые", onChange: (event) => updateInventoryForm("name", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "category" }, [
+                h("label", null, "Категория"),
+                h("input", { value: inventoryForm.category, placeholder: "Расходники", onChange: (event) => updateInventoryForm("category", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "quantity" }, [
+                h("label", null, "Количество"),
+                h("input", { type: "number", min: "0", step: "0.01", value: inventoryForm.quantity, placeholder: "10", onChange: (event) => updateInventoryForm("quantity", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "unit" }, [
+                h("label", null, "Ед. изм."),
+                h("input", { value: inventoryForm.unit, placeholder: "шт", onChange: (event) => updateInventoryForm("unit", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "min" }, [
+                h("label", null, "Минимум"),
+                h("input", { type: "number", min: "0", step: "0.01", value: inventoryForm.min_quantity, placeholder: "2", onChange: (event) => updateInventoryForm("min_quantity", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "cost" }, [
+                h("label", null, "Себестоимость за ед."),
+                h("input", { type: "number", min: "0", step: "100", value: inventoryForm.cost_per_unit, placeholder: "500", onChange: (event) => updateInventoryForm("cost_per_unit", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "supplier" }, [
+                h("label", null, "Поставщик"),
+                h("input", { value: inventoryForm.supplier, placeholder: "Dental Supply", onChange: (event) => updateInventoryForm("supplier", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "notes" }, [
+                h("label", null, "Комментарий"),
+                h("input", { value: inventoryForm.notes, placeholder: "Размер, бренд, упаковка", onChange: (event) => updateInventoryForm("notes", event.target.value) }),
+              ]),
+            ]),
+            h("div", { className: "toolbar", style: { marginTop: 14, marginBottom: 0 }, key: "actions" }, [
+              h("button", { className: "btn primary", type: "submit" }, "Добавить на склад"),
+              h("span", { className: "cell-sub" }, "Позиции с остатком ниже минимума появятся в предупреждении ERP."),
+            ]),
+          ])
+        ),
+      ]),
+
+      h("section", { className: "panel", key: "expense-add" }, [
+        h("div", { className: "panel-header", key: "head" }, [
+          h("div", { key: "title" }, [
+            h("h2", { className: "panel-title", key: "main" }, "Новый расход"),
+            h("div", { className: "cell-sub", key: "sub" }, "Материалы, аренда, зарплаты, реклама и прочие платежи"),
+          ]),
+          h(StatusBadge, { key: "month", tone: "active" }, metrics.month || "месяц"),
+        ]),
+        h("div", { className: "panel-body", key: "body" },
+          h("form", { onSubmit: submitExpense }, [
+            h("div", { className: "form-grid", key: "grid" }, [
+              h("div", { className: "form-field", key: "date" }, [
+                h("label", null, "Дата"),
+                h("input", { type: "date", value: expenseForm.expense_date, onChange: (event) => updateExpenseForm("expense_date", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "category" }, [
+                h("label", null, "Категория"),
+                h("input", { value: expenseForm.category, placeholder: "Материалы", onChange: (event) => updateExpenseForm("category", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "title" }, [
+                h("label", null, "Название расхода"),
+                h("input", { value: expenseForm.title, placeholder: "Закуп перчаток", onChange: (event) => updateExpenseForm("title", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "amount" }, [
+                h("label", null, "Сумма, тг"),
+                h("input", { type: "number", min: "0", step: "100", value: expenseForm.amount, placeholder: "25000", onChange: (event) => updateExpenseForm("amount", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "vendor" }, [
+                h("label", null, "Получатель"),
+                h("input", { value: expenseForm.vendor, placeholder: "Поставщик или сотрудник", onChange: (event) => updateExpenseForm("vendor", event.target.value) }),
+              ]),
+              h("div", { className: "form-field", key: "method" }, [
+                h("label", null, "Оплата"),
+                h("input", { value: expenseForm.payment_method, placeholder: "карта / наличные / Kaspi", onChange: (event) => updateExpenseForm("payment_method", event.target.value) }),
+              ]),
+              h("div", { className: "form-field wide", key: "notes" }, [
+                h("label", null, "Комментарий"),
+                h("input", { value: expenseForm.notes, placeholder: "Номер счёта, причина, детали", onChange: (event) => updateExpenseForm("notes", event.target.value) }),
+              ]),
+            ]),
+            h("div", { className: "toolbar", style: { marginTop: 14, marginBottom: 0 }, key: "actions" }, [
+              h("button", { className: "btn primary", type: "submit" }, "Добавить расход"),
+              h("span", { className: "cell-sub" }, "Расход сразу попадёт в расчёт месяца."),
+            ]),
+          ])
+        ),
+      ]),
+    ]),
+
+    h("section", { className: "panel", key: "inventory-list" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("h2", { className: "panel-title", key: "title" }, "Складские позиции"),
+        h(StatusBadge, { key: "value", tone: "active" }, metrics.inventory_value_display || "0 тг"),
+      ]),
+      h("div", { className: "panel-body", key: "body" },
+        inventory.length
+          ? h("div", { className: "table-wrap" },
+              h("table", { className: "data-table" }, [
+                h("thead", { key: "head" },
+                  h("tr", null, [
+                    h("th", { key: "name" }, "Позиция"),
+                    h("th", { key: "qty" }, "Остаток"),
+                    h("th", { key: "min" }, "Мин."),
+                    h("th", { key: "cost" }, "Цена/ед."),
+                    h("th", { key: "supplier" }, "Поставщик"),
+                    h("th", { key: "actions" }, "Действия"),
+                  ])
+                ),
+                h("tbody", { key: "body" }, inventory.map((item) => {
+                  const editing = editingId === item.id;
+                  return h("tr", { key: item.id, className: item.is_low_stock ? "erp-low-row" : "" }, [
+                    h("td", { key: "name" }, editing
+                      ? h("input", { className: "table-input", value: editForm.name, onChange: (event) => updateEditForm("name", event.target.value) })
+                      : [
+                          h("div", { className: "cell-main", key: "main" }, item.name),
+                          h("div", { className: "cell-sub", key: "sub" }, [item.category, item.notes].filter(Boolean).join(" · ") || "—"),
+                        ]
+                    ),
+                    h("td", { key: "qty" }, editing
+                      ? h("input", { className: "table-input", type: "number", min: "0", step: "0.01", value: editForm.quantity, onChange: (event) => updateEditForm("quantity", event.target.value) })
+                      : h("div", { className: "cell-main" }, item.quantity_display)
+                    ),
+                    h("td", { key: "min" }, editing
+                      ? h("input", { className: "table-input", type: "number", min: "0", step: "0.01", value: editForm.min_quantity, onChange: (event) => updateEditForm("min_quantity", event.target.value) })
+                      : h(StatusBadge, { tone: item.is_low_stock ? "waiting_operator" : "closed" }, item.min_quantity_display)
+                    ),
+                    h("td", { key: "cost" }, editing
+                      ? h("input", { className: "table-input", type: "number", min: "0", step: "100", value: editForm.cost_per_unit, onChange: (event) => updateEditForm("cost_per_unit", event.target.value) })
+                      : h("div", { className: "cell-sub" }, item.cost_per_unit_display)
+                    ),
+                    h("td", { key: "supplier" }, editing
+                      ? h("input", { className: "table-input", value: editForm.supplier, onChange: (event) => updateEditForm("supplier", event.target.value) })
+                      : h("div", { className: "cell-sub" }, item.supplier || "—")
+                    ),
+                    h("td", { key: "actions" },
+                      h("div", { className: "row-actions" }, editing
+                        ? [
+                            h("button", { className: "btn green", type: "button", onClick: () => saveInventory(item.id), key: "save" }, "Сохранить"),
+                            h("button", { className: "btn", type: "button", onClick: () => setEditingId(null), key: "cancel" }, "Отмена"),
+                          ]
+                        : [
+                            h("button", { className: "btn", type: "button", onClick: () => startEditInventory(item), key: "edit" }, "Редактировать"),
+                            h("button", { className: "btn red", type: "button", onClick: () => onDeleteInventory(item.id), key: "delete" }, "Списать"),
+                          ])
+                    ),
+                  ]);
+                })),
+              ])
+            )
+          : h(EmptyState, { text: "Склад пока пуст. Добавьте расходники или материалы выше." })
+      ),
+    ]),
+
+    h("section", { className: "panel", key: "expenses-list" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("h2", { className: "panel-title", key: "title" }, "Последние расходы"),
+        h(StatusBadge, { key: "sum", tone: "active" }, metrics.month_expenses_display || "0 тг"),
+      ]),
+      h("div", { className: "panel-body", key: "body" },
+        expenses.length
+          ? h("div", { className: "table-wrap" },
+              h("table", { className: "data-table" }, [
+                h("thead", { key: "head" },
+                  h("tr", null, [
+                    h("th", { key: "date" }, "Дата"),
+                    h("th", { key: "title" }, "Расход"),
+                    h("th", { key: "category" }, "Категория"),
+                    h("th", { key: "amount" }, "Сумма"),
+                    h("th", { key: "vendor" }, "Получатель"),
+                    h("th", { key: "actions" }, "Действия"),
+                  ])
+                ),
+                h("tbody", { key: "body" }, expenses.map((expense) =>
+                  h("tr", { key: expense.id }, [
+                    h("td", { key: "date" }, expense.expense_date_display || expense.expense_date),
+                    h("td", { key: "title" }, [
+                      h("div", { className: "cell-main", key: "main" }, expense.title),
+                      expense.notes && h("div", { className: "cell-sub", key: "sub" }, expense.notes),
+                    ].filter(Boolean)),
+                    h("td", { key: "category" }, expense.category || "—"),
+                    h("td", { key: "amount" }, h("div", { className: "cell-main" }, expense.amount_display)),
+                    h("td", { key: "vendor" }, h("div", { className: "cell-sub" }, [expense.vendor, expense.payment_method].filter(Boolean).join(" · ") || "—")),
+                    h("td", { key: "actions" },
+                      h("button", { className: "btn red", type: "button", onClick: () => onDeleteExpense(expense.id) }, "Удалить")
+                    ),
+                  ])
+                )),
+              ])
+            )
+          : h(EmptyState, { text: "Расходов пока нет. Добавьте первый платёж выше." })
+      ),
+    ]),
+  ].filter(Boolean));
+}
+
 function ChannelManager({ data, onAddChannel, onDeleteChannel }) {
   const [form, setForm] = useState({
     channel_name: "",
@@ -1023,7 +1334,7 @@ function AssistantWidget({ data, setView }) {
     open && h("section", { className: "assistant-panel", key: "panel" }, [
       h("div", { className: "assistant-head", key: "head" }, [
         h("div", { key: "title" }, [
-          h("div", { className: "assistant-title", key: "main" }, "AI помощник"),
+          h("div", { className: "assistant-title", key: "main" }, "Ваш персональный помощник по CRM"),
           h("div", { className: "assistant-subtitle", key: "sub" }, "Подсказывает по текущей клинике"),
         ]),
         h("button", { className: "assistant-close", type: "button", onClick: () => setOpen(false), key: "close" }, "×"),
@@ -1145,6 +1456,7 @@ function App() {
       conversations: data.conversations.inbox.length,
       services: (data.services || []).length,
       doctors: (data.doctors || []).length,
+      erp: data.erp?.metrics?.low_stock_count || 0,
       settings: "",
       platform: (data.platform_clinics || []).length,
     };
@@ -1396,6 +1708,103 @@ function App() {
     }
   }
 
+  async function onAddInventory(form) {
+    setSaving(true);
+    try {
+      const payload = await api("/admin/api/react/erp/inventory", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Позиция добавлена в ERP");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось добавить позицию", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onUpdateInventory(itemId, form) {
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/erp/inventory/${itemId}/update`, {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Складская позиция обновлена");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось обновить позицию", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onDeleteInventory(itemId) {
+    if (!window.confirm("Списать эту позицию со склада?")) return false;
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/erp/inventory/${itemId}/delete`, {
+        method: "POST",
+        body: "{}",
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Позиция списана");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось списать позицию", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onAddExpense(form) {
+    setSaving(true);
+    try {
+      const payload = await api("/admin/api/react/erp/expenses", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Расход добавлен");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось добавить расход", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onDeleteExpense(expenseId) {
+    if (!window.confirm("Удалить этот расход?")) return false;
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/erp/expenses/${expenseId}/delete`, {
+        method: "POST",
+        body: "{}",
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Расход удалён");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось удалить расход", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
   async function onAddDoctor(form) {
     setSaving(true);
     try {
@@ -1524,6 +1933,7 @@ function App() {
         }),
         view === "services" && h(ServicesView, { data, onAddService, onUpdateService, onDeleteService }),
         view === "doctors" && h(DoctorsView, { data, onAddDoctor, onUpdateDoctor, onDeleteDoctor }),
+        view === "erp" && h(ERPView, { data, onAddInventory, onUpdateInventory, onDeleteInventory, onAddExpense, onDeleteExpense }),
         view === "settings" && h(SettingsView, { data, onSave: onSaveSettings, onAddChannel, onDeleteChannel, onDirtyChange: setSettingsDirty }),
         view === "platform" && data.platform_admin?.can_manage_all_clinics && h(PlatformView, {
           data,
