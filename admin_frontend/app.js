@@ -598,12 +598,31 @@ function getTodayInputValue() {
   return date.toISOString().slice(0, 10);
 }
 
-function ERPView({ data, onAddInventory, onUpdateInventory, onDeleteInventory, onAddExpense, onDeleteExpense }) {
+function getMonthInputValue() {
+  const date = new Date();
+  date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+  return date.toISOString().slice(0, 7);
+}
+
+function ERPView({
+  data,
+  onAddInventory,
+  onUpdateInventory,
+  onDeleteInventory,
+  onAddExpense,
+  onDeleteExpense,
+  onAddSalary,
+  onUpdateSalary,
+  onDeleteSalary,
+}) {
   const erp = data.erp || {};
   const metrics = erp.metrics || {};
   const inventory = erp.inventory || [];
   const expenses = erp.expenses || [];
+  const salaries = erp.salaries || [];
   const lowStock = erp.low_stock || [];
+  const doctors = data.doctors || [];
+  const currentMonth = metrics.month || getMonthInputValue();
   const emptyInventory = {
     name: "",
     category: "",
@@ -623,11 +642,21 @@ function ERPView({ data, onAddInventory, onUpdateInventory, onDeleteInventory, o
     payment_method: "карта",
     notes: "",
   };
+  const emptySalary = {
+    salary_month: currentMonth,
+    doctor_id: doctors[0]?.id || "",
+    amount: "",
+    is_paid: false,
+    notes: "",
+  };
 
   const [inventoryForm, setInventoryForm] = useState(emptyInventory);
   const [expenseForm, setExpenseForm] = useState(emptyExpense);
+  const [salaryForm, setSalaryForm] = useState(emptySalary);
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState(emptyInventory);
+  const [editingSalaryId, setEditingSalaryId] = useState(null);
+  const [salaryEditForm, setSalaryEditForm] = useState(emptySalary);
 
   function updateInventoryForm(key, value) {
     setInventoryForm((prev) => ({ ...prev, [key]: value }));
@@ -637,8 +666,16 @@ function ERPView({ data, onAddInventory, onUpdateInventory, onDeleteInventory, o
     setExpenseForm((prev) => ({ ...prev, [key]: value }));
   }
 
+  function updateSalaryForm(key, value) {
+    setSalaryForm((prev) => ({ ...prev, [key]: value }));
+  }
+
   function updateEditForm(key, value) {
     setEditForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function updateSalaryEditForm(key, value) {
+    setSalaryEditForm((prev) => ({ ...prev, [key]: value }));
   }
 
   async function submitInventory(event) {
@@ -651,6 +688,12 @@ function ERPView({ data, onAddInventory, onUpdateInventory, onDeleteInventory, o
     event.preventDefault();
     const ok = await onAddExpense(expenseForm);
     if (ok) setExpenseForm({ ...emptyExpense, expense_date: getTodayInputValue() });
+  }
+
+  async function submitSalary(event) {
+    event.preventDefault();
+    const ok = await onAddSalary(salaryForm);
+    if (ok) setSalaryForm({ ...emptySalary, salary_month: salaryForm.salary_month || currentMonth, doctor_id: "" });
   }
 
   function startEditInventory(item) {
@@ -672,11 +715,28 @@ function ERPView({ data, onAddInventory, onUpdateInventory, onDeleteInventory, o
     if (ok) setEditingId(null);
   }
 
+  function startEditSalary(item) {
+    setEditingSalaryId(item.id);
+    setSalaryEditForm({
+      salary_month: item.salary_month || currentMonth,
+      doctor_id: item.doctor_id || "",
+      amount: item.amount ?? "",
+      is_paid: !!item.is_paid,
+      notes: item.notes || "",
+    });
+  }
+
+  async function saveSalary(salaryId) {
+    const ok = await onUpdateSalary(salaryId, salaryEditForm);
+    if (ok) setEditingSalaryId(null);
+  }
+
   return h("div", { className: "settings-stack erp-page" }, [
     h("div", { className: "metric-grid", key: "metrics" }, [
       h(Metric, { key: "revenue", label: "Выручка месяца", value: metrics.completed_revenue_display || "0 тг", note: "по завершённым визитам" }),
-      h(Metric, { key: "expenses", label: "Расходы месяца", value: metrics.month_expenses_display || "0 тг", note: "зарегистрированные расходы" }),
-      h(Metric, { key: "profit", label: "Оценка прибыли", value: metrics.estimated_profit_display || "0 тг", note: "выручка минус расходы" }),
+      h(Metric, { key: "expenses", label: "Расходы месяца", value: metrics.month_expenses_display || "0 тг", note: `операц.: ${metrics.operating_expenses_display || "0 тг"}` }),
+      h(Metric, { key: "salary", label: "Зарплаты врачей", value: metrics.salary_total_display || "0 тг", note: `${metrics.salary_paid_count || 0}/${metrics.salary_count || 0} отмечены выплатой` }),
+      h(Metric, { key: "profit", label: "Оценка прибыли", value: metrics.estimated_profit_display || "0 тг", note: "выручка минус расходы и зарплаты" }),
       h(Metric, { key: "stock", label: "Низкий остаток", value: metrics.low_stock_count || 0, note: `склад: ${metrics.inventory_value_display || "0 тг"}` }),
     ]),
 
@@ -792,6 +852,53 @@ function ERPView({ data, onAddInventory, onUpdateInventory, onDeleteInventory, o
           ])
         ),
       ]),
+
+      h("section", { className: "panel", key: "salary-add" }, [
+        h("div", { className: "panel-header", key: "head" }, [
+          h("div", { key: "title" }, [
+            h("h2", { className: "panel-title", key: "main" }, "Зарплата врачу"),
+            h("div", { className: "cell-sub", key: "sub" }, "Ежемесячная зарплата по каждому врачу для расчёта прибыли"),
+          ]),
+          h(StatusBadge, { key: "month", tone: "active" }, currentMonth),
+        ]),
+        h("div", { className: "panel-body", key: "body" },
+          doctors.length
+            ? h("form", { onSubmit: submitSalary }, [
+                h("div", { className: "form-grid", key: "grid" }, [
+                  h("div", { className: "form-field", key: "month" }, [
+                    h("label", null, "Месяц"),
+                    h("input", { type: "month", value: salaryForm.salary_month, onChange: (event) => updateSalaryForm("salary_month", event.target.value) }),
+                  ]),
+                  h("div", { className: "form-field", key: "doctor" }, [
+                    h("label", null, "Врач"),
+                    h("select", { value: salaryForm.doctor_id, onChange: (event) => updateSalaryForm("doctor_id", event.target.value) }, [
+                      h("option", { key: "empty", value: "" }, "Выберите врача"),
+                      ...doctors.map((doctor) =>
+                        h("option", { key: doctor.id, value: doctor.id }, `${doctor.full_name} — ${doctor.profession || "врач"}`)
+                      ),
+                    ]),
+                  ]),
+                  h("div", { className: "form-field", key: "amount" }, [
+                    h("label", null, "Сумма, тг"),
+                    h("input", { type: "number", min: "0", step: "1000", value: salaryForm.amount, placeholder: "300000", onChange: (event) => updateSalaryForm("amount", event.target.value) }),
+                  ]),
+                  h("label", { className: "check-field", key: "paid" }, [
+                    h("input", { type: "checkbox", checked: !!salaryForm.is_paid, onChange: (event) => updateSalaryForm("is_paid", event.target.checked) }),
+                    h("span", null, "Уже выплачено"),
+                  ]),
+                  h("div", { className: "form-field wide", key: "notes" }, [
+                    h("label", null, "Комментарий"),
+                    h("input", { value: salaryForm.notes, placeholder: "Ставка, аванс, бонусы", onChange: (event) => updateSalaryForm("notes", event.target.value) }),
+                  ]),
+                ]),
+                h("div", { className: "toolbar", style: { marginTop: 14, marginBottom: 0 }, key: "actions" }, [
+                  h("button", { className: "btn primary", type: "submit" }, "Сохранить зарплату"),
+                  h("span", { className: "cell-sub" }, "Если за этот месяц врач уже есть, сумма обновится."),
+                ]),
+              ])
+            : h(EmptyState, { text: "Сначала добавьте врачей в разделе «Врачи», затем назначьте им зарплату." })
+        ),
+      ]),
     ]),
 
     h("section", { className: "panel", key: "inventory-list" }, [
@@ -855,6 +962,73 @@ function ERPView({ data, onAddInventory, onUpdateInventory, onDeleteInventory, o
               ])
             )
           : h(EmptyState, { text: "Склад пока пуст. Добавьте расходники или материалы выше." })
+      ),
+    ]),
+
+    h("section", { className: "panel", key: "salary-list" }, [
+      h("div", { className: "panel-header", key: "head" }, [
+        h("div", { key: "title" }, [
+          h("h2", { className: "panel-title", key: "main" }, "Зарплаты врачей"),
+          h("div", { className: "cell-sub", key: "sub" }, "Суммы за текущий и прошлые месяцы"),
+        ]),
+        h(StatusBadge, { key: "sum", tone: "active" }, metrics.salary_total_display || "0 тг"),
+      ]),
+      h("div", { className: "panel-body", key: "body" },
+        salaries.length
+          ? h("div", { className: "table-wrap" },
+              h("table", { className: "data-table" }, [
+                h("thead", { key: "head" },
+                  h("tr", null, [
+                    h("th", { key: "month" }, "Месяц"),
+                    h("th", { key: "doctor" }, "Врач"),
+                    h("th", { key: "amount" }, "Сумма"),
+                    h("th", { key: "status" }, "Статус"),
+                    h("th", { key: "notes" }, "Комментарий"),
+                    h("th", { key: "actions" }, "Действия"),
+                  ])
+                ),
+                h("tbody", { key: "body" }, salaries.map((salary) => {
+                  const editing = editingSalaryId === salary.id;
+                  return h("tr", { key: salary.id }, [
+                    h("td", { key: "month" }, editing
+                      ? h("input", { className: "table-input", type: "month", value: salaryEditForm.salary_month, onChange: (event) => updateSalaryEditForm("salary_month", event.target.value) })
+                      : h("div", { className: "cell-main" }, salary.salary_month)
+                    ),
+                    h("td", { key: "doctor" }, [
+                      h("div", { className: "cell-main", key: "main" }, salary.doctor_name),
+                      h("div", { className: "cell-sub", key: "sub" }, salary.profession || "—"),
+                    ]),
+                    h("td", { key: "amount" }, editing
+                      ? h("input", { className: "table-input", type: "number", min: "0", step: "1000", value: salaryEditForm.amount, onChange: (event) => updateSalaryEditForm("amount", event.target.value) })
+                      : h("div", { className: "cell-main" }, salary.amount_display)
+                    ),
+                    h("td", { key: "status" }, editing
+                      ? h("label", { className: "check-field compact" }, [
+                          h("input", { type: "checkbox", checked: !!salaryEditForm.is_paid, onChange: (event) => updateSalaryEditForm("is_paid", event.target.checked) }),
+                          h("span", null, "Выплачено"),
+                        ])
+                      : h(StatusBadge, { tone: salary.is_paid ? "completed" : "waiting_operator" }, salary.status_label)
+                    ),
+                    h("td", { key: "notes" }, editing
+                      ? h("input", { className: "table-input", value: salaryEditForm.notes, onChange: (event) => updateSalaryEditForm("notes", event.target.value) })
+                      : h("div", { className: "cell-sub" }, salary.notes || "—")
+                    ),
+                    h("td", { key: "actions" },
+                      h("div", { className: "row-actions" }, editing
+                        ? [
+                            h("button", { className: "btn green", type: "button", onClick: () => saveSalary(salary.id), key: "save" }, "Сохранить"),
+                            h("button", { className: "btn", type: "button", onClick: () => setEditingSalaryId(null), key: "cancel" }, "Отмена"),
+                          ]
+                        : [
+                            h("button", { className: "btn", type: "button", onClick: () => startEditSalary(salary), key: "edit" }, "Редактировать"),
+                            h("button", { className: "btn red", type: "button", onClick: () => onDeleteSalary(salary.id), key: "delete" }, "Удалить"),
+                          ])
+                    ),
+                  ]);
+                })),
+              ])
+            )
+          : h(EmptyState, { text: "Зарплаты пока не добавлены. Назначьте сумму врачу выше." })
       ),
     ]),
 
@@ -1805,6 +1979,64 @@ function App() {
     }
   }
 
+  async function onAddSalary(form) {
+    setSaving(true);
+    try {
+      const payload = await api("/admin/api/react/erp/salaries", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Зарплата врача сохранена");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось сохранить зарплату", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onUpdateSalary(salaryId, form) {
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/erp/salaries/${salaryId}/update`, {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Зарплата обновлена");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось обновить зарплату", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function onDeleteSalary(salaryId) {
+    if (!window.confirm("Удалить зарплату врача за этот месяц?")) return false;
+    setSaving(true);
+    try {
+      const payload = await api(`/admin/api/react/erp/salaries/${salaryId}/delete`, {
+        method: "POST",
+        body: "{}",
+      });
+      if (payload?.ok) {
+        setData(payload.data);
+        showToast("Зарплата удалена");
+        return true;
+      }
+      showToast(payload?.error || "Не удалось удалить зарплату", "error");
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
   async function onAddDoctor(form) {
     setSaving(true);
     try {
@@ -1933,7 +2165,7 @@ function App() {
         }),
         view === "services" && h(ServicesView, { data, onAddService, onUpdateService, onDeleteService }),
         view === "doctors" && h(DoctorsView, { data, onAddDoctor, onUpdateDoctor, onDeleteDoctor }),
-        view === "erp" && h(ERPView, { data, onAddInventory, onUpdateInventory, onDeleteInventory, onAddExpense, onDeleteExpense }),
+        view === "erp" && h(ERPView, { data, onAddInventory, onUpdateInventory, onDeleteInventory, onAddExpense, onDeleteExpense, onAddSalary, onUpdateSalary, onDeleteSalary }),
         view === "settings" && h(SettingsView, { data, onSave: onSaveSettings, onAddChannel, onDeleteChannel, onDirtyChange: setSettingsDirty }),
         view === "platform" && data.platform_admin?.can_manage_all_clinics && h(PlatformView, {
           data,

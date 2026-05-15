@@ -3742,6 +3742,25 @@ def ensure_erp_tables() -> None:
     """)
 
     cursor.execute("""
+    CREATE TABLE IF NOT EXISTS erp_doctor_salaries (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        clinic_id INTEGER NOT NULL,
+        doctor_id INTEGER NOT NULL,
+        salary_month TEXT NOT NULL,
+        doctor_name TEXT NOT NULL,
+        profession TEXT DEFAULT '',
+        amount INTEGER NOT NULL DEFAULT 0,
+        is_paid INTEGER NOT NULL DEFAULT 0,
+        notes TEXT DEFAULT '',
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(clinic_id, doctor_id, salary_month),
+        FOREIGN KEY(clinic_id) REFERENCES clinics(id),
+        FOREIGN KEY(doctor_id) REFERENCES doctors(id)
+    )
+    """)
+
+    cursor.execute("""
     CREATE INDEX IF NOT EXISTS idx_erp_inventory_clinic_active
     ON erp_inventory_items (clinic_id, is_active, name)
     """)
@@ -3749,6 +3768,11 @@ def ensure_erp_tables() -> None:
     cursor.execute("""
     CREATE INDEX IF NOT EXISTS idx_erp_expenses_clinic_date
     ON erp_expenses (clinic_id, expense_date DESC, id DESC)
+    """)
+
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_erp_salaries_clinic_month
+    ON erp_doctor_salaries (clinic_id, salary_month DESC, doctor_id)
     """)
 
     conn.commit()
@@ -3810,6 +3834,25 @@ def serialize_erp_expense(expense: dict) -> dict:
     }
 
 
+def serialize_erp_doctor_salary(salary: dict) -> dict:
+    amount = int(salary.get("amount") or 0)
+    return {
+        "id": salary.get("id"),
+        "doctor_id": salary.get("doctor_id"),
+        "doctor_name": salary.get("doctor_name") or salary.get("current_doctor_name") or "",
+        "profession": salary.get("profession") or salary.get("current_profession") or "",
+        "salary_month": salary.get("salary_month") or "",
+        "amount": amount,
+        "amount_display": format_admin_money(amount),
+        "is_paid": bool(salary.get("is_paid")),
+        "status_label": "Выплачено" if salary.get("is_paid") else "Запланировано",
+        "notes": salary.get("notes") or "",
+        "created_at": salary.get("created_at") or "",
+        "updated_at": salary.get("updated_at") or "",
+        "updated_display": format_admin_datetime(salary.get("updated_at") or ""),
+    }
+
+
 def get_erp_inventory_items(clinic_id: int) -> list[dict]:
     ensure_erp_tables()
     conn = get_db_connection()
@@ -3838,6 +3881,29 @@ def get_erp_expenses(clinic_id: int, limit: int = 80) -> list[dict]:
     FROM erp_expenses
     WHERE clinic_id = ?
     ORDER BY expense_date DESC, id DESC
+    LIMIT ?
+    """, (clinic_id, limit))
+    rows = [dict(row) for row in cursor.fetchall()]
+    conn.close()
+    return rows
+
+
+def get_erp_doctor_salaries(clinic_id: int, limit: int = 120) -> list[dict]:
+    ensure_erp_tables()
+    conn = get_db_connection()
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT
+        s.*,
+        COALESCE(d.full_name, s.doctor_name) AS current_doctor_name,
+        COALESCE(d.profession, s.profession) AS current_profession
+    FROM erp_doctor_salaries s
+    LEFT JOIN doctors d
+        ON d.id = s.doctor_id
+       AND d.clinic_id = s.clinic_id
+    WHERE s.clinic_id = ?
+    ORDER BY s.salary_month DESC, lower(COALESCE(d.full_name, s.doctor_name)), s.id DESC
     LIMIT ?
     """, (clinic_id, limit))
     rows = [dict(row) for row in cursor.fetchall()]
@@ -3883,9 +3949,18 @@ def get_erp_finance_metrics(clinic_id: int) -> dict:
     WHERE clinic_id = ?
       AND substr(COALESCE(expense_date, ''), 1, 7) = ?
     """, (clinic_id, month_prefix))
-    month_expenses = int(cursor.fetchone()[0] or 0)
+    operating_expenses = int(cursor.fetchone()[0] or 0)
+
+    cursor.execute("""
+    SELECT COALESCE(SUM(amount), 0)
+    FROM erp_doctor_salaries
+    WHERE clinic_id = ?
+      AND salary_month = ?
+    """, (clinic_id, month_prefix))
+    salary_total = int(cursor.fetchone()[0] or 0)
 
     conn.close()
+    month_expenses = operating_expenses + salary_total
 
     return {
         "month": month_prefix,
@@ -3893,6 +3968,10 @@ def get_erp_finance_metrics(clinic_id: int) -> dict:
         "completed_revenue_display": format_admin_money(completed_revenue),
         "pipeline_revenue": pipeline_revenue,
         "pipeline_revenue_display": format_admin_money(pipeline_revenue),
+        "operating_expenses": operating_expenses,
+        "operating_expenses_display": format_admin_money(operating_expenses),
+        "salary_total": salary_total,
+        "salary_total_display": format_admin_money(salary_total),
         "month_expenses": month_expenses,
         "month_expenses_display": format_admin_money(month_expenses),
         "estimated_profit": completed_revenue - month_expenses,
@@ -3903,12 +3982,16 @@ def get_erp_finance_metrics(clinic_id: int) -> dict:
 def get_admin_erp_payload(clinic_id: int) -> dict:
     inventory_raw = get_erp_inventory_items(clinic_id)
     expenses_raw = get_erp_expenses(clinic_id)
+    salaries_raw = get_erp_doctor_salaries(clinic_id)
     inventory = [serialize_erp_inventory_item(item) for item in inventory_raw]
     expenses = [serialize_erp_expense(item) for item in expenses_raw]
+    salaries = [serialize_erp_doctor_salary(item) for item in salaries_raw]
 
     inventory_value = sum(item["stock_value"] for item in inventory)
     low_stock_count = len([item for item in inventory if item["is_low_stock"]])
     finance = get_erp_finance_metrics(clinic_id)
+    current_month = finance.get("month") or datetime.now().strftime("%Y-%m")
+    current_month_salaries = [item for item in salaries if item["salary_month"] == current_month]
 
     return {
         "metrics": {
@@ -3918,10 +4001,13 @@ def get_admin_erp_payload(clinic_id: int) -> dict:
             "inventory_value_display": format_admin_money(inventory_value),
             "low_stock_count": low_stock_count,
             "expenses_count": len(expenses),
+            "salary_count": len(current_month_salaries),
+            "salary_paid_count": len([item for item in current_month_salaries if item["is_paid"]]),
         },
         "inventory": inventory,
         "low_stock": [item for item in inventory if item["is_low_stock"]],
         "expenses": expenses,
+        "salaries": salaries,
     }
 
 
@@ -4105,7 +4191,7 @@ def build_admin_assistant_reply(request: Request, message: str) -> dict:
             get_admin_assistant_action("Открыть сводку", "dashboard"),
         ], ["Какие записи сегодня?", "Как включить бота обратно?", "Как ответить клиенту?"])
 
-    if any(word in text for word in ["врач", "доктор", "специалист"]):
+    if any(word in text for word in ["врач", "доктор", "специалист"]) and "зарплат" not in text:
         answer = (
             "Чтобы добавить врача:\n"
             "1. Откройте раздел «Врачи».\n"
@@ -4146,13 +4232,14 @@ def build_admin_assistant_reply(request: Request, message: str) -> dict:
 
     if any(word in text for word in ["erp", "склад", "расход", "финанс", "остат", "прибыл", "выруч", "материал", "зарплат"]):
         answer = (
-            "В ERP можно вести склад расходников, фиксировать расходы и смотреть финансы месяца.\n\n"
+            "В ERP можно вести склад расходников, фиксировать расходы, зарплаты врачей и смотреть финансы месяца.\n\n"
             f"Сейчас: складских позиций — {erp_metrics.get('inventory_count', 0)}, "
             f"низких остатков — {erp_metrics.get('low_stock_count', 0)}, "
             f"стоимость склада — {erp_metrics.get('inventory_value_display', '0 тг')}, "
+            f"зарплаты врачей — {erp_metrics.get('salary_total_display', '0 тг')}, "
             f"расходы месяца — {erp_metrics.get('month_expenses_display', '0 тг')}, "
             f"оценка прибыли — {erp_metrics.get('estimated_profit_display', '0 тг')}.\n\n"
-            "Откройте ERP, чтобы добавить материалы, указать минимальный остаток или внести расход."
+            "Откройте ERP, чтобы добавить материалы, указать минимальный остаток, внести расход или назначить зарплату врачу."
         )
         return response(answer, [
             get_admin_assistant_action("Открыть ERP", "erp"),
@@ -4567,6 +4654,16 @@ def normalize_erp_date(value: str) -> str:
         return ""
 
 
+def normalize_erp_month(value: str) -> str:
+    value_text = (value or "").strip()
+    if not value_text:
+        return datetime.now().strftime("%Y-%m")
+    try:
+        return datetime.strptime(value_text, "%Y-%m").strftime("%Y-%m")
+    except ValueError:
+        return ""
+
+
 @app.post("/admin/api/react/erp/inventory")
 async def admin_api_react_erp_add_inventory(request: Request):
     ensure_erp_tables()
@@ -4711,6 +4808,112 @@ async def admin_api_react_erp_delete_expense(request: Request, expense_id: int):
     conn.commit()
     conn.close()
     return {"ok": bool(changed), "data": get_admin_react_payload(request), "error": "" if changed else "Расход не найден"}
+
+
+@app.post("/admin/api/react/erp/salaries")
+async def admin_api_react_erp_upsert_salary(request: Request):
+    ensure_erp_tables()
+    clinic_id = get_current_clinic_id(request)
+    data = await request.json()
+
+    try:
+        doctor_id = int(data.get("doctor_id") or 0)
+    except (TypeError, ValueError):
+        doctor_id = 0
+
+    salary_month = normalize_erp_month(data.get("salary_month") or "")
+    amount = parse_admin_money(data.get("amount"))
+    is_paid = 1 if data.get("is_paid") in {True, "true", "1", 1, "on", "yes"} else 0
+    notes = (data.get("notes") or "").strip()
+
+    if doctor_id <= 0:
+        return {"ok": False, "error": "Выберите врача"}
+    if not salary_month:
+        return {"ok": False, "error": "Введите месяц в формате YYYY-MM"}
+    if amount is None or amount < 0:
+        return {"ok": False, "error": "Введите сумму зарплаты числом"}
+
+    doctor = get_doctor_by_id(doctor_id, clinic_id)
+    if not doctor:
+        return {"ok": False, "error": "Врач не найден"}
+
+    doctor_name = (doctor.get("full_name") or "").strip()
+    profession = (doctor.get("profession") or "").strip()
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    INSERT INTO erp_doctor_salaries (
+        clinic_id, doctor_id, salary_month, doctor_name, profession,
+        amount, is_paid, notes, created_at, updated_at
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    ON CONFLICT(clinic_id, doctor_id, salary_month) DO UPDATE SET
+        doctor_name = excluded.doctor_name,
+        profession = excluded.profession,
+        amount = excluded.amount,
+        is_paid = excluded.is_paid,
+        notes = excluded.notes,
+        updated_at = CURRENT_TIMESTAMP
+    """, (clinic_id, doctor_id, salary_month, doctor_name, profession, amount, is_paid, notes))
+    conn.commit()
+    conn.close()
+
+    return {"ok": True, "data": get_admin_react_payload(request)}
+
+
+@app.post("/admin/api/react/erp/salaries/{salary_id}/update")
+async def admin_api_react_erp_update_salary(request: Request, salary_id: int):
+    ensure_erp_tables()
+    clinic_id = get_current_clinic_id(request)
+    data = await request.json()
+
+    salary_month = normalize_erp_month(data.get("salary_month") or "")
+    amount = parse_admin_money(data.get("amount"))
+    is_paid = 1 if data.get("is_paid") in {True, "true", "1", 1, "on", "yes"} else 0
+    notes = (data.get("notes") or "").strip()
+
+    if not salary_month:
+        return {"ok": False, "error": "Введите месяц в формате YYYY-MM"}
+    if amount is None or amount < 0:
+        return {"ok": False, "error": "Введите сумму зарплаты числом"}
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+        UPDATE erp_doctor_salaries
+        SET salary_month = ?,
+            amount = ?,
+            is_paid = ?,
+            notes = ?,
+            updated_at = CURRENT_TIMESTAMP
+        WHERE id = ? AND clinic_id = ?
+        """, (salary_month, amount, is_paid, notes, salary_id, clinic_id))
+        changed = cursor.rowcount
+        conn.commit()
+    except sqlite3.IntegrityError:
+        conn.close()
+        return {"ok": False, "error": "Для этого врача за выбранный месяц зарплата уже есть"}
+    conn.close()
+
+    return {"ok": bool(changed), "data": get_admin_react_payload(request), "error": "" if changed else "Зарплата не найдена"}
+
+
+@app.post("/admin/api/react/erp/salaries/{salary_id}/delete")
+async def admin_api_react_erp_delete_salary(request: Request, salary_id: int):
+    ensure_erp_tables()
+    clinic_id = get_current_clinic_id(request)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+    DELETE FROM erp_doctor_salaries
+    WHERE id = ? AND clinic_id = ?
+    """, (salary_id, clinic_id))
+    changed = cursor.rowcount
+    conn.commit()
+    conn.close()
+    return {"ok": bool(changed), "data": get_admin_react_payload(request), "error": "" if changed else "Зарплата не найдена"}
 
 
 @app.post("/admin/api/react/services")

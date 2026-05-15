@@ -648,6 +648,32 @@ button {
   gap: 12px;
 }
 
+.check-field {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  align-self: end;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.check-field.compact {
+  min-height: 34px;
+  padding: 7px 9px;
+}
+
+.check-field input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--brand);
+}
+
 .form-field label {
   display: block;
   margin-bottom: 6px;
@@ -1061,9 +1087,13 @@ body {
   font-size: 28px;
 }
 
+.erp-page .metric-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .erp-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
   gap: 14px;
   align-items: start;
 }

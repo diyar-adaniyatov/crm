@@ -204,6 +204,25 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
     """)
 
     cursor.execute("""
+    CREATE TABLE IF NOT EXISTS erp_doctor_salaries (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        clinic_id INTEGER NOT NULL,
+        doctor_id INTEGER NOT NULL,
+        salary_month TEXT NOT NULL,
+        doctor_name TEXT NOT NULL,
+        profession TEXT DEFAULT '',
+        amount INTEGER NOT NULL DEFAULT 0,
+        is_paid INTEGER NOT NULL DEFAULT 0,
+        notes TEXT DEFAULT '',
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(clinic_id, doctor_id, salary_month),
+        FOREIGN KEY(clinic_id) REFERENCES clinics(id),
+        FOREIGN KEY(doctor_id) REFERENCES doctors(id)
+    )
+    """)
+
+    cursor.execute("""
     CREATE TABLE IF NOT EXISTS faq_items (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         clinic_id INTEGER NOT NULL DEFAULT 1,
@@ -728,6 +747,11 @@ CREATE TABLE IF NOT EXISTS clinic_channels (
     cursor.execute("""
     CREATE INDEX IF NOT EXISTS idx_erp_expenses_clinic_date
     ON erp_expenses (clinic_id, expense_date DESC, id DESC)
+    """)
+
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_erp_salaries_clinic_month
+    ON erp_doctor_salaries (clinic_id, salary_month DESC, doctor_id)
     """)
 
     # Ensure default admin exists
